@@ -5,10 +5,26 @@ const coinsElement = document.getElementById('coins');
 const totalCaughtElement = document.getElementById('total-caught');
 const lastCatchElement = document.getElementById('last-catch');
 const resetSaveButton = document.getElementById('reset-save');
+const openBestiaryButton = document.getElementById('open-bestiary');
+const closeBestiaryButton = document.getElementById('close-bestiary');
+const bestiaryOverlay = document.getElementById('bestiary-overlay');
+const bestiaryList = document.getElementById('bestiary-list');
 const game = window.BossFishGame.start(canvas);
 const savedData = window.BossFishSave.loadSave();
 
 renderSave(savedData);
+
+window.BossFishBestiary.initBestiary({
+  openButton: openBestiaryButton,
+  closeButton: closeBestiaryButton,
+  overlay: bestiaryOverlay,
+  list: bestiaryList,
+  getSave: window.BossFishSave.loadSave,
+  getFishList: async () => {
+    const response = await fetch('data/fish.json');
+    return response.json();
+  }
+});
 
 if (savedData.lastCatch) {
   game.setLastCaughtFish(savedData.lastCatch);

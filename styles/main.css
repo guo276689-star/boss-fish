@@ -16,6 +16,7 @@ body {
 }
 
 main {
+  position: relative;
   width: 420px;
   height: 260px;
 }
@@ -52,12 +53,74 @@ main {
   text-overflow: ellipsis;
 }
 
-#reset-save {
-  justify-self: end;
+.action-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+button {
   padding: 3px 10px;
   border: 2px solid #594d42;
   background: #e2d2ae;
   color: #463d35;
   font: inherit;
   cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 10px;
+  background: #f4ead5;
+  color: #463d35;
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #594d42;
+}
+
+.overlay-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.bestiary-list {
+  overflow-y: auto;
+  padding-top: 8px;
+}
+
+.fish-entry {
+  padding: 7px 4px;
+  border-bottom: 1px solid #aa987b;
+}
+
+.fish-entry h3,
+.fish-entry p {
+  margin: 0;
+}
+
+.fish-entry h3 {
+  font-size: 15px;
+}
+
+.fish-meta {
+  padding-top: 2px;
+  color: #776758;
+  font-size: 12px;
+}
+
+.fish-description {
+  padding-top: 3px;
+  font-size: 13px;
 }

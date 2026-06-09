@@ -8,6 +8,7 @@
     <script src="src/save.js" defer></script>
     <script src="src/fishing.js" defer></script>
     <script src="src/game.js" defer></script>
+    <script src="src/bestiary.js" defer></script>
     <script src="src/renderer.js" defer></script>
   </head>
   <body>
@@ -23,7 +24,17 @@
             最近 <strong id="last-catch">暂无</strong>
           </span>
         </div>
-        <button id="reset-save" type="button">重置存档</button>
+        <div class="action-row">
+          <button id="open-bestiary" type="button">图鉴</button>
+          <button id="reset-save" type="button">重置存档</button>
+        </div>
+      </section>
+      <section id="bestiary-overlay" class="overlay" aria-label="图鉴" hidden>
+        <div class="overlay-header">
+          <h2>图鉴</h2>
+          <button id="close-bestiary" type="button">关闭</button>
+        </div>
+        <div id="bestiary-list" class="bestiary-list"></div>
       </section>
     </main>
   </body>
