@@ -25,7 +25,7 @@ window.BossFishGame = {
         fishBiting = isBiting;
       },
       setLastCaughtFish(fish) {
-        lastCaughtFishName = fish.name;
+        lastCaughtFishName = fish ? fish.name : '';
       }
     };
   }

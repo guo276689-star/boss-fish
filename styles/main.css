@@ -31,14 +31,33 @@ main {
   display: grid;
   width: 420px;
   height: 70px;
+  padding: 6px 8px;
   border-top: 4px solid #594d42;
   background: #f4ead5;
-  place-items: center;
+  gap: 5px;
 }
 
-.ui-area h1 {
-  margin: 0;
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: #463d35;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.last-catch {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#reset-save {
+  justify-self: end;
+  padding: 3px 10px;
+  border: 2px solid #594d42;
+  background: #e2d2ae;
+  color: #463d35;
+  font: inherit;
+  cursor: pointer;
 }

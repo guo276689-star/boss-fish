@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>老板鱼来了</title>
     <link rel="stylesheet" href="styles/main.css">
+    <script src="src/save.js" defer></script>
     <script src="src/fishing.js" defer></script>
     <script src="src/game.js" defer></script>
     <script src="src/renderer.js" defer></script>
@@ -14,8 +15,15 @@
       <canvas id="game-canvas" width="420" height="190">
         你的浏览器不支持 Canvas。
       </canvas>
-      <section class="ui-area">
-        <h1>老板鱼来了 - v0.1</h1>
+      <section class="ui-area" aria-label="游戏信息">
+        <div class="stats-row">
+          <span>金币 <strong id="coins">0</strong></span>
+          <span>总数 <strong id="total-caught">0</strong></span>
+          <span class="last-catch">
+            最近 <strong id="last-catch">暂无</strong>
+          </span>
+        </div>
+        <button id="reset-save" type="button">重置存档</button>
       </section>
     </main>
   </body>
