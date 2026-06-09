@@ -1,0 +1,82 @@
+[
+  {
+    "id": "moyu_goldfish",
+    "name": "摸鱼金鱼",
+    "rarity": "common",
+    "basePrice": 10,
+    "weight": 35,
+    "description": "看起来很闲，其实很会装忙。"
+  },
+  {
+    "id": "badge_carp",
+    "name": "工牌鲤鱼",
+    "rarity": "common",
+    "basePrice": 14,
+    "weight": 25,
+    "description": "脖子上挂着工牌，比你还像正式员工。"
+  },
+  {
+    "id": "coffee_loach",
+    "name": "咖啡泥鳅",
+    "rarity": "common",
+    "basePrice": 18,
+    "weight": 18,
+    "description": "每天靠咖啡续命。"
+  },
+  {
+    "id": "overtime_sardine",
+    "name": "加班沙丁鱼",
+    "rarity": "common",
+    "basePrice": 22,
+    "weight": 12,
+    "description": "一群出现，通常意味着今晚走不了。"
+  },
+  {
+    "id": "ppt_catfish",
+    "name": "PPT 鲶鱼",
+    "rarity": "rare",
+    "basePrice": 60,
+    "weight": 6,
+    "description": "鱼鳞一片就是一页汇报。"
+  },
+  {
+    "id": "meeting_jellyfish",
+    "name": "会议水母",
+    "rarity": "rare",
+    "basePrice": 75,
+    "weight": 4,
+    "description": "透明、冗长、会后没人记得它说了什么。"
+  },
+  {
+    "id": "todo_turtle",
+    "name": "待办乌龟",
+    "rarity": "rare",
+    "basePrice": 90,
+    "weight": 3,
+    "description": "永远在路上，永远没完成。"
+  },
+  {
+    "id": "client_octopus",
+    "name": "甲方章鱼",
+    "rarity": "epic",
+    "basePrice": 180,
+    "weight": 1.5,
+    "description": "八只手同时改需求。"
+  },
+  {
+    "id": "bug_eel",
+    "name": "Bug 电鳗",
+    "rarity": "epic",
+    "basePrice": 220,
+    "weight": 1,
+    "description": "你不碰它，它自己也会报错。"
+  },
+  {
+    "id": "boss_fish",
+    "name": "老板鱼",
+    "rarity": "legendary",
+    "basePrice": 500,
+    "weight": 0.5,
+    "description": "它不是来上钩的，它是来巡逻的。"
+  }
+]
