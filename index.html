@@ -5,48 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>老板鱼来了</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/disguise.css">
     <script src="src/save.js" defer></script>
     <script src="src/fishing.js" defer></script>
     <script src="src/game.js" defer></script>
     <script src="src/bestiary.js" defer></script>
     <script src="src/shop.js" defer></script>
+    <script src="src/disguise.js" defer></script>
     <script src="src/renderer.js" defer></script>
   </head>
   <body>
     <main>
-      <canvas id="game-canvas" width="420" height="190">
-        你的浏览器不支持 Canvas。
-      </canvas>
-      <section class="ui-area" aria-label="游戏信息">
-        <div class="stats-row">
-          <span>金币 <strong id="coins">0</strong></span>
-          <span>总数 <strong id="total-caught">0</strong></span>
-          <span class="last-catch">
-            最近 <strong id="last-catch">暂无</strong>
-          </span>
-        </div>
-        <div class="action-row">
-          <button id="open-bestiary" type="button">图鉴</button>
-          <button id="open-shop" type="button">商店</button>
-          <button id="reset-save" type="button">重置存档</button>
-        </div>
+      <section id="game-view">
+        <canvas id="game-canvas" width="420" height="190">
+          你的浏览器不支持 Canvas。
+        </canvas>
+        <section class="ui-area" aria-label="游戏信息">
+          <div class="stats-row">
+            <span>金币 <strong id="coins">0</strong></span>
+            <span>总数 <strong id="total-caught">0</strong></span>
+            <span class="last-catch">
+              最近 <strong id="last-catch">暂无</strong>
+            </span>
+          </div>
+          <div class="action-row">
+            <button id="open-bestiary" type="button">图鉴</button>
+            <button id="open-shop" type="button">商店</button>
+            <button id="open-report" type="button">报表</button>
+            <button id="reset-save" type="button">重置存档</button>
+          </div>
+        </section>
+        <section id="bestiary-overlay" class="overlay" aria-label="图鉴" hidden>
+          <div class="overlay-header">
+            <h2>图鉴</h2>
+            <button id="close-bestiary" type="button">关闭</button>
+          </div>
+          <div id="bestiary-list" class="bestiary-list"></div>
+        </section>
+        <section id="shop-overlay" class="overlay" aria-label="商店" hidden>
+          <div class="overlay-header">
+            <h2>商店</h2>
+            <button id="close-shop" type="button">关闭</button>
+          </div>
+          <div class="shop-content">
+            <p id="shop-message" class="shop-message" aria-live="polite"></p>
+            <div id="shop-list" class="shop-list"></div>
+          </div>
+        </section>
       </section>
-      <section id="bestiary-overlay" class="overlay" aria-label="图鉴" hidden>
-        <div class="overlay-header">
-          <h2>图鉴</h2>
-          <button id="close-bestiary" type="button">关闭</button>
+      <section id="report-view" class="report-view" aria-label="办公报表" hidden>
+        <header class="report-header">
+          <div>
+            <p>工作台 / 日报</p>
+            <h1>今日工作概览</h1>
+          </div>
+          <span class="report-date">今日</span>
+        </header>
+        <div class="report-content">
+          <section class="report-card report-projects">
+            <h2>项目进度</h2>
+            <p><strong>项目 Alpha</strong><span>进度 87%</span></p>
+            <p><strong>项目 Beta</strong><span>等待复核</span></p>
+            <p><strong>项目 Gamma</strong><span>数据同步中</span></p>
+          </section>
+          <section class="report-card">
+            <h2>今日待办</h2>
+            <p>[✓] 整理需求文档</p>
+            <p>[✓] 同步项目进度</p>
+            <p>[ ] 输出复盘记录</p>
+          </section>
+          <section class="report-card report-status">
+            <h2>系统状态</h2>
+            <p><span class="status-dot"></span>正常</p>
+          </section>
         </div>
-        <div id="bestiary-list" class="bestiary-list"></div>
-      </section>
-      <section id="shop-overlay" class="overlay" aria-label="商店" hidden>
-        <div class="overlay-header">
-          <h2>商店</h2>
-          <button id="close-shop" type="button">关闭</button>
-        </div>
-        <div class="shop-content">
-          <p id="shop-message" class="shop-message" aria-live="polite"></p>
-          <div id="shop-list" class="shop-list"></div>
-        </div>
+        <button id="close-report" class="report-return" type="button">返回</button>
       </section>
     </main>
   </body>

@@ -1,0 +1,128 @@
+#game-view {
+  position: relative;
+  width: 420px;
+  height: 260px;
+}
+
+#game-view[hidden],
+.report-view[hidden] {
+  display: none;
+}
+
+.report-view {
+  position: relative;
+  width: 420px;
+  height: 260px;
+  padding: 12px;
+  background: #f2f4f7;
+  color: #263445;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 42px;
+  padding: 0 2px 8px;
+  border-bottom: 1px solid #cbd2da;
+}
+
+.report-header p,
+.report-header h1 {
+  margin: 0;
+}
+
+.report-header p {
+  color: #718096;
+  font-size: 10px;
+}
+
+.report-header h1 {
+  padding-top: 2px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.report-date {
+  padding: 3px 8px;
+  border: 1px solid #b8c2cc;
+  background: #ffffff;
+  color: #586575;
+  font-size: 11px;
+}
+
+.report-content {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-rows: 116px 38px;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.report-card {
+  padding: 8px 10px;
+  border: 1px solid #d4dae1;
+  background: #ffffff;
+}
+
+.report-card h2 {
+  margin: 0 0 6px;
+  color: #536273;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.report-card p {
+  margin: 0 0 5px;
+  font-size: 11px;
+}
+
+.report-projects {
+  grid-row: 1 / span 2;
+}
+
+.report-projects p {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #edf0f3;
+}
+
+.report-projects span {
+  color: #60758c;
+}
+
+.report-status {
+  padding-top: 6px;
+}
+
+.report-status h2 {
+  display: inline;
+  margin-right: 12px;
+}
+
+.report-status p {
+  display: inline;
+  color: #2f6f4e;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #3f9b68;
+}
+
+.report-return {
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
+  padding: 3px 13px;
+  border: 1px solid #7c8997;
+  background: #ffffff;
+  color: #344454;
+  font-size: 12px;
+}
