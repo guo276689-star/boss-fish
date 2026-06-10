@@ -95,7 +95,8 @@ button {
   font-size: 20px;
 }
 
-.bestiary-list {
+.bestiary-list,
+.shop-content {
   overflow-y: auto;
   padding-top: 8px;
 }
@@ -123,4 +124,44 @@ button {
 .fish-description {
   padding-top: 3px;
   font-size: 13px;
+}
+
+.shop-message {
+  min-height: 18px;
+  margin: 0;
+  color: #9a392f;
+  font-size: 13px;
+}
+
+.upgrade-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 8px 4px;
+  border-bottom: 1px solid #aa987b;
+  gap: 4px 8px;
+}
+
+.upgrade-entry h3,
+.upgrade-entry p {
+  margin: 0;
+}
+
+.upgrade-entry h3 {
+  font-size: 15px;
+}
+
+.upgrade-description,
+.upgrade-price {
+  font-size: 13px;
+}
+
+.upgrade-entry button {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+}
+
+.upgrade-entry button:disabled {
+  cursor: default;
+  opacity: 0.55;
 }

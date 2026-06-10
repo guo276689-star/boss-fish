@@ -9,6 +9,7 @@
     <script src="src/fishing.js" defer></script>
     <script src="src/game.js" defer></script>
     <script src="src/bestiary.js" defer></script>
+    <script src="src/shop.js" defer></script>
     <script src="src/renderer.js" defer></script>
   </head>
   <body>
@@ -26,6 +27,7 @@
         </div>
         <div class="action-row">
           <button id="open-bestiary" type="button">图鉴</button>
+          <button id="open-shop" type="button">商店</button>
           <button id="reset-save" type="button">重置存档</button>
         </div>
       </section>
@@ -35,6 +37,16 @@
           <button id="close-bestiary" type="button">关闭</button>
         </div>
         <div id="bestiary-list" class="bestiary-list"></div>
+      </section>
+      <section id="shop-overlay" class="overlay" aria-label="商店" hidden>
+        <div class="overlay-header">
+          <h2>商店</h2>
+          <button id="close-shop" type="button">关闭</button>
+        </div>
+        <div class="shop-content">
+          <p id="shop-message" class="shop-message" aria-live="polite"></p>
+          <div id="shop-list" class="shop-list"></div>
+        </div>
       </section>
     </main>
   </body>

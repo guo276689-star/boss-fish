@@ -9,6 +9,11 @@ const openBestiaryButton = document.getElementById('open-bestiary');
 const closeBestiaryButton = document.getElementById('close-bestiary');
 const bestiaryOverlay = document.getElementById('bestiary-overlay');
 const bestiaryList = document.getElementById('bestiary-list');
+const openShopButton = document.getElementById('open-shop');
+const closeShopButton = document.getElementById('close-shop');
+const shopOverlay = document.getElementById('shop-overlay');
+const shopList = document.getElementById('shop-list');
+const shopMessage = document.getElementById('shop-message');
 const game = window.BossFishGame.start(canvas);
 const savedData = window.BossFishSave.loadSave();
 
@@ -35,9 +40,31 @@ window.BossFishFishing.create(
   (fish) => {
     game.setLastCaughtFish(fish);
     renderSave(window.BossFishSave.addCatchToSave(fish));
-  }
+  },
+  () => window.BossFishSave.loadSave().upgrades.biteSpeed
 ).then((fishing) => {
   canvas.addEventListener('click', fishing.catchFish);
+
+  window.BossFishShop.initShop({
+    openButton: openShopButton,
+    closeButton: closeShopButton,
+    overlay: shopOverlay,
+    list: shopList,
+    message: shopMessage,
+    getSave: window.BossFishSave.loadSave,
+    saveGame: window.BossFishSave.saveGame,
+    getUpgrades: async () => {
+      const response = await fetch('data/upgrades.json');
+      return response.json();
+    },
+    onPurchase: (data, upgradeId) => {
+      renderSave(data);
+
+      if (upgradeId === 'biteSpeed') {
+        fishing.refreshBiteTimer();
+      }
+    }
+  });
 });
 
 resetSaveButton.addEventListener('click', () => {

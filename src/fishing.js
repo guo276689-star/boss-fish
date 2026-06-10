@@ -1,15 +1,23 @@
 'use strict';
 
 window.BossFishFishing = {
-  async create(onBiteChange, onCatch) {
+  async create(onBiteChange, onCatch, getBiteSpeedLevel) {
     const response = await fetch('data/fish.json');
     const fishList = await response.json();
     let fishBiting = false;
+    let biteTimer = null;
 
     function scheduleBite() {
-      const delay = 20000 + Math.random() * 40000;
+      const level = getBiteSpeedLevel();
+      const minimumSeconds = Math.max(10, 20 - level * 2);
+      const maximumSeconds = Math.max(40, 60 - level * 4);
+      const delay = (
+        minimumSeconds +
+        Math.random() * (maximumSeconds - minimumSeconds)
+      ) * 1000;
 
-      window.setTimeout(() => {
+      biteTimer = window.setTimeout(() => {
+        biteTimer = null;
         fishBiting = true;
         onBiteChange(true);
       }, delay);
@@ -28,10 +36,20 @@ window.BossFishFishing = {
       scheduleBite();
     }
 
+    function refreshBiteTimer() {
+      if (fishBiting) {
+        return;
+      }
+
+      window.clearTimeout(biteTimer);
+      scheduleBite();
+    }
+
     scheduleBite();
 
     return {
-      catchFish
+      catchFish,
+      refreshBiteTimer
     };
   }
 };

@@ -67,8 +67,12 @@ function resetSave() {
 
 function addCatchToSave(fish) {
   const data = loadSave();
+  const sellBonusLevel = data.upgrades.sellBonus;
+  const earnedCoins = Math.floor(
+    fish.basePrice * (1 + sellBonusLevel * 0.15)
+  );
 
-  data.coins += fish.basePrice;
+  data.coins += earnedCoins;
   data.totalCaught += 1;
   data.ownedFish[fish.id] = (data.ownedFish[fish.id] || 0) + 1;
   data.lastCatch = {

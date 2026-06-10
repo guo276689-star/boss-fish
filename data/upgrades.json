@@ -1,0 +1,18 @@
+[
+  {
+    "id": "biteSpeed",
+    "name": "上钩速度",
+    "baseCost": 80,
+    "costMultiplier": 1.7,
+    "maxLevel": 5,
+    "description": "鱼更快上钩。"
+  },
+  {
+    "id": "sellBonus",
+    "name": "鱼价加成",
+    "baseCost": 120,
+    "costMultiplier": 1.8,
+    "maxLevel": 5,
+    "description": "卖鱼获得更多金币。"
+  }
+]
