@@ -7,6 +7,7 @@ function createWindow() {
     height: 260,
     useContentSize: true,
     resizable: false,
+    autoHideMenuBar: true,
     title: '老板鱼来了',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -14,6 +15,18 @@ function createWindow() {
       nodeIntegration: false
     }
   });
+
+  mainWindow.setMenuBarVisibility(false);
+  mainWindow.setContentSize(420, 260);
+
+  const [contentWidth, contentHeight] = mainWindow.getContentSize();
+
+  if (contentWidth !== 420 || contentHeight !== 260) {
+    mainWindow.setContentSize(
+      420 - (contentWidth - 420),
+      260 - (contentHeight - 260)
+    );
+  }
 
   mainWindow.loadFile('index.html');
 }
