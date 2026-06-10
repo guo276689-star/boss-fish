@@ -12,6 +12,9 @@
     <script src="src/bestiary.js" defer></script>
     <script src="src/shop.js" defer></script>
     <script src="src/disguise.js" defer></script>
+    <script src="src/mini.js" defer></script>
+    <script src="src/daily-quests.js" defer></script>
+    <script src="src/navigation.js" defer></script>
     <script src="src/renderer.js" defer></script>
   </head>
   <body>
@@ -24,15 +27,10 @@
           <div class="stats-row">
             <span>金币 <strong id="coins">0</strong></span>
             <span>总数 <strong id="total-caught">0</strong></span>
-            <span class="last-catch">
-              最近 <strong id="last-catch">暂无</strong>
-            </span>
           </div>
           <div class="action-row">
-            <button id="open-bestiary" type="button">图鉴</button>
-            <button id="open-shop" type="button">商店</button>
-            <button id="open-report" type="button">报表</button>
-            <button id="reset-save" type="button">重置存档</button>
+            <button id="open-features" type="button">功能</button>
+            <button id="open-mini" type="button">迷你</button>
           </div>
         </section>
         <section id="bestiary-overlay" class="overlay" aria-label="图鉴" hidden>
@@ -52,6 +50,26 @@
             <div id="shop-list" class="shop-list"></div>
           </div>
         </section>
+      </section>
+      <section id="features-view" class="app-page" aria-label="功能" hidden>
+        <div class="page-header">
+          <h2>功能</h2>
+          <button id="close-features" type="button">返回</button>
+        </div>
+        <div class="feature-grid">
+          <button id="open-daily-quests" type="button">今日委托</button>
+          <button id="open-bestiary" type="button">图鉴</button>
+          <button id="open-shop" type="button">商店</button>
+          <button id="open-report" type="button">报表</button>
+          <button id="reset-save" type="button">重置存档</button>
+        </div>
+      </section>
+      <section id="daily-quests-view" class="app-page" aria-label="今日委托" hidden>
+        <div class="page-header">
+          <h2>今日委托</h2>
+          <button id="close-daily-quests" type="button">返回功能页</button>
+        </div>
+        <div id="daily-quests-list" class="daily-quests-list"></div>
       </section>
       <section id="report-view" class="report-view" aria-label="办公报表" hidden>
         <header class="report-header">

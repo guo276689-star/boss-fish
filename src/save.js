@@ -22,7 +22,8 @@ function getDefaultSave() {
     },
     settings: {
       windowMode: 'game'
-    }
+    },
+    dailyQuests: createDailyQuests()
   };
 }
 
@@ -48,11 +49,41 @@ function loadSave() {
       settings: {
         ...defaultSave.settings,
         ...parsedData.settings
-      }
+      },
+      dailyQuests: parsedData.dailyQuests || defaultSave.dailyQuests
     };
   } catch {
     return getDefaultSave();
   }
+}
+
+function createDailyQuests() {
+  return {
+    date: getLocalDateKey(),
+    quests: [
+      createQuest('catch_3', '钓到 3 条鱼', 3),
+      createQuest('catch_5', '钓到 5 条鱼', 5),
+      createQuest('catch_8', '钓到 8 条鱼', 8)
+    ]
+  };
+}
+
+function createQuest(id, title, target) {
+  return {
+    id,
+    title,
+    target,
+    progress: 0
+  };
+}
+
+function getLocalDateKey() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
 }
 
 function saveGame(data) {
