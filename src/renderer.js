@@ -13,6 +13,8 @@ const closeShopButton = document.getElementById('close-shop');
 const shopOverlay = document.getElementById('shop-overlay');
 const shopList = document.getElementById('shop-list');
 const shopMessage = document.getElementById('shop-message');
+const rareCatchNotice = document.getElementById('rare-catch-notice');
+let rareCatchNoticeTimer = null;
 const game = window.BossFishGame.start(canvas);
 const savedData = window.BossFishDailyQuests.initialize(
   window.BossFishSave.loadSave()
@@ -43,6 +45,7 @@ window.BossFishFishing.create(
   },
   (fish) => {
     game.setLastCaughtFish(fish);
+    showRareCatchNotice(fish);
     const catchResult = window.BossFishSave.addCatchToSave(fish);
     const data = window.BossFishDailyQuests.recordCatch(
       fish,
@@ -85,9 +88,38 @@ resetSaveButton.addEventListener('click', () => {
 
   const defaultSave = window.BossFishSave.resetSave();
   game.setLastCaughtFish(null);
+  clearRareCatchNotice();
   window.BossFishDailyQuests.render(defaultSave);
   renderSave(defaultSave);
 });
+
+function showRareCatchNotice(fish) {
+  const rarityLabels = {
+    rare: '稀有鱼！',
+    epic: '史诗鱼！',
+    legendary: '传说鱼！'
+  };
+  const label = rarityLabels[fish.rarity];
+
+  clearRareCatchNotice();
+
+  if (!label) {
+    return;
+  }
+
+  rareCatchNotice.textContent = `${label}${fish.name}`;
+  rareCatchNotice.className = `rare-catch-notice ${fish.rarity}`;
+  rareCatchNotice.hidden = false;
+  rareCatchNoticeTimer = window.setTimeout(clearRareCatchNotice, 2500);
+}
+
+function clearRareCatchNotice() {
+  window.clearTimeout(rareCatchNoticeTimer);
+  rareCatchNoticeTimer = null;
+  rareCatchNotice.hidden = true;
+  rareCatchNotice.textContent = '';
+  rareCatchNotice.className = 'rare-catch-notice';
+}
 
 function renderSave(data) {
   coinsElement.textContent = data.coins;
