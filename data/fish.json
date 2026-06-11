@@ -78,5 +78,85 @@
     "basePrice": 500,
     "weight": 0.5,
     "description": "它不是来上钩的，它是来巡逻的。"
+  },
+  {
+    "id": "email_puffer",
+    "name": "邮件河豚",
+    "rarity": "common",
+    "basePrice": 16,
+    "weight": 18,
+    "description": "一紧张就把收件箱撑满。"
+  },
+  {
+    "id": "clockin_eel",
+    "name": "打卡鳗鱼",
+    "rarity": "common",
+    "basePrice": 20,
+    "weight": 14,
+    "description": "每天准点出现，准点消失。"
+  },
+  {
+    "id": "weekly_crab",
+    "name": "周报螃蟹",
+    "rarity": "common",
+    "basePrice": 24,
+    "weight": 12,
+    "description": "横着走，也能写出一篇周报。"
+  },
+  {
+    "id": "reimbursement_seahorse",
+    "name": "报销海马",
+    "rarity": "common",
+    "basePrice": 28,
+    "weight": 10,
+    "description": "身上贴满发票，游得很谨慎。"
+  },
+  {
+    "id": "requirement_bass",
+    "name": "需求鲈鱼",
+    "rarity": "rare",
+    "basePrice": 85,
+    "weight": 5,
+    "description": "刚钓上来，需求又变了。"
+  },
+  {
+    "id": "code_koi",
+    "name": "代码锦鲤",
+    "rarity": "rare",
+    "basePrice": 100,
+    "weight": 4,
+    "description": "上线前出现，大家都想拜一拜。"
+  },
+  {
+    "id": "deadline_tuna",
+    "name": "截止日金枪鱼",
+    "rarity": "rare",
+    "basePrice": 120,
+    "weight": 3,
+    "description": "游得飞快，因为后面就是 deadline。"
+  },
+  {
+    "id": "schedule_urchin",
+    "name": "排期海胆",
+    "rarity": "rare",
+    "basePrice": 140,
+    "weight": 2.5,
+    "description": "看起来圆润，碰一下全是刺。"
+  },
+  {
+    "id": "kpi_shark",
+    "name": "KPI 鲨鱼",
+    "rarity": "epic",
+    "basePrice": 280,
+    "weight": 1,
+    "description": "闻到绩效味就会靠近。"
+  },
+  {
+    "id": "founder_whale",
+    "name": "创始人鲸",
+    "rarity": "legendary",
+    "basePrice": 800,
+    "weight": 0.3,
+    "description": "很少露面，但一出现就要改方向。"
   }
 ]
