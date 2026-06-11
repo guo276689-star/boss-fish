@@ -205,18 +205,18 @@ button {
 .daily-quests-list {
   display: grid;
   align-content: start;
-  gap: 8px;
-  padding-top: 10px;
+  gap: 6px;
+  padding-top: 8px;
 }
 
 .daily-quest-entry {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 8px 10px;
+  padding: 6px 8px;
   border: 1px solid #aa987b;
   background: #fffaf0;
-  gap: 5px 10px;
+  gap: 3px 8px;
 }
 
 .daily-quest-entry h3,
@@ -225,16 +225,41 @@ button {
 }
 
 .daily-quest-entry h3 {
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.daily-quest-progress {
+.daily-quest-details,
+.daily-quest-status {
   color: #776758;
-  font-size: 12px;
+  font-size: 11px;
+}
+
+.daily-quest-details {
+  grid-column: 1 / span 2;
+}
+
+.daily-quest-status.claimed {
+  color: #497154;
+}
+
+.daily-quest-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.daily-quest-status.available {
+  color: #9a5c20;
+}
+
+.daily-quest-claim {
+  padding: 2px 8px;
+  border-width: 1px;
+  font-size: 11px;
 }
 
 .daily-quest-entry progress {
   grid-column: 1 / span 2;
   width: 100%;
-  height: 8px;
+  height: 7px;
 }

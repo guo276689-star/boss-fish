@@ -61,19 +61,38 @@ function createDailyQuests() {
   return {
     date: getLocalDateKey(),
     quests: [
-      createQuest('catch_3', '钓到 3 条鱼', 3),
-      createQuest('catch_5', '钓到 5 条鱼', 5),
-      createQuest('catch_8', '钓到 8 条鱼', 8)
+      createQuest({
+        id: 'catch_5',
+        type: 'catch_count',
+        title: '钓到 5 条鱼',
+        target: 5,
+        rewardCoins: 50
+      }),
+      createQuest({
+        id: 'earn_200',
+        type: 'earn_coins',
+        title: '通过钓鱼获得 200 金币',
+        target: 200,
+        rewardCoins: 80
+      }),
+      createQuest({
+        id: 'catch_rare_1',
+        type: 'catch_rarity',
+        title: '钓到 1 条稀有及以上的鱼',
+        target: 1,
+        rarities: ['rare', 'epic', 'legendary'],
+        rewardCoins: 120
+      })
     ]
   };
 }
 
-function createQuest(id, title, target) {
+function createQuest(options) {
   return {
-    id,
-    title,
-    target,
-    progress: 0
+    ...options,
+    progress: 0,
+    completed: false,
+    claimed: false
   };
 }
 
@@ -113,5 +132,8 @@ function addCatchToSave(fish) {
     basePrice: fish.basePrice
   };
 
-  return saveGame(data);
+  return {
+    data: saveGame(data),
+    earnedCoins
+  };
 }

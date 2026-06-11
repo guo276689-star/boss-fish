@@ -43,8 +43,12 @@ window.BossFishFishing.create(
   },
   (fish) => {
     game.setLastCaughtFish(fish);
-    const data = window.BossFishSave.addCatchToSave(fish);
-    renderSave(window.BossFishDailyQuests.recordCatch(data));
+    const catchResult = window.BossFishSave.addCatchToSave(fish);
+    const data = window.BossFishDailyQuests.recordCatch(
+      fish,
+      catchResult.earnedCoins
+    );
+    renderSave(data);
   },
   () => window.BossFishSave.loadSave().upgrades.biteSpeed
 ).then((fishing) => {
