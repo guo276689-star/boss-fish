@@ -267,16 +267,57 @@ function drawFishingRod(
 }
 
 function drawStatus(context, fishBiting, lastCaughtFishName) {
-  context.font = 'bold 16px "Microsoft YaHei", sans-serif';
+  context.font = 'bold 15px "Microsoft YaHei", sans-serif';
   context.textAlign = 'center';
+  context.textBaseline = 'middle';
 
   if (fishBiting) {
-    context.fillStyle = '#b52d27';
-    context.fillText('上钩了！', 286, 112);
+    drawStatusLabel(
+      context,
+      '上钩了！',
+      286,
+      106,
+      '#fff1dc',
+      '#9e332c',
+      '#9e332c'
+    );
   }
 
   if (lastCaughtFishName) {
-    context.fillStyle = '#3e514a';
-    context.fillText(`最近钓到：${lastCaughtFishName}`, 210, 24);
+    drawStatusLabel(
+      context,
+      `最近钓到：${lastCaughtFishName}`,
+      210,
+      18,
+      '#fff8df',
+      '#5b4b3c',
+      '#3e514a'
+    );
   }
+}
+
+function drawStatusLabel(
+  context,
+  text,
+  centerX,
+  centerY,
+  backgroundColor,
+  borderColor,
+  textColor
+) {
+  const horizontalPadding = 10;
+  const height = 24;
+  const width = Math.min(
+    380,
+    Math.ceil(context.measureText(text).width) + horizontalPadding * 2
+  );
+  const left = Math.round(centerX - width / 2);
+  const top = Math.round(centerY - height / 2);
+
+  context.fillStyle = borderColor;
+  context.fillRect(left, top, width, height);
+  context.fillStyle = backgroundColor;
+  context.fillRect(left + 2, top + 2, width - 4, height - 4);
+  context.fillStyle = textColor;
+  context.fillText(text, centerX, centerY + 1, width - horizontalPadding * 2);
 }
