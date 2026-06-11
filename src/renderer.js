@@ -42,6 +42,10 @@ window.BossFishFishing.create(
   (isBiting) => {
     game.setFishBiting(isBiting);
     window.BossFishMini.setBiting(isBiting);
+
+    if (isBiting) {
+      window.BossFishSound.playBite();
+    }
   },
   (fish) => {
     game.setLastCaughtFish(fish);
@@ -53,6 +57,7 @@ window.BossFishFishing.create(
       catchResult.earnedCoins
     );
     renderSave(data);
+    window.BossFishSound.playCatch(fish.rarity);
   },
   () => window.BossFishSave.loadSave().upgrades.biteSpeed
 ).then((fishing) => {
@@ -91,6 +96,7 @@ resetSaveButton.addEventListener('click', () => {
   game.setLastCaughtFish(null);
   game.clearCatReaction();
   clearRareCatchNotice();
+  window.BossFishSound.syncSettings(defaultSave);
   window.BossFishDailyQuests.render(defaultSave);
   renderSave(defaultSave);
 });

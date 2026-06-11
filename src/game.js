@@ -3,6 +3,7 @@
 window.BossFishGame = {
   start(canvas) {
     const context = canvas.getContext('2d');
+    const images = createGameImages();
     let fishBiting = false;
     let lastCaughtFishName = '';
     let catReaction = 'default';
@@ -13,9 +14,20 @@ window.BossFishGame = {
       const bobberOffset = Math.sin(timestamp / 450) * 2;
       const catMood = fishBiting ? 'bite' : catReaction;
 
-      drawBackground(context);
-      drawCat(context, catMood);
-      drawFishingRod(context, bobberOffset, fishBiting);
+      drawBackground(context, images.pondBackground);
+      drawCat(
+        context,
+        catMood,
+        images.catFishing,
+        images.catExcited
+      );
+      drawFishingRod(
+        context,
+        bobberOffset,
+        fishBiting,
+        images.bobber,
+        images.catFishing
+      );
       drawStatus(context, fishBiting, lastCaughtFishName);
 
       window.requestAnimationFrame(drawScene);
@@ -50,7 +62,33 @@ window.BossFishGame = {
   }
 };
 
-function drawBackground(context) {
+function createGameImages() {
+  return {
+    pondBackground: loadImage('assets/images/pond_background.png'),
+    catFishing: loadImage('assets/images/cat_fishing.png'),
+    catExcited: loadImage('assets/images/cat_excited.png'),
+    bobber: loadImage('assets/images/bobber.png')
+  };
+}
+
+function loadImage(source) {
+  const image = new Image();
+  image.src = source;
+  return image;
+}
+
+function isImageReady(image) {
+  return image.complete && image.naturalWidth > 0;
+}
+
+function drawBackground(context, backgroundImage) {
+  if (isImageReady(backgroundImage)) {
+    context.fillStyle = '#55aeb5';
+    context.fillRect(0, 0, 420, 190);
+    context.drawImage(backgroundImage, 0, 0);
+    return;
+  }
+
   context.fillStyle = '#a9d9e8';
   context.fillRect(0, 0, 420, 72);
 
@@ -74,7 +112,16 @@ function drawBackground(context) {
   context.fillRect(390, 63, 5, 9);
 }
 
-function drawCat(context, mood) {
+function drawCat(context, mood, fishingImage, excitedImage) {
+  const isExcited = ['rare', 'epic', 'legendary'].includes(mood);
+  const catImage = isExcited ? excitedImage : fishingImage;
+
+  if (isImageReady(catImage)) {
+    context.drawImage(catImage, 32, 42);
+    drawCatAccent(context, mood);
+    return;
+  }
+
   context.fillStyle = '#66584d';
   context.fillRect(42, 70, 38, 34);
   context.fillRect(48, 52, 28, 24);
@@ -174,29 +221,46 @@ function drawStar(context, x, y, color) {
   context.fillRect(x, y + 3, 9, 3);
 }
 
-function drawFishingRod(context, bobberOffset, fishBiting) {
+function drawFishingRod(
+  context,
+  bobberOffset,
+  fishBiting,
+  bobberImage,
+  catImage
+) {
   const bobberX = 286;
   const bobberY = 137 + bobberOffset;
+  const usingCatImage = isImageReady(catImage);
 
-  context.strokeStyle = '#4b3d32';
-  context.lineWidth = 4;
-  context.beginPath();
-  context.moveTo(75, 79);
-  context.lineTo(218, 62);
-  context.stroke();
+  if (!usingCatImage) {
+    context.strokeStyle = '#4b3d32';
+    context.lineWidth = 4;
+    context.beginPath();
+    context.moveTo(75, 79);
+    context.lineTo(218, 62);
+    context.stroke();
+  }
 
   context.strokeStyle = '#ded7c4';
   context.lineWidth = 1;
   context.beginPath();
-  context.moveTo(218, 62);
+  context.moveTo(usingCatImage ? 91 : 218, usingCatImage ? 72 : 62);
   context.lineTo(bobberX, bobberY);
   context.stroke();
 
-  context.fillStyle = fishBiting ? '#e23d32' : '#f2eee2';
-  context.fillRect(bobberX - 3, bobberY - 7, 6, 7);
+  if (isImageReady(bobberImage)) {
+    context.drawImage(
+      bobberImage,
+      Math.round(bobberX - 12),
+      Math.round(bobberY - 12)
+    );
+  } else {
+    context.fillStyle = fishBiting ? '#e23d32' : '#f2eee2';
+    context.fillRect(bobberX - 3, bobberY - 7, 6, 7);
 
-  context.fillStyle = fishBiting ? '#e23d32' : '#d8584c';
-  context.fillRect(bobberX - 4, bobberY, 8, 8);
+    context.fillStyle = fishBiting ? '#e23d32' : '#d8584c';
+    context.fillRect(bobberX - 4, bobberY, 8, 8);
+  }
 
   context.fillStyle = '#518fa3';
   context.fillRect(bobberX - 10, bobberY + 9, 20, 2);

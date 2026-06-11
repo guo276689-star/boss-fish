@@ -89,6 +89,7 @@
     window.BossFishSave.saveGame(data);
     render(data);
     document.getElementById('coins').textContent = data.coins;
+    window.BossFishSound.playQuestReward();
     return data;
   }
 

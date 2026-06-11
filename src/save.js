@@ -21,7 +21,8 @@ function getDefaultSave() {
       sellBonus: 0
     },
     settings: {
-      windowMode: 'game'
+      windowMode: 'game',
+      soundEnabled: false
     },
     dailyQuests: createDailyQuests()
   };
