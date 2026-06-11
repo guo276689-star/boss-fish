@@ -1,6 +1,86 @@
 'use strict';
 
 const SAVE_KEY = 'bossFishSave';
+const DAILY_QUEST_TEMPLATES = {
+  catchCount: [
+    {
+      id: 'catch_3',
+      type: 'catch_count',
+      title: '摸鱼热身：钓到 3 条鱼',
+      target: 3,
+      rewardCoins: 25
+    },
+    {
+      id: 'catch_5',
+      type: 'catch_count',
+      title: '今日进度：钓到 5 条鱼',
+      target: 5,
+      rewardCoins: 50
+    },
+    {
+      id: 'catch_6',
+      type: 'catch_count',
+      title: '工位巡塘：钓到 6 条鱼',
+      target: 6,
+      rewardCoins: 55
+    },
+    {
+      id: 'catch_10',
+      type: 'catch_count',
+      title: '带薪丰收：钓到 10 条鱼',
+      target: 10,
+      rewardCoins: 90
+    }
+  ],
+  earnCoins: [
+    {
+      id: 'earn_30',
+      type: 'earn_coins',
+      title: '摸鱼创收：获得 30 金币',
+      target: 30,
+      rewardCoins: 15
+    },
+    {
+      id: 'earn_80',
+      type: 'earn_coins',
+      title: '工位创收：获得 80 金币',
+      target: 80,
+      rewardCoins: 30
+    },
+    {
+      id: 'earn_120',
+      type: 'earn_coins',
+      title: '今日业绩：获得 120 金币',
+      target: 120,
+      rewardCoins: 45
+    },
+    {
+      id: 'earn_200',
+      type: 'earn_coins',
+      title: '超额摸鱼：获得 200 金币',
+      target: 200,
+      rewardCoins: 80
+    }
+  ],
+  catchRarity: [
+    {
+      id: 'catch_rare_1',
+      type: 'catch_rarity',
+      title: '发现 1 条稀有及以上的鱼',
+      target: 1,
+      rarities: ['rare', 'epic', 'legendary'],
+      rewardCoins: 120
+    },
+    {
+      id: 'catch_epic_1',
+      type: 'catch_rarity',
+      title: '发现 1 条史诗及以上的鱼',
+      target: 1,
+      rarities: ['epic', 'legendary'],
+      rewardCoins: 200
+    }
+  ]
+};
 
 window.BossFishSave = {
   getDefaultSave,
@@ -59,33 +139,45 @@ function loadSave() {
 }
 
 function createDailyQuests() {
+  const date = getLocalDateKey();
+
   return {
-    date: getLocalDateKey(),
+    date,
     quests: [
-      createQuest({
-        id: 'catch_5',
-        type: 'catch_count',
-        title: '钓到 5 条鱼',
-        target: 5,
-        rewardCoins: 50
-      }),
-      createQuest({
-        id: 'earn_200',
-        type: 'earn_coins',
-        title: '通过钓鱼获得 200 金币',
-        target: 200,
-        rewardCoins: 80
-      }),
-      createQuest({
-        id: 'catch_rare_1',
-        type: 'catch_rarity',
-        title: '钓到 1 条稀有及以上的鱼',
-        target: 1,
-        rarities: ['rare', 'epic', 'legendary'],
-        rewardCoins: 120
-      })
+      createQuest(selectDailyTemplate(
+        DAILY_QUEST_TEMPLATES.catchCount,
+        date,
+        'catch_count'
+      )),
+      createQuest(selectDailyTemplate(
+        DAILY_QUEST_TEMPLATES.earnCoins,
+        date,
+        'earn_coins'
+      )),
+      createQuest(selectDailyTemplate(
+        DAILY_QUEST_TEMPLATES.catchRarity,
+        date,
+        'catch_rarity'
+      ))
     ]
   };
+}
+
+function selectDailyTemplate(templates, date, category) {
+  const seed = hashText(`${date}:${category}`);
+  return templates[seed % templates.length];
+}
+
+function hashText(text) {
+  let hash = 2166136261;
+
+  for (const character of text) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  hash ^= hash >>> 16;
+  return hash >>> 0;
 }
 
 function createQuest(options) {
