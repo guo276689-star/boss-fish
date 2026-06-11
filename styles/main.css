@@ -80,9 +80,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   width: 420px;
   height: 70px;
-  padding: 8px;
+  padding: 8px 10px;
   border-top: 4px solid #594d42;
   background: #f4ead5;
 }
@@ -90,19 +91,39 @@ main {
 .stats-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: #463d35;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1;
   white-space: nowrap;
+}
+
+.stats-row span {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.stats-row strong {
+  min-width: 18px;
+  color: #2f2924;
+  font-size: 16px;
+  text-align: right;
 }
 
 .action-row {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+}
+
+.action-row button {
+  min-width: 56px;
+  min-height: 36px;
+  font-weight: bold;
 }
 
 button {
-  padding: 3px 10px;
+  padding: 4px 10px;
   border: 2px solid #594d42;
   background: #e2d2ae;
   color: #463d35;
@@ -228,26 +249,36 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 8px;
+  min-height: 46px;
+  padding-bottom: 7px;
   border-bottom: 3px solid #594d42;
 }
 
 .page-header h2 {
   margin: 0;
   font-size: 20px;
+  line-height: 1;
+}
+
+.page-header button {
+  min-width: 56px;
+  min-height: 32px;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-content: start;
-  gap: 10px;
-  padding-top: 14px;
+  gap: 8px 10px;
+  padding-top: 10px;
 }
 
 .feature-grid button {
-  min-height: 44px;
+  min-height: 46px;
+  padding: 5px 8px;
   font-size: 15px;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 .daily-quests-list {
