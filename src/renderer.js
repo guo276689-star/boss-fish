@@ -14,6 +14,7 @@ const shopOverlay = document.getElementById('shop-overlay');
 const shopList = document.getElementById('shop-list');
 const shopMessage = document.getElementById('shop-message');
 const rareCatchNotice = document.getElementById('rare-catch-notice');
+const gameHint = document.getElementById('game-hint');
 let rareCatchNoticeTimer = null;
 const game = window.BossFishGame.start(canvas);
 const savedData = window.BossFishDailyQuests.initialize(
@@ -103,9 +104,9 @@ resetSaveButton.addEventListener('click', () => {
 
 function showRareCatchNotice(fish) {
   const rarityLabels = {
-    rare: '稀有鱼！',
-    epic: '史诗鱼！',
-    legendary: '传说鱼！'
+    rare: '稀有收获！',
+    epic: '史诗出水！',
+    legendary: '传说降临！'
   };
   const label = rarityLabels[fish.rarity];
 
@@ -132,4 +133,5 @@ function clearRareCatchNotice() {
 function renderSave(data) {
   coinsElement.textContent = data.coins;
   totalCaughtElement.textContent = data.totalCaught;
+  gameHint.hidden = data.totalCaught > 0;
 }

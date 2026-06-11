@@ -61,12 +61,14 @@ main {
   border-color: #39758c;
   background-color: #d8f1f5;
   color: #28596d;
+  box-shadow: 0 2px 0 rgba(40, 89, 109, 0.2);
 }
 
 .rare-catch-notice.epic {
   border-color: #76509a;
   background-color: #eadcf4;
   color: #573875;
+  box-shadow: 0 0 0 2px rgba(234, 220, 244, 0.55);
 }
 
 .rare-catch-notice.legendary {
@@ -74,6 +76,28 @@ main {
   background-color: #fff0b8;
   color: #7d4b0c;
   box-shadow: 0 0 0 2px rgba(255, 244, 194, 0.65);
+}
+
+.game-hint {
+  position: absolute;
+  left: 10px;
+  bottom: 78px;
+  width: 400px;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid rgba(73, 83, 75, 0.72);
+  background: rgba(255, 248, 223, 0.9);
+  color: #46534c;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.game-hint[hidden] {
+  display: none;
 }
 
 .ui-area {

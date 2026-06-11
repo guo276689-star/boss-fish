@@ -104,10 +104,11 @@
       const progress = document.createElement('progress');
 
       entry.className = 'daily-quest-entry';
-      title.textContent = quest.title;
+      title.textContent = getQuestDisplayTitle(quest);
       details.className = 'daily-quest-details';
       details.textContent = (
-        `进度 ${quest.progress} / ${quest.target} · 奖励 ${quest.rewardCoins} 金币`
+        `进度 ${quest.progress} / ${quest.target} · ` +
+        `摸鱼奖金 ${quest.rewardCoins} 金币`
       );
       progress.max = quest.target;
       progress.value = quest.progress;
@@ -115,6 +116,23 @@
       entry.append(title, status, details, progress);
       list.append(entry);
     }
+  }
+
+  function getQuestDisplayTitle(quest) {
+    if (quest.type === 'catch_count') {
+      return `摸鱼指标：钓到 ${quest.target} 条鱼`;
+    }
+
+    if (quest.type === 'earn_coins') {
+      return `工位创收：获得 ${quest.target} 金币`;
+    }
+
+    if (quest.type === 'catch_rarity') {
+      const rarityLabel = quest.rarities.includes('rare') ? '稀有' : '史诗';
+      return `重点发现：钓到 ${quest.target} 条${rarityLabel}及以上的鱼`;
+    }
+
+    return quest.title;
   }
 
   function createQuestStatus(quest) {

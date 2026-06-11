@@ -25,7 +25,7 @@
   justify-content: space-between;
   height: 42px;
   padding: 0 2px 8px;
-  border-bottom: 1px solid #cbd2da;
+  border-bottom: 2px solid #c5ced8;
 }
 
 .report-header p,
@@ -50,6 +50,7 @@
   background: #ffffff;
   color: #586575;
   font-size: 11px;
+  font-weight: 600;
 }
 
 .report-content {
@@ -95,6 +96,8 @@
 
 .report-status {
   padding-top: 6px;
+  border-color: #cbdad1;
+  background: #f8fcf9;
 }
 
 .report-status h2 {
