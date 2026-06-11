@@ -29,13 +29,14 @@ main {
 }
 
 .ui-area {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 420px;
   height: 70px;
-  padding: 6px 8px;
+  padding: 8px;
   border-top: 4px solid #594d42;
   background: #f4ead5;
-  gap: 5px;
 }
 
 .stats-row {
@@ -47,15 +48,8 @@ main {
   white-space: nowrap;
 }
 
-.last-catch {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .action-row {
   display: flex;
-  justify-content: flex-end;
   gap: 6px;
 }
 
@@ -164,4 +158,108 @@ button {
 .upgrade-entry button:disabled {
   cursor: default;
   opacity: 0.55;
+}
+
+.app-page {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 420px;
+  height: 260px;
+  padding: 10px;
+  background: #f4ead5;
+  color: #463d35;
+}
+
+.app-page[hidden] {
+  display: none;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #594d42;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: start;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.feature-grid button {
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.daily-quests-list {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding-top: 8px;
+}
+
+.daily-quest-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid #aa987b;
+  background: #fffaf0;
+  gap: 3px 8px;
+}
+
+.daily-quest-entry h3,
+.daily-quest-entry p {
+  margin: 0;
+}
+
+.daily-quest-entry h3 {
+  font-size: 13px;
+}
+
+.daily-quest-details,
+.daily-quest-status {
+  color: #776758;
+  font-size: 11px;
+}
+
+.daily-quest-details {
+  grid-column: 1 / span 2;
+}
+
+.daily-quest-status.claimed {
+  color: #497154;
+}
+
+.daily-quest-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.daily-quest-status.available {
+  color: #9a5c20;
+}
+
+.daily-quest-claim {
+  padding: 2px 8px;
+  border-width: 1px;
+  font-size: 11px;
+}
+
+.daily-quest-entry progress {
+  grid-column: 1 / span 2;
+  width: 100%;
+  height: 7px;
 }

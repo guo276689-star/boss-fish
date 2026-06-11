@@ -3,7 +3,6 @@
 const canvas = document.getElementById('game-canvas');
 const coinsElement = document.getElementById('coins');
 const totalCaughtElement = document.getElementById('total-caught');
-const lastCatchElement = document.getElementById('last-catch');
 const resetSaveButton = document.getElementById('reset-save');
 const openBestiaryButton = document.getElementById('open-bestiary');
 const closeBestiaryButton = document.getElementById('close-bestiary');
@@ -15,7 +14,9 @@ const shopOverlay = document.getElementById('shop-overlay');
 const shopList = document.getElementById('shop-list');
 const shopMessage = document.getElementById('shop-message');
 const game = window.BossFishGame.start(canvas);
-const savedData = window.BossFishSave.loadSave();
+const savedData = window.BossFishDailyQuests.initialize(
+  window.BossFishSave.loadSave()
+);
 
 renderSave(savedData);
 
@@ -36,10 +37,18 @@ if (savedData.lastCatch) {
 }
 
 window.BossFishFishing.create(
-  game.setFishBiting,
+  (isBiting) => {
+    game.setFishBiting(isBiting);
+    window.BossFishMini.setBiting(isBiting);
+  },
   (fish) => {
     game.setLastCaughtFish(fish);
-    renderSave(window.BossFishSave.addCatchToSave(fish));
+    const catchResult = window.BossFishSave.addCatchToSave(fish);
+    const data = window.BossFishDailyQuests.recordCatch(
+      fish,
+      catchResult.earnedCoins
+    );
+    renderSave(data);
   },
   () => window.BossFishSave.loadSave().upgrades.biteSpeed
 ).then((fishing) => {
@@ -76,11 +85,11 @@ resetSaveButton.addEventListener('click', () => {
 
   const defaultSave = window.BossFishSave.resetSave();
   game.setLastCaughtFish(null);
+  window.BossFishDailyQuests.render(defaultSave);
   renderSave(defaultSave);
 });
 
 function renderSave(data) {
   coinsElement.textContent = data.coins;
   totalCaughtElement.textContent = data.totalCaught;
-  lastCatchElement.textContent = data.lastCatch ? data.lastCatch.name : '暂无';
 }

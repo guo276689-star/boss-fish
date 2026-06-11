@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+#mini-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+#mini-button::before {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #594d42;
+  border-radius: 50%;
+  background: #e2d2ae;
+  content: "";
+}
+
+#bite-indicator {
+  position: absolute;
+  color: #c72525;
+  font: bold 20px/1 Arial, sans-serif;
+}
+
+#bite-indicator[hidden] {
+  display: none;
+}
