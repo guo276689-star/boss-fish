@@ -37,12 +37,17 @@ main {
   top: 38px;
   left: 50%;
   max-width: 360px;
-  padding: 5px 12px;
+  padding: 5px 12px 5px 40px;
   transform: translateX(-50%);
   border: 2px solid;
   border-radius: 3px;
+  background-image: url("../assets/images/rare_alert_icon.png");
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
   font-size: 15px;
   font-weight: bold;
+  image-rendering: pixelated;
   text-align: center;
   white-space: nowrap;
   pointer-events: none;
@@ -54,19 +59,19 @@ main {
 
 .rare-catch-notice.rare {
   border-color: #39758c;
-  background: #d8f1f5;
+  background-color: #d8f1f5;
   color: #28596d;
 }
 
 .rare-catch-notice.epic {
   border-color: #76509a;
-  background: #eadcf4;
+  background-color: #eadcf4;
   color: #573875;
 }
 
 .rare-catch-notice.legendary {
   border-color: #a46b19;
-  background: #fff0b8;
+  background-color: #fff0b8;
   color: #7d4b0c;
   box-shadow: 0 0 0 2px rgba(255, 244, 194, 0.65);
 }
