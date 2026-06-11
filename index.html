@@ -31,6 +31,9 @@
           aria-live="polite"
           hidden
         ></div>
+        <p id="game-hint" class="game-hint" hidden>
+          鱼漂上钩就点击 · 委托在功能页 · 老板来了切迷你
+        </p>
         <section class="ui-area" aria-label="游戏信息">
           <div class="stats-row">
             <span>金币 <strong id="coins">0</strong></span>
@@ -85,27 +88,27 @@
       <section id="report-view" class="report-view" aria-label="办公报表" hidden>
         <header class="report-header">
           <div>
-            <p>工作台 / 日报</p>
-            <h1>今日工作概览</h1>
+            <p>项目协同 / 工作日报</p>
+            <h1>今日项目推进简报</h1>
           </div>
-          <span class="report-date">今日</span>
+          <span class="report-date">今日更新</span>
         </header>
         <div class="report-content">
           <section class="report-card report-projects">
             <h2>项目进度</h2>
-            <p><strong>项目 Alpha</strong><span>进度 87%</span></p>
-            <p><strong>项目 Beta</strong><span>等待复核</span></p>
-            <p><strong>项目 Gamma</strong><span>数据同步中</span></p>
+            <p><strong>需求对齐</strong><span>已完成</span></p>
+            <p><strong>方案评审</strong><span>推进中</span></p>
+            <p><strong>风险项盘点</strong><span>待跟进</span></p>
           </section>
           <section class="report-card">
             <h2>今日待办</h2>
-            <p>[✓] 整理需求文档</p>
-            <p>[✓] 同步项目进度</p>
-            <p>[ ] 输出复盘记录</p>
+            <p>[✓] 汇总需求反馈</p>
+            <p>[✓] 同步项目进展</p>
+            <p>[ ] 补充风险说明</p>
           </section>
           <section class="report-card report-status">
-            <h2>系统状态</h2>
-            <p><span class="status-dot"></span>正常</p>
+            <h2>在线状态</h2>
+            <p><span class="status-dot"></span>专注工作</p>
           </section>
         </div>
         <button id="close-report" class="report-return" type="button">返回</button>
