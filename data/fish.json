@@ -158,5 +158,101 @@
     "basePrice": 800,
     "weight": 0.3,
     "description": "很少露面，但一出现就要改方向。"
+  },
+  {
+    "id": "pantry_guppy",
+    "name": "茶水间孔雀鱼",
+    "rarity": "common",
+    "basePrice": 19,
+    "weight": 16,
+    "description": "消息灵通，游一圈就知道全公司的新鲜事。"
+  },
+  {
+    "id": "spreadsheet_minnow",
+    "name": "表格鳉鱼",
+    "rarity": "common",
+    "basePrice": 21,
+    "weight": 14,
+    "description": "每片鱼鳞都对齐了单元格。"
+  },
+  {
+    "id": "approval_bream",
+    "name": "审批鳊鱼",
+    "rarity": "common",
+    "basePrice": 25,
+    "weight": 12,
+    "description": "已经游到最后一级，正在等待通过。"
+  },
+  {
+    "id": "printer_goby",
+    "name": "打印机虾虎鱼",
+    "rarity": "common",
+    "basePrice": 27,
+    "weight": 10,
+    "description": "平时一声不响，着急时一定卡纸。"
+  },
+  {
+    "id": "leave_request_carp",
+    "name": "请假条鲫鱼",
+    "rarity": "common",
+    "basePrice": 30,
+    "weight": 9,
+    "description": "理由写得很满，去向保持神秘。"
+  },
+  {
+    "id": "rollback_salmon",
+    "name": "回滚鲑鱼",
+    "rarity": "rare",
+    "basePrice": 95,
+    "weight": 4,
+    "description": "奋力向前半天，最后游回了昨天。"
+  },
+  {
+    "id": "review_stingray",
+    "name": "复盘鳐鱼",
+    "rarity": "rare",
+    "basePrice": 115,
+    "weight": 3.5,
+    "description": "摊开以后，哪里都是可以优化的地方。"
+  },
+  {
+    "id": "process_barracuda",
+    "name": "流程梭鱼",
+    "rarity": "rare",
+    "basePrice": 130,
+    "weight": 3,
+    "description": "速度很快，但必须先走完十四个流程。"
+  },
+  {
+    "id": "read_receipt_starfish",
+    "name": "已读海星",
+    "rarity": "rare",
+    "basePrice": 150,
+    "weight": 2.5,
+    "description": "五只手都看见了，暂时没有一只想回复。"
+  },
+  {
+    "id": "notification_anglerfish",
+    "name": "红点灯笼鱼",
+    "rarity": "epic",
+    "basePrice": 260,
+    "weight": 0.9,
+    "description": "头顶永远亮着一个无法消除的未读红点。"
+  },
+  {
+    "id": "legacy_sheet_swordfish",
+    "name": "祖传表格剑鱼",
+    "rarity": "epic",
+    "basePrice": 320,
+    "weight": 0.7,
+    "description": "没人敢改它的公式，也没人知道它从哪来。"
+  },
+  {
+    "id": "annual_bonus_arowana",
+    "name": "年终奖龙鱼",
+    "rarity": "legendary",
+    "basePrice": 1000,
+    "weight": 0.2,
+    "description": "每个人都听说过，但很少有人真的见到。"
   }
 ]
