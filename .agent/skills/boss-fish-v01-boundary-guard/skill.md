@@ -9,8 +9,14 @@ You are assisting development of 《老板鱼来了》, a Windows tiny desktop i
 
 ## Current version
 
-The project has entered v0.3 progression work. Implement only the explicitly approved
-version scope and keep the existing Electron single-player architecture.
+The project is on `v0.3-progression-pack`. The branch currently contains derived
+fishing levels and titles, bestiary details, eight local badges, and shop current/next
+effect descriptions. The planned today summary panel and `todayStats` persistence
+field are not implemented.
+
+Implement only the explicitly approved version scope and keep the existing Electron
+single-player architecture. Do not describe the whole v0.3 pack as complete until
+every child requirement has separate acceptance evidence.
 
 The goal is to validate:
 1. Whether a 420×260 desktop fishing widget feels comfortable.
@@ -47,12 +53,13 @@ Do not use:
 From v0.3 onward, a small milestone branch is allowed:
 - One major version uses one branch.
 - One version may contain 3–6 related, same-theme requirements.
-- Each requirement must have its own commit.
+- Each requirement should preferably have its own commit.
 - Each requirement must have its own acceptance result.
 - High-risk features still require a separate branch.
 - Unrelated features must not be mixed into one version.
-- Persistence schemas, quest rules, fish fields, upgrade fields, IPC APIs,
-  window sizes, and error formats require matching documentation updates.
+- Rule changes, directory structure, persistence schemas, quest rules, fish fields,
+  upgrade fields, IPC APIs, window sizes, and error formats require matching
+  documentation updates.
 
 ## Current forbidden scope
 
@@ -68,6 +75,9 @@ Do not implement:
 - crafting
 - tray
 - global shortcuts
+- complex animation systems
+
+Do not assume the current project has a server or backend.
 
 ## Before making changes
 
@@ -88,6 +98,9 @@ When implementing:
 - Modify only files needed for the current step.
 - Keep code simple and readable.
 - Do not silently add extra features.
-- Commit and report each milestone requirement separately.
+- Prefer a separate commit for each milestone requirement.
+- Report the acceptance result for each milestone requirement separately.
+- For localStorage changes, document defaults, migration, reset-save behavior, and
+  restart persistence.
 - Explain which files changed.
 - Mention if any request conflicts with current boundaries.
