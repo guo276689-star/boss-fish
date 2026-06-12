@@ -287,6 +287,13 @@ button {
   line-height: 1.5;
 }
 
+.bestiary-detail > .bestiary-detail-flavor {
+  border-left-color: #b96f3c;
+  background: #f7e5c3;
+  color: #6d462d;
+  font-style: italic;
+}
+
 .shop-message {
   min-height: 18px;
   margin: 0;

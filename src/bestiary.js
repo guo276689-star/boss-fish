@@ -92,4 +92,7 @@ function renderFishDetail(detail, fish, count) {
   detail.querySelector('#bestiary-detail-description').textContent = (
     fish.description
   );
+  detail.querySelector('#bestiary-detail-flavor').textContent = (
+    fish.flavorText || fish.description || ''
+  );
 }
