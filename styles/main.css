@@ -193,9 +193,26 @@ button {
   display: none;
 }
 
+.bestiary-group + .bestiary-group {
+  margin-top: 8px;
+}
+
+.bestiary-group-title {
+  margin: 0;
+  padding: 5px 7px;
+  border-bottom: 2px solid #8f7b5e;
+  background: #e7d4ad;
+  color: #654b35;
+  font-size: 13px;
+}
+
 .fish-entry {
   padding: 7px 4px;
   border-bottom: 1px solid #aa987b;
+}
+
+.fish-entry-locked {
+  color: #8c7b68;
 }
 
 .fish-entry-button {
