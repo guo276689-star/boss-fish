@@ -490,3 +490,73 @@ button {
   height: 12px;
   margin-top: 8px;
 }
+
+.progression-section {
+  margin-top: 10px;
+}
+
+.progression-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.progression-section-heading h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.progression-section-heading span {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-badge-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.progression-badge {
+  position: relative;
+  min-height: 78px;
+  padding: 8px;
+  border: 1px solid #b7a68a;
+  background: #eee4d0;
+  color: #817365;
+}
+
+.progression-badge.unlocked {
+  border-color: #8f6a36;
+  background: #fff1c9;
+  color: #554332;
+}
+
+.progression-badge h4,
+.progression-badge p {
+  margin: 0;
+}
+
+.progression-badge h4 {
+  padding-right: 44px;
+  font-size: 13px;
+}
+
+.progression-badge p {
+  padding-top: 5px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.progression-badge span {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: 10px;
+}
+
+.progression-badge.unlocked span {
+  color: #8a4e25;
+  font-weight: bold;
+}
