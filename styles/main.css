@@ -297,9 +297,9 @@ button {
 .upgrade-entry {
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 8px 4px;
+  padding: 5px 4px;
   border-bottom: 1px solid #aa987b;
-  gap: 4px 8px;
+  gap: 1px 8px;
 }
 
 .upgrade-entry h3,
@@ -308,17 +308,23 @@ button {
 }
 
 .upgrade-entry h3 {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .upgrade-description,
+.upgrade-effect,
 .upgrade-price {
-  font-size: 13px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.upgrade-effect {
+  color: #6b593f;
 }
 
 .upgrade-entry button {
   grid-column: 2;
-  grid-row: 1 / span 3;
+  grid-row: 1 / span 4;
   align-self: center;
 }
 
