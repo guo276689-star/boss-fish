@@ -134,4 +134,5 @@ function renderSave(data) {
   coinsElement.textContent = data.coins;
   totalCaughtElement.textContent = data.totalCaught;
   gameHint.hidden = data.totalCaught > 0;
+  window.BossFishProgression.render(data);
 }

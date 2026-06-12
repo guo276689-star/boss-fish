@@ -293,12 +293,13 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-content: start;
-  gap: 8px 10px;
+  gap: 6px 10px;
   padding-top: 10px;
+  overflow-y: auto;
 }
 
 .feature-grid button {
-  min-height: 46px;
+  min-height: 40px;
   padding: 5px 8px;
   font-size: 15px;
   font-weight: bold;
@@ -365,4 +366,53 @@ button {
   grid-column: 1 / span 2;
   width: 100%;
   height: 7px;
+}
+
+.progression-content {
+  overflow-y: auto;
+  padding-top: 10px;
+}
+
+.progression-level-card {
+  padding: 14px;
+  border: 2px solid #8f7b5e;
+  background: #fffaf0;
+}
+
+.progression-level-card p {
+  margin: 0;
+}
+
+.progression-kicker {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-level-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0 10px;
+}
+
+.progression-level-heading strong {
+  color: #8a4e25;
+  font-size: 28px;
+}
+
+.progression-level-heading span {
+  color: #463d35;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.progression-next {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-level-card progress {
+  width: 100%;
+  height: 12px;
+  margin-top: 8px;
 }
