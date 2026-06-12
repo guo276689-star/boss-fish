@@ -188,9 +188,31 @@ button {
   padding-top: 8px;
 }
 
+.bestiary-list[hidden],
+.bestiary-detail[hidden] {
+  display: none;
+}
+
 .fish-entry {
   padding: 7px 4px;
   border-bottom: 1px solid #aa987b;
+}
+
+.fish-entry-button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #aa987b;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.fish-entry-button:hover,
+.fish-entry-button:focus-visible {
+  background: #fff5dc;
+  outline: 2px solid #8f7b5e;
+  outline-offset: -2px;
 }
 
 .fish-entry h3,
@@ -211,6 +233,58 @@ button {
 .fish-description {
   padding-top: 3px;
   font-size: 13px;
+}
+
+.bestiary-detail {
+  overflow-y: auto;
+  padding: 10px 4px 0;
+}
+
+.bestiary-detail > button {
+  margin-bottom: 8px;
+}
+
+.bestiary-detail h3 {
+  margin: 0 0 8px;
+  color: #8a4e25;
+  font-size: 22px;
+}
+
+.bestiary-detail dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: 1px solid #aa987b;
+  background: #fffaf0;
+}
+
+.bestiary-detail dl div {
+  padding: 8px;
+  border-right: 1px solid #d2c2a5;
+}
+
+.bestiary-detail dl div:last-child {
+  border-right: 0;
+}
+
+.bestiary-detail dt {
+  color: #776758;
+  font-size: 11px;
+}
+
+.bestiary-detail dd {
+  margin: 3px 0 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.bestiary-detail > p {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #8f7b5e;
+  background: #fff5dc;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .shop-message {

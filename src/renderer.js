@@ -8,6 +8,10 @@ const openBestiaryButton = document.getElementById('open-bestiary');
 const closeBestiaryButton = document.getElementById('close-bestiary');
 const bestiaryOverlay = document.getElementById('bestiary-overlay');
 const bestiaryList = document.getElementById('bestiary-list');
+const bestiaryDetail = document.getElementById('bestiary-detail');
+const closeBestiaryDetailButton = document.getElementById(
+  'close-bestiary-detail'
+);
 const openShopButton = document.getElementById('open-shop');
 const closeShopButton = document.getElementById('close-shop');
 const shopOverlay = document.getElementById('shop-overlay');
@@ -28,6 +32,8 @@ window.BossFishBestiary.initBestiary({
   closeButton: closeBestiaryButton,
   overlay: bestiaryOverlay,
   list: bestiaryList,
+  detail: bestiaryDetail,
+  closeDetailButton: closeBestiaryDetailButton,
   getSave: window.BossFishSave.loadSave,
   getFishList: async () => {
     const response = await fetch('data/fish.json');
