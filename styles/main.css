@@ -188,9 +188,31 @@ button {
   padding-top: 8px;
 }
 
+.bestiary-list[hidden],
+.bestiary-detail[hidden] {
+  display: none;
+}
+
 .fish-entry {
   padding: 7px 4px;
   border-bottom: 1px solid #aa987b;
+}
+
+.fish-entry-button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #aa987b;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.fish-entry-button:hover,
+.fish-entry-button:focus-visible {
+  background: #fff5dc;
+  outline: 2px solid #8f7b5e;
+  outline-offset: -2px;
 }
 
 .fish-entry h3,
@@ -213,6 +235,58 @@ button {
   font-size: 13px;
 }
 
+.bestiary-detail {
+  overflow-y: auto;
+  padding: 10px 4px 0;
+}
+
+.bestiary-detail > button {
+  margin-bottom: 8px;
+}
+
+.bestiary-detail h3 {
+  margin: 0 0 8px;
+  color: #8a4e25;
+  font-size: 22px;
+}
+
+.bestiary-detail dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: 1px solid #aa987b;
+  background: #fffaf0;
+}
+
+.bestiary-detail dl div {
+  padding: 8px;
+  border-right: 1px solid #d2c2a5;
+}
+
+.bestiary-detail dl div:last-child {
+  border-right: 0;
+}
+
+.bestiary-detail dt {
+  color: #776758;
+  font-size: 11px;
+}
+
+.bestiary-detail dd {
+  margin: 3px 0 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.bestiary-detail > p {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #8f7b5e;
+  background: #fff5dc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .shop-message {
   min-height: 18px;
   margin: 0;
@@ -223,9 +297,9 @@ button {
 .upgrade-entry {
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 8px 4px;
+  padding: 5px 4px;
   border-bottom: 1px solid #aa987b;
-  gap: 4px 8px;
+  gap: 1px 8px;
 }
 
 .upgrade-entry h3,
@@ -234,17 +308,23 @@ button {
 }
 
 .upgrade-entry h3 {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .upgrade-description,
+.upgrade-effect,
 .upgrade-price {
-  font-size: 13px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.upgrade-effect {
+  color: #6b593f;
 }
 
 .upgrade-entry button {
   grid-column: 2;
-  grid-row: 1 / span 3;
+  grid-row: 1 / span 4;
   align-self: center;
 }
 
@@ -293,12 +373,13 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-content: start;
-  gap: 8px 10px;
+  gap: 6px 10px;
   padding-top: 10px;
+  overflow-y: auto;
 }
 
 .feature-grid button {
-  min-height: 46px;
+  min-height: 40px;
   padding: 5px 8px;
   font-size: 15px;
   font-weight: bold;
@@ -365,4 +446,123 @@ button {
   grid-column: 1 / span 2;
   width: 100%;
   height: 7px;
+}
+
+.progression-content {
+  overflow-y: auto;
+  padding-top: 10px;
+}
+
+.progression-level-card {
+  padding: 14px;
+  border: 2px solid #8f7b5e;
+  background: #fffaf0;
+}
+
+.progression-level-card p {
+  margin: 0;
+}
+
+.progression-kicker {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-level-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0 10px;
+}
+
+.progression-level-heading strong {
+  color: #8a4e25;
+  font-size: 28px;
+}
+
+.progression-level-heading span {
+  color: #463d35;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.progression-next {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-level-card progress {
+  width: 100%;
+  height: 12px;
+  margin-top: 8px;
+}
+
+.progression-section {
+  margin-top: 10px;
+}
+
+.progression-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.progression-section-heading h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.progression-section-heading span {
+  color: #776758;
+  font-size: 12px;
+}
+
+.progression-badge-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.progression-badge {
+  position: relative;
+  min-height: 78px;
+  padding: 8px;
+  border: 1px solid #b7a68a;
+  background: #eee4d0;
+  color: #817365;
+}
+
+.progression-badge.unlocked {
+  border-color: #8f6a36;
+  background: #fff1c9;
+  color: #554332;
+}
+
+.progression-badge h4,
+.progression-badge p {
+  margin: 0;
+}
+
+.progression-badge h4 {
+  padding-right: 44px;
+  font-size: 13px;
+}
+
+.progression-badge p {
+  padding-top: 5px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.progression-badge span {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: 10px;
+}
+
+.progression-badge.unlocked span {
+  color: #8a4e25;
+  font-weight: bold;
 }

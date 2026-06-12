@@ -15,6 +15,7 @@
     <script src="src/disguise.js" defer></script>
     <script src="src/mini.js" defer></script>
     <script src="src/daily-quests.js" defer></script>
+    <script src="src/progression.js" defer></script>
     <script src="src/navigation.js" defer></script>
     <script src="src/renderer.js" defer></script>
   </head>
@@ -50,6 +51,25 @@
             <button id="close-bestiary" type="button">关闭</button>
           </div>
           <div id="bestiary-list" class="bestiary-list"></div>
+          <article id="bestiary-detail" class="bestiary-detail" hidden>
+            <button id="close-bestiary-detail" type="button">返回图鉴</button>
+            <h3 id="bestiary-detail-name"></h3>
+            <dl>
+              <div>
+                <dt>稀有度</dt>
+                <dd id="bestiary-detail-rarity"></dd>
+              </div>
+              <div>
+                <dt>基础价格</dt>
+                <dd id="bestiary-detail-price"></dd>
+              </div>
+              <div>
+                <dt>已钓数量</dt>
+                <dd id="bestiary-detail-count"></dd>
+              </div>
+            </dl>
+            <p id="bestiary-detail-description"></p>
+          </article>
         </section>
         <section id="shop-overlay" class="overlay" aria-label="商店" hidden>
           <div class="overlay-header">
@@ -72,6 +92,7 @@
           <button id="open-bestiary" type="button">图鉴</button>
           <button id="open-shop" type="button">商店</button>
           <button id="open-report" type="button">报表</button>
+          <button id="open-progression" type="button">成长 Lv.1</button>
           <button id="toggle-sound" type="button" aria-pressed="false">
             音效：关
           </button>
@@ -84,6 +105,30 @@
           <button id="close-daily-quests" type="button">返回功能页</button>
         </div>
         <div id="daily-quests-list" class="daily-quests-list"></div>
+      </section>
+      <section id="progression-view" class="app-page" aria-label="成长档案" hidden>
+        <div class="page-header">
+          <h2>成长档案</h2>
+          <button id="close-progression" type="button">返回功能页</button>
+        </div>
+        <div class="progression-content">
+          <section class="progression-level-card">
+            <p class="progression-kicker">当前摸鱼等级</p>
+            <div class="progression-level-heading">
+              <strong id="progression-level">Lv.1</strong>
+              <span id="progression-title">实习摸鱼员</span>
+            </div>
+            <p id="progression-next" class="progression-next"></p>
+            <progress id="progression-level-progress" max="5" value="0"></progress>
+          </section>
+          <section class="progression-section">
+            <div class="progression-section-heading">
+              <h3>本地徽章</h3>
+              <span id="progression-badge-count">0 / 8</span>
+            </div>
+            <div id="progression-badge-list" class="progression-badge-list"></div>
+          </section>
+        </div>
       </section>
       <section id="report-view" class="report-view" aria-label="办公报表" hidden>
         <header class="report-header">

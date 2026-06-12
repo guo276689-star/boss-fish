@@ -1,6 +1,7 @@
 'use strict';
 
 window.BossFishShop = {
+  getUpgradeEffectText,
   initShop
 };
 
@@ -64,6 +65,7 @@ function renderShop(list, upgrades, data, onBuy) {
     const entry = document.createElement('article');
     const name = document.createElement('h3');
     const description = document.createElement('p');
+    const effect = document.createElement('p');
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
 
@@ -71,6 +73,12 @@ function renderShop(list, upgrades, data, onBuy) {
     name.textContent = `${upgrade.name} Lv.${currentLevel} / ${upgrade.maxLevel}`;
     description.className = 'upgrade-description';
     description.textContent = upgrade.description;
+    effect.className = 'upgrade-effect';
+    effect.textContent = getUpgradeEffectText(
+      upgrade.id,
+      currentLevel,
+      upgrade.maxLevel
+    );
     price.className = 'upgrade-price';
     price.textContent = isMaxLevel
       ? '已满级'
@@ -80,9 +88,34 @@ function renderShop(list, upgrades, data, onBuy) {
     buyButton.disabled = isMaxLevel;
     buyButton.addEventListener('click', () => onBuy(upgrade));
 
-    entry.append(name, description, price, buyButton);
+    entry.append(name, description, effect, price, buyButton);
     list.append(entry);
   }
+}
+
+function getUpgradeEffectText(upgradeId, currentLevel, maxLevel) {
+  const currentEffect = getEffectAtLevel(upgradeId, currentLevel);
+
+  if (currentLevel >= maxLevel) {
+    return `当前：${currentEffect} · 已满级`;
+  }
+
+  const nextEffect = getEffectAtLevel(upgradeId, currentLevel + 1);
+  return `当前：${currentEffect} · 下级：${nextEffect}`;
+}
+
+function getEffectAtLevel(upgradeId, level) {
+  if (upgradeId === 'biteSpeed') {
+    const minimumSeconds = Math.max(10, 20 - level * 2);
+    const maximumSeconds = Math.max(40, 60 - level * 4);
+    return `${minimumSeconds}～${maximumSeconds} 秒`;
+  }
+
+  if (upgradeId === 'sellBonus') {
+    return `+${level * 15}%`;
+  }
+
+  return '效果未知';
 }
 
 function getUpgradeCost(upgrade, currentLevel) {
