@@ -1,15 +1,16 @@
 ---
-name: boss-fish-v01-boundary-guard
-description: Use this skill whenever working on the Boss Fish v0.1 project, especially before adding features, changing architecture, adding dependencies, refactoring, or implementing anything beyond the current requested step.
+name: boss-fish-boundary-guard
+description: Use this skill whenever working on Boss Fish, especially before adding features, changing architecture, modifying persistence, adding dependencies, refactoring, or implementing anything beyond the current requested step.
 ---
 
-# Boss Fish v0.1 Boundary Guard
+# Boss Fish Boundary Guard
 
 You are assisting development of 《老板鱼来了》, a Windows tiny desktop idle fishing game.
 
 ## Current version
 
-Only implement v0.1 strict scope.
+The project has entered v0.3 progression work. Implement only the explicitly approved
+version scope and keep the existing Electron single-player architecture.
 
 The goal is to validate:
 1. Whether a 420×260 desktop fishing widget feels comfortable.
@@ -41,66 +42,43 @@ Do not use:
 - account system
 - online features
 
-## v0.1 allowed features
+## Branch and milestone rules
 
-Only these features are allowed:
-- 420×260 Electron window
-- Canvas pond scene
-- placeholder fishing cat
-- animated fishing bobber
-- automatic fish bite timer
-- click to catch fish
-- 10 fish
-- coins
-- localStorage save
-- simple bestiary
-- 2 upgrades: biteSpeed and sellBonus
-- report mode
-- reset save button
-- README
+From v0.3 onward, a small milestone branch is allowed:
+- One major version uses one branch.
+- One version may contain 3–6 related, same-theme requirements.
+- Each requirement must have its own commit.
+- Each requirement must have its own acceptance result.
+- High-risk features still require a separate branch.
+- Unrelated features must not be mixed into one version.
+- Persistence schemas, quest rules, fish fields, upgrade fields, IPC APIs,
+  window sizes, and error formats require matching documentation updates.
 
-## Forbidden in v0.1
+## Current forbidden scope
 
 Do not implement:
-- rods
-- bait
-- treasure chests
-- trash items
-- offline rewards
-- rare chance upgrade
-- pet system
-- cat mood
-- cat feeding
-- dungeon
-- crafting
-- quests
-- daily login
-- Steam achievements
-- Steam Cloud
-- leaderboard
+- backend
+- database
 - account system
 - networking
-- ads
-- in-app purchases
-- tray hiding
+- leaderboard
+- Steam achievements
+- complex pet progression
+- dungeon
+- crafting
+- tray
 - global shortcuts
-- always on top
-- borderless draggable window
-- multiple pond scenes
-- multilingual system
-- audio system
-- complex animation
-- installer
-- auto update
 
 ## Before making changes
 
 Before changing code, check:
 1. Is this requested by the current step?
-2. Is this inside v0.1 scope?
+2. Is this inside the approved version scope?
 3. Can it be done with fewer files?
 4. Does it add a dependency?
 5. Does it make the project harder to test?
+6. Does it require a documentation update?
+7. Is it high risk and therefore unsuitable for the milestone branch?
 
 If the answer suggests scope creep, stop and propose a smaller change.
 
@@ -110,5 +88,6 @@ When implementing:
 - Modify only files needed for the current step.
 - Keep code simple and readable.
 - Do not silently add extra features.
+- Commit and report each milestone requirement separately.
 - Explain which files changed.
-- Mention if any request conflicts with v0.1 boundaries.
+- Mention if any request conflicts with current boundaries.
