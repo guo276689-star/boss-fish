@@ -1,269 +1,341 @@
 'use strict';
 
+const SCENE_WIDTH = 420;
+const SCENE_HEIGHT = 190;
+const CATCH_DURATION = 760;
+const CAT_FRAME_SOURCES = {
+  idle: [
+    'assets/images/cats/idle-1.png',
+    'assets/images/cats/idle-2.png'
+  ],
+  bite: [
+    'assets/images/cats/bite-1.png',
+    'assets/images/cats/bite-2.png'
+  ],
+  happy: [
+    'assets/images/cats/happy-1.png',
+    'assets/images/cats/happy-2.png',
+    'assets/images/cats/happy-3.png'
+  ],
+  excited: [
+    'assets/images/cats/excited-1.png',
+    'assets/images/cats/excited-2.png',
+    'assets/images/cats/excited-3.png',
+    'assets/images/cats/excited-4.png'
+  ],
+  pull: [
+    'assets/images/cats/pull-1.png',
+    'assets/images/cats/pull-2.png',
+    'assets/images/cats/pull-3.png'
+  ]
+};
+const FISH_SPRITE_SOURCES = [
+  'assets/images/fish/round.png',
+  'assets/images/fish/carp.png',
+  'assets/images/fish/eel.png',
+  'assets/images/fish/sardine.png',
+  'assets/images/fish/catfish.png',
+  'assets/images/fish/jellyfish.png',
+  'assets/images/fish/turtle.png',
+  'assets/images/fish/octopus.png',
+  'assets/images/fish/crab.png',
+  'assets/images/fish/seahorse.png',
+  'assets/images/fish/shark.png',
+  'assets/images/fish/whale.png',
+  'assets/images/fish/stingray.png',
+  'assets/images/fish/starfish.png',
+  'assets/images/fish/swordfish.png',
+  'assets/images/fish/puffer.png'
+];
+
 window.BossFishGame = {
   start(canvas) {
-    const context = canvas.getContext('2d');
-    const images = createGameImages();
-    let fishBiting = false;
-    let lastCaughtFishName = '';
-    let catReaction = 'default';
-    let catReactionTimer = null;
-    context.imageSmoothingEnabled = false;
+    const scene = createScene(canvas);
 
-    function drawScene(timestamp) {
-      const bobberOffset = Math.sin(timestamp / 450) * 2;
-      const catMood = fishBiting ? 'bite' : catReaction;
-
-      drawBackground(context, images.pondBackground);
-      drawCat(
-        context,
-        catMood,
-        images.catFishing,
-        images.catExcited
-      );
-      drawFishingRod(
-        context,
-        bobberOffset,
-        fishBiting,
-        images.bobber,
-        images.catFishing
-      );
-      drawStatus(context, fishBiting, lastCaughtFishName);
-
-      window.requestAnimationFrame(drawScene);
-    }
-
-    window.requestAnimationFrame(drawScene);
-
-    return {
-      setFishBiting(isBiting) {
-        fishBiting = isBiting;
-
-        if (isBiting) {
-          clearCatReaction();
-        }
-      },
-      setLastCaughtFish(fish) {
-        lastCaughtFishName = fish ? fish.name : '';
-      },
-      setCatReaction(fish) {
-        window.clearTimeout(catReactionTimer);
-        catReaction = fish ? fish.rarity : 'default';
-        catReactionTimer = window.setTimeout(clearCatReaction, 2500);
-      },
-      clearCatReaction
-    };
-
-    function clearCatReaction() {
-      window.clearTimeout(catReactionTimer);
-      catReactionTimer = null;
-      catReaction = 'default';
-    }
+    window.requestAnimationFrame((timestamp) => drawScene(scene, timestamp));
+    return createGameApi(scene);
   }
 };
+
+function createScene(canvas) {
+  const context = canvas.getContext('2d');
+
+  context.imageSmoothingEnabled = false;
+  return {
+    context,
+    images: createGameImages(),
+    state: {
+      fishBiting: false,
+      lastCaughtFishName: '',
+      catReaction: null,
+      catReactionUntil: 0,
+      catchAnimation: null
+    }
+  };
+}
+
+function createGameApi(scene) {
+  return {
+    setFishBiting(isBiting) {
+      scene.state.fishBiting = isBiting;
+
+      if (isBiting) {
+        clearReaction(scene.state);
+      }
+    },
+    setLastCaughtFish(fish) {
+      scene.state.lastCaughtFishName = fish ? fish.name : '';
+    },
+    playCatch(fish) {
+      const now = window.performance.now();
+
+      scene.state.catchAnimation = {
+        fish,
+        startedAt: now
+      };
+      scene.state.catReaction = isRareFish(fish) ? 'excited' : 'happy';
+      scene.state.catReactionUntil = now + 2500;
+    },
+    clearCatReaction() {
+      clearReaction(scene.state);
+    }
+  };
+}
+
+function clearReaction(state) {
+  state.catReaction = null;
+  state.catReactionUntil = 0;
+  state.catchAnimation = null;
+}
+
+function drawScene(scene, timestamp) {
+  const catchPose = getCatchPose(scene.state, timestamp);
+  const catState = getCatState(scene.state, catchPose, timestamp);
+  const bobberPose = getBobberPose(timestamp, scene.state.fishBiting);
+
+  drawBackground(scene.context, scene.images.pondBackground);
+  drawCat(scene.context, getCatFrame(scene.images.cats, catState, timestamp));
+  drawFishingRod(
+    scene.context,
+    scene.images.bobber,
+    bobberPose,
+    catchPose,
+    catState,
+    scene.state.fishBiting
+  );
+  drawCatchFish(scene.context, scene.images.fish, catchPose);
+  drawStatus(
+    scene.context,
+    scene.state.fishBiting,
+    scene.state.lastCaughtFishName
+  );
+  window.requestAnimationFrame((nextTimestamp) => {
+    drawScene(scene, nextTimestamp);
+  });
+}
 
 function createGameImages() {
   return {
     pondBackground: loadImage('assets/images/pond_background.png'),
-    catFishing: loadImage('assets/images/cat_fishing.png'),
-    catExcited: loadImage('assets/images/cat_excited.png'),
-    bobber: loadImage('assets/images/bobber.png')
+    bobber: loadImage('assets/images/bobber.png'),
+    cats: Object.fromEntries(
+      Object.entries(CAT_FRAME_SOURCES).map(([state, sources]) => {
+        return [state, sources.map(loadImage)];
+      })
+    ),
+    fish: new Map(
+      FISH_SPRITE_SOURCES.map((source) => [source, loadImage(source)])
+    )
   };
 }
 
 function loadImage(source) {
   const image = new Image();
+
   image.src = source;
   return image;
 }
 
 function isImageReady(image) {
-  return image.complete && image.naturalWidth > 0;
+  return image && image.complete && image.naturalWidth > 0;
+}
+
+function isRareFish(fish) {
+  return fish && fish.rarity !== 'common';
 }
 
 function drawBackground(context, backgroundImage) {
   if (isImageReady(backgroundImage)) {
     context.fillStyle = '#55aeb5';
-    context.fillRect(0, 0, 420, 190);
+    context.fillRect(0, 0, SCENE_WIDTH, SCENE_HEIGHT);
     context.drawImage(backgroundImage, 0, 0);
     return;
   }
 
   context.fillStyle = '#a9d9e8';
-  context.fillRect(0, 0, 420, 72);
-
+  context.fillRect(0, 0, SCENE_WIDTH, 72);
   context.fillStyle = '#d7c58b';
-  context.fillRect(0, 72, 420, 38);
-
+  context.fillRect(0, 72, SCENE_WIDTH, 38);
   context.fillStyle = '#72b6c9';
-  context.fillRect(0, 110, 420, 80);
-
+  context.fillRect(0, 110, SCENE_WIDTH, 80);
   context.fillStyle = '#8cc8d6';
-  context.fillRect(0, 122, 420, 4);
+  context.fillRect(0, 122, SCENE_WIDTH, 4);
   context.fillRect(210, 146, 58, 3);
   context.fillRect(320, 168, 48, 3);
-
   context.fillStyle = '#8aa45d';
-  context.fillRect(0, 68, 420, 8);
-
-  context.fillStyle = '#6f8e4f';
-  context.fillRect(16, 62, 5, 10);
-  context.fillRect(28, 65, 5, 7);
-  context.fillRect(390, 63, 5, 9);
+  context.fillRect(0, 68, SCENE_WIDTH, 8);
 }
 
-function drawCat(context, mood, fishingImage, excitedImage) {
-  const isExcited = ['rare', 'epic', 'legendary'].includes(mood);
-  const catImage = isExcited ? excitedImage : fishingImage;
+function getCatState(state, catchPose, timestamp) {
+  if (catchPose) {
+    return 'pull';
+  }
 
+  if (state.fishBiting) {
+    return 'bite';
+  }
+
+  if (state.catReaction && timestamp < state.catReactionUntil) {
+    return state.catReaction;
+  }
+
+  state.catReaction = null;
+  return 'idle';
+}
+
+function getCatFrame(catFrames, state, timestamp) {
+  const frames = catFrames[state] || catFrames.idle;
+  const frameDuration = state === 'bite' ? 110 : 180;
+  const frameIndex = Math.floor(timestamp / frameDuration) % frames.length;
+
+  return frames[frameIndex];
+}
+
+function drawCat(context, catImage) {
   if (isImageReady(catImage)) {
-    context.drawImage(catImage, 32, 42);
-    drawCatAccent(context, mood);
+    context.drawImage(catImage, 20, 25, 96, 96);
     return;
   }
 
   context.fillStyle = '#66584d';
-  context.fillRect(42, 70, 38, 34);
-  context.fillRect(48, 52, 28, 24);
-  context.fillRect(
-    48,
-    mood === 'bite' ? 42 : 46,
-    8,
-    mood === 'bite' ? 14 : 10
-  );
-  context.fillRect(
-    68,
-    mood === 'bite' ? 42 : 46,
-    8,
-    mood === 'bite' ? 14 : 10
-  );
-  context.fillRect(34, 94, 14, 8);
-
-  drawCatFace(context, mood);
-  drawCatAccent(context, mood);
+  context.fillRect(43, 66, 38, 38);
+  context.fillStyle = '#eee1c5';
+  context.fillRect(49, 48, 28, 28);
 }
 
-function drawCatFace(context, mood) {
-  if (mood === 'bite' || mood === 'legendary') {
-    context.fillStyle = '#eee1c5';
-    context.fillRect(52, 61, 8, 8);
-    context.fillRect(66, 61, 8, 8);
-    context.fillStyle = '#3e3833';
-    context.fillRect(55, 63, 3, 4);
-    context.fillRect(69, 63, 3, 4);
-  } else if (mood === 'rare') {
-    context.fillStyle = '#3e3833';
-    context.fillRect(53, 64, 7, 2);
-    context.fillRect(67, 64, 7, 2);
-    context.fillRect(53, 62, 2, 2);
-    context.fillRect(72, 62, 2, 2);
-  } else if (mood === 'epic') {
-    context.fillStyle = '#fff3a6';
-    context.fillRect(52, 61, 8, 8);
-    context.fillRect(66, 61, 8, 8);
-    context.fillStyle = '#8a5b18';
-    context.fillRect(55, 63, 3, 3);
-    context.fillRect(69, 63, 3, 3);
-  } else {
-    context.fillStyle = '#eee1c5';
-    context.fillRect(54, 64, 5, 5);
-    context.fillRect(67, 64, 5, 5);
-    context.fillStyle = '#3e3833';
-    context.fillRect(56, 65, 2, 2);
-    context.fillRect(69, 65, 2, 2);
-  }
-
-  context.fillStyle = '#3e3833';
-
-  if (mood === 'common' || mood === 'rare' || mood === 'epic') {
-    context.fillRect(61, 70, 5, 2);
-    context.fillRect(59, 69, 2, 2);
-    context.fillRect(66, 69, 2, 2);
-  } else {
-    context.fillRect(61, 71, 5, 3);
-  }
-
-  if (mood === 'rare') {
-    context.fillStyle = '#d78579';
-    context.fillRect(50, 69, 3, 2);
-    context.fillRect(74, 69, 3, 2);
-  }
-}
-
-function drawCatAccent(context, mood) {
-  if (mood === 'bite') {
-    context.fillStyle = '#b52d27';
-    context.fillRect(61, 30, 4, 8);
-    context.fillRect(61, 40, 4, 4);
-    return;
-  }
-
-  if (mood === 'epic') {
-    drawStar(context, 43, 54, '#f3c84b');
-    drawStar(context, 79, 49, '#f3c84b');
-    return;
-  }
-
-  if (mood === 'legendary') {
-    context.fillStyle = '#e6b735';
-    context.fillRect(52, 43, 24, 7);
-    context.fillRect(52, 38, 5, 5);
-    context.fillRect(61, 35, 6, 8);
-    context.fillRect(71, 38, 5, 5);
-    context.fillStyle = '#fff1a6';
-    context.fillRect(62, 37, 4, 3);
-  }
-}
-
-function drawStar(context, x, y, color) {
-  context.fillStyle = color;
-  context.fillRect(x + 3, y, 3, 9);
-  context.fillRect(x, y + 3, 9, 3);
+function getBobberPose(timestamp) {
+  return {
+    x: 286,
+    y: 137 + Math.sin(timestamp / 450) * 2
+  };
 }
 
 function drawFishingRod(
   context,
-  bobberOffset,
-  fishBiting,
   bobberImage,
-  catImage
+  bobberPose,
+  catchPose,
+  catState,
+  fishBiting
 ) {
-  const bobberX = 286;
-  const bobberY = 137 + bobberOffset;
-  const usingCatImage = isImageReady(catImage);
+  const rodTip = catState === 'pull'
+    ? { x: 194, y: 48 }
+    : { x: 218, y: 62 };
+  const lineTarget = catchPose
+    ? { x: catchPose.x, y: catchPose.y - 12 }
+    : bobberPose;
 
-  if (!usingCatImage) {
-    context.strokeStyle = '#4b3d32';
-    context.lineWidth = 4;
-    context.beginPath();
-    context.moveTo(75, 79);
-    context.lineTo(218, 62);
-    context.stroke();
+  drawLine(context, '#4b3d32', 4, 84, 84, rodTip.x, rodTip.y);
+  drawLine(
+    context,
+    '#ded7c4',
+    1,
+    rodTip.x,
+    rodTip.y,
+    lineTarget.x,
+    lineTarget.y
+  );
+
+  if (!catchPose) {
+    drawBobber(context, bobberImage, bobberPose, fishBiting);
   }
+}
 
-  context.strokeStyle = '#ded7c4';
-  context.lineWidth = 1;
+function drawLine(context, color, width, startX, startY, endX, endY) {
+  context.strokeStyle = color;
+  context.lineWidth = width;
   context.beginPath();
-  context.moveTo(usingCatImage ? 91 : 218, usingCatImage ? 72 : 62);
-  context.lineTo(bobberX, bobberY);
+  context.moveTo(startX, startY);
+  context.lineTo(endX, endY);
   context.stroke();
+}
 
-  if (isImageReady(bobberImage)) {
-    context.drawImage(
-      bobberImage,
-      Math.round(bobberX - 12),
-      Math.round(bobberY - 12)
-    );
+function drawBobber(context, image, pose, fishBiting) {
+  if (isImageReady(image)) {
+    context.drawImage(image, Math.round(pose.x - 12), Math.round(pose.y - 12));
   } else {
     context.fillStyle = fishBiting ? '#e23d32' : '#f2eee2';
-    context.fillRect(bobberX - 3, bobberY - 7, 6, 7);
-
-    context.fillStyle = fishBiting ? '#e23d32' : '#d8584c';
-    context.fillRect(bobberX - 4, bobberY, 8, 8);
+    context.fillRect(pose.x - 3, pose.y - 7, 6, 7);
+    context.fillStyle = '#d8584c';
+    context.fillRect(pose.x - 4, pose.y, 8, 8);
   }
 
   context.fillStyle = '#518fa3';
-  context.fillRect(bobberX - 10, bobberY + 9, 20, 2);
+  context.fillRect(pose.x - 10, pose.y + 9, 20, 2);
+}
+
+function getCatchPose(state, timestamp) {
+  const animation = state.catchAnimation;
+
+  if (!animation) {
+    return null;
+  }
+
+  const elapsed = timestamp - animation.startedAt;
+  if (elapsed >= CATCH_DURATION) {
+    state.catchAnimation = null;
+    return null;
+  }
+
+  const progress = Math.max(0, elapsed / CATCH_DURATION);
+  const eased = 1 - Math.pow(1 - progress, 2);
+
+  return {
+    fish: animation.fish,
+    x: Math.round(286 + (156 - 286) * eased),
+    y: Math.round(151 + (88 - 151) * eased - Math.sin(progress * Math.PI) * 25),
+    rotation: -0.18 + Math.sin(progress * Math.PI * 3) * 0.12
+  };
+}
+
+function drawCatchFish(context, fishImages, pose) {
+  if (!pose) {
+    return;
+  }
+
+  const image = fishImages.get(pose.fish.sprite);
+  if (!isImageReady(image)) {
+    drawCatchFishFallback(context, pose);
+    return;
+  }
+
+  context.save();
+  context.translate(pose.x, pose.y);
+  context.rotate(pose.rotation);
+  context.drawImage(image, -42, -28, 84, 56);
+  context.restore();
+}
+
+function drawCatchFishFallback(context, pose) {
+  context.save();
+  context.translate(pose.x, pose.y);
+  context.rotate(pose.rotation);
+  context.fillStyle = '#e0a844';
+  context.fillRect(-24, -10, 36, 20);
+  context.fillRect(12, -7, 12, 14);
+  context.fillStyle = '#3e3833';
+  context.fillRect(-17, -4, 3, 3);
+  context.restore();
 }
 
 function drawStatus(context, fishBiting, lastCaughtFishName) {

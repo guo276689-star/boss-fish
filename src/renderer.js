@@ -56,7 +56,7 @@ window.BossFishFishing.create(
   },
   (fish) => {
     game.setLastCaughtFish(fish);
-    game.setCatReaction(fish);
+    game.playCatch(fish);
     showRareCatchNotice(fish);
     const catchResult = window.BossFishSave.addCatchToSave(fish);
     const data = window.BossFishDailyQuests.recordCatch(
