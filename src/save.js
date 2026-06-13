@@ -1,6 +1,7 @@
 'use strict';
 
 const SAVE_KEY = 'bossFishSave';
+const MAX_RECENT_CATCHES = 5;
 const DAILY_QUEST_TEMPLATES = {
   catchCount: [
     {
@@ -140,6 +141,7 @@ function getDefaultSave() {
     totalCaught: 0,
     ownedFish: {},
     lastCatch: null,
+    recentCatches: [],
     upgrades: {
       biteSpeed: 0,
       sellBonus: 0
@@ -167,6 +169,7 @@ function loadSave() {
       ...defaultSave,
       ...parsedData,
       ownedFish: parsedData.ownedFish || {},
+      recentCatches: normalizeRecentCatches(parsedData.recentCatches),
       upgrades: {
         ...defaultSave.upgrades,
         ...parsedData.upgrades
@@ -180,6 +183,26 @@ function loadSave() {
   } catch {
     return getDefaultSave();
   }
+}
+
+function normalizeRecentCatches(recentCatches) {
+  if (!Array.isArray(recentCatches)) {
+    return [];
+  }
+
+  return recentCatches
+    .filter(isValidRecentCatch)
+    .slice(0, MAX_RECENT_CATCHES)
+    .map((catchEntry) => ({ ...catchEntry }));
+}
+
+function isValidRecentCatch(catchEntry) {
+  return catchEntry &&
+    typeof catchEntry.id === 'string' &&
+    typeof catchEntry.name === 'string' &&
+    typeof catchEntry.rarity === 'string' &&
+    Number.isFinite(catchEntry.earnedCoins) &&
+    catchEntry.earnedCoins >= 0;
 }
 
 function createDailyQuests() {
@@ -268,6 +291,13 @@ function addCatchToSave(fish) {
     rarity: fish.rarity,
     basePrice: fish.basePrice
   };
+  data.recentCatches.unshift({
+    id: fish.id,
+    name: fish.name,
+    rarity: fish.rarity,
+    earnedCoins
+  });
+  data.recentCatches = data.recentCatches.slice(0, MAX_RECENT_CATCHES);
 
   return {
     data: saveGame(data),
