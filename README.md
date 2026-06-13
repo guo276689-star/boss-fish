@@ -74,3 +74,9 @@ npm start
 - Canvas
 - JSON
 - localStorage
+
+## 鱼类视觉数据
+
+`data/fish.json` 的 `sprite` 字段保存鱼类基础静态图路径。多条鱼可以
+复用同一体型模板；该字段只用于 Canvas 演出，不参与抽取权重、售价、
+图鉴解锁或存档结构。

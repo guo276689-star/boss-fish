@@ -5,6 +5,7 @@
     "rarity": "common",
     "basePrice": 10,
     "weight": 35,
+    "sprite": "assets/images/fish/round.png",
     "description": "看起来很闲，其实很会装忙。",
     "flavorText": "今日工作进度：鱼漂上下浮动两次。"
   },
@@ -14,6 +15,7 @@
     "rarity": "common",
     "basePrice": 14,
     "weight": 25,
+    "sprite": "assets/images/fish/carp.png",
     "description": "脖子上挂着工牌，比你还像正式员工。",
     "flavorText": "工牌戴得端正，去哪里没人知道。"
   },
@@ -23,6 +25,7 @@
     "rarity": "common",
     "basePrice": 18,
     "weight": 18,
+    "sprite": "assets/images/fish/eel.png",
     "description": "每天靠咖啡续命。",
     "flavorText": "第三杯不是提神，是维持系统运行。"
   },
@@ -32,6 +35,7 @@
     "rarity": "common",
     "basePrice": 22,
     "weight": 12,
+    "sprite": "assets/images/fish/sardine.png",
     "description": "一群出现，通常意味着今晚走不了。",
     "flavorText": "下班铃响了，它假装没听见。"
   },
@@ -41,6 +45,7 @@
     "rarity": "rare",
     "basePrice": 60,
     "weight": 6,
+    "sprite": "assets/images/fish/catfish.png",
     "description": "鱼鳞一片就是一页汇报。",
     "flavorText": "这一页先放着，下一版一定精简。"
   },
@@ -50,6 +55,7 @@
     "rarity": "rare",
     "basePrice": 75,
     "weight": 4,
+    "sprite": "assets/images/fish/jellyfish.png",
     "description": "透明、冗长、会后没人记得它说了什么。",
     "flavorText": "本次会议结论：下次继续讨论。"
   },
@@ -59,6 +65,7 @@
     "rarity": "rare",
     "basePrice": 90,
     "weight": 3,
+    "sprite": "assets/images/fish/turtle.png",
     "description": "永远在路上，永远没完成。",
     "flavorText": "优先级很高，所以先放到明天。"
   },
@@ -68,6 +75,7 @@
     "rarity": "epic",
     "basePrice": 180,
     "weight": 1.5,
+    "sprite": "assets/images/fish/octopus.png",
     "description": "八只手同时改需求。",
     "flavorText": "每只手都拿着不同版本的需求。"
   },
@@ -77,6 +85,7 @@
     "rarity": "epic",
     "basePrice": 220,
     "weight": 1,
+    "sprite": "assets/images/fish/eel.png",
     "description": "你不碰它，它自己也会报错。",
     "flavorText": "复现不了的时候，它最有精神。"
   },
@@ -86,6 +95,7 @@
     "rarity": "legendary",
     "basePrice": 500,
     "weight": 0.5,
+    "sprite": "assets/images/fish/carp.png",
     "description": "它不是来上钩的，它是来巡逻的。",
     "flavorText": "你没看见它，不代表它没看见你。"
   },
@@ -95,6 +105,7 @@
     "rarity": "common",
     "basePrice": 16,
     "weight": 18,
+    "sprite": "assets/images/fish/puffer.png",
     "description": "一紧张就把收件箱撑满。",
     "flavorText": "未读 99+，其中 98 封只是抄送。"
   },
@@ -104,6 +115,7 @@
     "rarity": "common",
     "basePrice": 20,
     "weight": 14,
+    "sprite": "assets/images/fish/eel.png",
     "description": "每天准点出现，准点消失。",
     "flavorText": "早一秒不算，晚一秒要解释。"
   },
@@ -113,6 +125,7 @@
     "rarity": "common",
     "basePrice": 24,
     "weight": 12,
+    "sprite": "assets/images/fish/crab.png",
     "description": "横着走，也能写出一篇周报。",
     "flavorText": "上周内容换个日期，又是崭新一篇。"
   },
@@ -122,6 +135,7 @@
     "rarity": "common",
     "basePrice": 28,
     "weight": 10,
+    "sprite": "assets/images/fish/seahorse.png",
     "description": "身上贴满发票，游得很谨慎。",
     "flavorText": "缺的不是发票，是某位领导的签字。"
   },
@@ -131,6 +145,7 @@
     "rarity": "rare",
     "basePrice": 85,
     "weight": 5,
+    "sprite": "assets/images/fish/carp.png",
     "description": "刚钓上来，需求又变了。",
     "flavorText": "最终版、最终版 2、真的最终版。"
   },
@@ -140,6 +155,7 @@
     "rarity": "rare",
     "basePrice": 100,
     "weight": 4,
+    "sprite": "assets/images/fish/carp.png",
     "description": "上线前出现，大家都想拜一拜。",
     "flavorText": "拜完记得自己跑测试。"
   },
@@ -149,6 +165,7 @@
     "rarity": "rare",
     "basePrice": 120,
     "weight": 3,
+    "sprite": "assets/images/fish/sardine.png",
     "description": "游得飞快，因为后面就是 deadline。",
     "flavorText": "它不是快，只是没有退路。"
   },
@@ -158,6 +175,7 @@
     "rarity": "rare",
     "basePrice": 140,
     "weight": 2.5,
+    "sprite": "assets/images/fish/puffer.png",
     "description": "看起来圆润，碰一下全是刺。",
     "flavorText": "看起来还有空，实际上哪里都插不进去。"
   },
@@ -167,6 +185,7 @@
     "rarity": "epic",
     "basePrice": 280,
     "weight": 1,
+    "sprite": "assets/images/fish/shark.png",
     "description": "闻到绩效味就会靠近。",
     "flavorText": "季度末的水域格外危险。"
   },
@@ -176,6 +195,7 @@
     "rarity": "legendary",
     "basePrice": 800,
     "weight": 0.3,
+    "sprite": "assets/images/fish/whale.png",
     "description": "很少露面，但一出现就要改方向。",
     "flavorText": "一句方向调整，整池鱼开始掉头。"
   },
@@ -185,6 +205,7 @@
     "rarity": "common",
     "basePrice": 19,
     "weight": 16,
+    "sprite": "assets/images/fish/round.png",
     "description": "消息灵通，游一圈就知道全公司的新鲜事。",
     "flavorText": "它说不传出去，下一秒全池都知道了。"
   },
@@ -194,6 +215,7 @@
     "rarity": "common",
     "basePrice": 21,
     "weight": 14,
+    "sprite": "assets/images/fish/sardine.png",
     "description": "每片鱼鳞都对齐了单元格。",
     "flavorText": "最擅长把简单问题做成十二张工作表。"
   },
@@ -203,6 +225,7 @@
     "rarity": "common",
     "basePrice": 25,
     "weight": 12,
+    "sprite": "assets/images/fish/carp.png",
     "description": "已经游到最后一级，正在等待通过。",
     "flavorText": "审批人正在休假，预计下周处理。"
   },
@@ -212,6 +235,7 @@
     "rarity": "common",
     "basePrice": 27,
     "weight": 10,
+    "sprite": "assets/images/fish/round.png",
     "description": "平时一声不响，着急时一定卡纸。",
     "flavorText": "重启三次以后，它要求更换墨盒。"
   },
@@ -221,6 +245,7 @@
     "rarity": "common",
     "basePrice": 30,
     "weight": 9,
+    "sprite": "assets/images/fish/carp.png",
     "description": "理由写得很满，去向保持神秘。",
     "flavorText": "请假类型：有事。具体事情：私事。"
   },
@@ -230,6 +255,7 @@
     "rarity": "rare",
     "basePrice": 95,
     "weight": 4,
+    "sprite": "assets/images/fish/sardine.png",
     "description": "奋力向前半天，最后游回了昨天。",
     "flavorText": "今天最稳定的版本，还是昨天那个。"
   },
@@ -239,6 +265,7 @@
     "rarity": "rare",
     "basePrice": 115,
     "weight": 3.5,
+    "sprite": "assets/images/fish/stingray.png",
     "description": "摊开以后，哪里都是可以优化的地方。",
     "flavorText": "问题已经找到：当时没有早点发现问题。"
   },
@@ -248,6 +275,7 @@
     "rarity": "rare",
     "basePrice": 130,
     "weight": 3,
+    "sprite": "assets/images/fish/eel.png",
     "description": "速度很快，但必须先走完十四个流程。",
     "flavorText": "加急可以，请先提交加急申请。"
   },
@@ -257,6 +285,7 @@
     "rarity": "rare",
     "basePrice": 150,
     "weight": 2.5,
+    "sprite": "assets/images/fish/starfish.png",
     "description": "五只手都看见了，暂时没有一只想回复。",
     "flavorText": "不是没看到，是正在组织语言。"
   },
@@ -266,6 +295,7 @@
     "rarity": "epic",
     "basePrice": 260,
     "weight": 0.9,
+    "sprite": "assets/images/fish/catfish.png",
     "description": "头顶永远亮着一个无法消除的未读红点。",
     "flavorText": "点进去以后，只是一条系统公告。"
   },
@@ -275,6 +305,7 @@
     "rarity": "epic",
     "basePrice": 320,
     "weight": 0.7,
+    "sprite": "assets/images/fish/swordfish.png",
     "description": "没人敢改它的公式，也没人知道它从哪来。",
     "flavorText": "打开前先另存一份，这是办公室传统。"
   },
@@ -284,6 +315,7 @@
     "rarity": "legendary",
     "basePrice": 1000,
     "weight": 0.2,
+    "sprite": "assets/images/fish/carp.png",
     "description": "每个人都听说过，但很少有人真的见到。",
     "flavorText": "捕获地点：别人的工资条里。"
   }
