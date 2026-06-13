@@ -114,6 +114,7 @@ function drawScene(scene, timestamp) {
   const bobberPose = getBobberPose(timestamp, scene.state.fishBiting);
 
   drawBackground(scene.context, scene.images.pondBackground);
+  drawPondMotion(scene.context, timestamp);
   if (scene.state.fishBiting) {
     drawBiteRipple(scene.context, bobberPose, timestamp);
   }
@@ -187,6 +188,52 @@ function drawBackground(context, backgroundImage) {
   context.fillRect(320, 168, 48, 3);
   context.fillStyle = '#8aa45d';
   context.fillRect(0, 68, SCENE_WIDTH, 8);
+}
+
+function drawPondMotion(context, timestamp) {
+  const waveShift = Math.floor(timestamp / 520) % 2;
+  const shimmerVisible = Math.floor(timestamp / 900) % 3 === 0;
+
+  context.globalAlpha = 0.55;
+  drawWave(context, 198 + waveShift * 2, 132, 24);
+  drawWave(context, 344 - waveShift * 2, 158, 18);
+  drawWave(context, 238 - waveShift, 176, 30);
+  drawBubbles(context, timestamp);
+
+  if (shimmerVisible) {
+    context.fillStyle = '#c8eef0';
+    context.fillRect(365, 126, 5, 2);
+    context.fillRect(368, 123, 2, 8);
+  }
+
+  context.globalAlpha = 1;
+}
+
+function drawWave(context, x, y, width) {
+  context.fillStyle = '#a7dfe3';
+  context.fillRect(x, y, width, 2);
+  context.fillRect(x + 5, y + 3, Math.max(4, width - 10), 1);
+}
+
+function drawBubbles(context, timestamp) {
+  const bubbles = [
+    { x: 326, y: 172, phase: 0 },
+    { x: 382, y: 151, phase: 900 },
+    { x: 226, y: 166, phase: 1700 }
+  ];
+
+  context.fillStyle = '#bce9eb';
+  for (const bubble of bubbles) {
+    const cycle = (timestamp + bubble.phase) % 2800;
+
+    if (cycle > 1500) {
+      continue;
+    }
+
+    const rise = Math.floor(cycle / 300) * 3;
+    context.fillRect(bubble.x, bubble.y - rise, 3, 3);
+    context.clearRect(bubble.x + 1, bubble.y - rise + 1, 1, 1);
+  }
 }
 
 function drawBiteRipple(context, bobberPose, timestamp) {
