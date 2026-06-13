@@ -1,6 +1,7 @@
 'use strict';
 
 const SAVE_KEY = 'bossFishSave';
+const MAX_RECENT_CATCHES = 5;
 const DAILY_QUEST_TEMPLATES = {
   catchCount: [
     {
@@ -30,6 +31,20 @@ const DAILY_QUEST_TEMPLATES = {
       title: '带薪丰收：钓到 10 条鱼',
       target: 10,
       rewardCoins: 90
+    },
+    {
+      id: 'catch_8',
+      type: 'catch_count',
+      title: '工位续航：钓到 8 条鱼',
+      target: 8,
+      rewardCoins: 70
+    },
+    {
+      id: 'catch_12',
+      type: 'catch_count',
+      title: '全天候巡塘：钓到 12 条鱼',
+      target: 12,
+      rewardCoins: 110
     }
   ],
   earnCoins: [
@@ -60,6 +75,20 @@ const DAILY_QUEST_TEMPLATES = {
       title: '超额摸鱼：获得 200 金币',
       target: 200,
       rewardCoins: 80
+    },
+    {
+      id: 'earn_50',
+      type: 'earn_coins',
+      title: '茶水间创收：获得 50 金币',
+      target: 50,
+      rewardCoins: 20
+    },
+    {
+      id: 'earn_160',
+      type: 'earn_coins',
+      title: '午后业绩：获得 160 金币',
+      target: 160,
+      rewardCoins: 60
     }
   ],
   catchRarity: [
@@ -78,6 +107,22 @@ const DAILY_QUEST_TEMPLATES = {
       target: 1,
       rarities: ['epic', 'legendary'],
       rewardCoins: 200
+    },
+    {
+      id: 'catch_rare_2',
+      type: 'catch_rarity',
+      title: '发现 2 条稀有及以上的鱼',
+      target: 2,
+      rarities: ['rare', 'epic', 'legendary'],
+      rewardCoins: 180
+    },
+    {
+      id: 'catch_epic_2',
+      type: 'catch_rarity',
+      title: '发现 2 条史诗及以上的鱼',
+      target: 2,
+      rarities: ['epic', 'legendary'],
+      rewardCoins: 320
     }
   ]
 };
@@ -96,6 +141,7 @@ function getDefaultSave() {
     totalCaught: 0,
     ownedFish: {},
     lastCatch: null,
+    recentCatches: [],
     upgrades: {
       biteSpeed: 0,
       sellBonus: 0
@@ -123,6 +169,7 @@ function loadSave() {
       ...defaultSave,
       ...parsedData,
       ownedFish: parsedData.ownedFish || {},
+      recentCatches: normalizeRecentCatches(parsedData.recentCatches),
       upgrades: {
         ...defaultSave.upgrades,
         ...parsedData.upgrades
@@ -136,6 +183,26 @@ function loadSave() {
   } catch {
     return getDefaultSave();
   }
+}
+
+function normalizeRecentCatches(recentCatches) {
+  if (!Array.isArray(recentCatches)) {
+    return [];
+  }
+
+  return recentCatches
+    .filter(isValidRecentCatch)
+    .slice(0, MAX_RECENT_CATCHES)
+    .map((catchEntry) => ({ ...catchEntry }));
+}
+
+function isValidRecentCatch(catchEntry) {
+  return catchEntry &&
+    typeof catchEntry.id === 'string' &&
+    typeof catchEntry.name === 'string' &&
+    typeof catchEntry.rarity === 'string' &&
+    Number.isFinite(catchEntry.earnedCoins) &&
+    catchEntry.earnedCoins >= 0;
 }
 
 function createDailyQuests() {
@@ -224,6 +291,13 @@ function addCatchToSave(fish) {
     rarity: fish.rarity,
     basePrice: fish.basePrice
   };
+  data.recentCatches.unshift({
+    id: fish.id,
+    name: fish.name,
+    rarity: fish.rarity,
+    earnedCoins
+  });
+  data.recentCatches = data.recentCatches.slice(0, MAX_RECENT_CATCHES);
 
   return {
     data: saveGame(data),
