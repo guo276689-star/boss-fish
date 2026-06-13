@@ -3,6 +3,13 @@
 const SCENE_WIDTH = 420;
 const SCENE_HEIGHT = 190;
 const CATCH_DURATION = 760;
+const CAT_ANIMATION_SETTINGS = {
+  idle: { frameDuration: 400, loop: true },
+  bite: { frameDuration: 100, loop: true },
+  happy: { frameDuration: 320, loop: true },
+  excited: { frameDuration: 300, loop: true },
+  pull: { frameDuration: CATCH_DURATION / 3, loop: false }
+};
 const CAT_FRAME_SOURCES = {
   idle: [
     'assets/images/cats/idle-1.png',
@@ -52,7 +59,9 @@ window.BossFishGame = {
   start(canvas) {
     const scene = createScene(canvas);
 
-    window.requestAnimationFrame((timestamp) => drawScene(scene, timestamp));
+    scene.images.ready.then(() => {
+      window.requestAnimationFrame((timestamp) => drawScene(scene, timestamp));
+    });
     return createGameApi(scene);
   }
 };
@@ -69,7 +78,9 @@ function createScene(canvas) {
       lastCaughtFishName: '',
       catReaction: null,
       catReactionUntil: 0,
-      catchAnimation: null
+      catchAnimation: null,
+      catAnimationState: 'idle',
+      catAnimationStartedAt: window.performance.now()
     }
   };
 }
@@ -81,6 +92,11 @@ function createGameApi(scene) {
 
       if (isBiting) {
         clearReaction(scene.state);
+        setCatAnimationState(
+          scene.state,
+          'bite',
+          window.performance.now()
+        );
       }
     },
     setLastCaughtFish(fish) {
@@ -95,9 +111,15 @@ function createGameApi(scene) {
       };
       scene.state.catReaction = isRareFish(fish) ? 'excited' : 'happy';
       scene.state.catReactionUntil = now + 2500;
+      setCatAnimationState(scene.state, 'pull', now);
     },
     clearCatReaction() {
       clearReaction(scene.state);
+      setCatAnimationState(
+        scene.state,
+        'idle',
+        window.performance.now()
+      );
     }
   };
 }
@@ -110,21 +132,29 @@ function clearReaction(state) {
 
 function drawScene(scene, timestamp) {
   const catchPose = getCatchPose(scene.state, timestamp);
-  const catState = getCatState(scene.state, catchPose, timestamp);
+  const nextCatState = getCatState(scene.state, catchPose, timestamp);
   const bobberPose = getBobberPose(timestamp, scene.state.fishBiting);
 
+  setCatAnimationState(scene.state, nextCatState, timestamp);
   drawBackground(scene.context, scene.images.pondBackground);
   drawPondMotion(scene.context, timestamp);
   if (scene.state.fishBiting) {
     drawBiteRipple(scene.context, bobberPose, timestamp);
   }
-  drawCat(scene.context, getCatFrame(scene.images.cats, catState, timestamp));
+  drawCat(
+    scene.context,
+    getCatFrame(
+      scene.images.cats,
+      scene.state.catAnimationState,
+      timestamp - scene.state.catAnimationStartedAt
+    )
+  );
   drawFishingRod(
     scene.context,
     scene.images.bobber,
     bobberPose,
     catchPose,
-    catState,
+    scene.state.catAnimationState,
     scene.state.fishBiting
   );
   drawCatchFish(scene.context, scene.images.fish, catchPose);
@@ -139,23 +169,37 @@ function drawScene(scene, timestamp) {
 }
 
 function createGameImages() {
-  return {
-    pondBackground: loadImage('assets/images/pond_background.png'),
-    bobber: loadImage('assets/images/bobber.png'),
+  const pending = [];
+  const images = {
+    pondBackground: loadImage('assets/images/pond_background.png', pending),
+    bobber: loadImage('assets/images/bobber.png', pending),
     cats: Object.fromEntries(
       Object.entries(CAT_FRAME_SOURCES).map(([state, sources]) => {
-        return [state, sources.map(loadImage)];
+        return [
+          state,
+          sources.map((source) => loadImage(source, pending))
+        ];
       })
     ),
     fish: new Map(
-      FISH_SPRITE_SOURCES.map((source) => [source, loadImage(source)])
+      FISH_SPRITE_SOURCES.map((source) => {
+        return [source, loadImage(source, pending)];
+      })
     )
   };
+
+  images.ready = Promise.all(pending);
+  return images;
 }
 
-function loadImage(source) {
+function loadImage(source, pending) {
   const image = new Image();
+  const ready = new Promise((resolve) => {
+    image.addEventListener('load', resolve, { once: true });
+    image.addEventListener('error', resolve, { once: true });
+  });
 
+  pending.push(ready);
   image.src = source;
   return image;
 }
@@ -191,7 +235,7 @@ function drawBackground(context, backgroundImage) {
 }
 
 function drawPondMotion(context, timestamp) {
-  const waveShift = Math.floor(timestamp / 520) % 2;
+  const waveShift = Math.floor(timestamp / 320) % 2;
   const shimmerVisible = Math.floor(timestamp / 900) % 3 === 0;
 
   context.globalAlpha = 0.55;
@@ -237,7 +281,7 @@ function drawBubbles(context, timestamp) {
 }
 
 function drawBiteRipple(context, bobberPose, timestamp) {
-  const stage = Math.floor(timestamp / 90) % 3;
+  const stage = Math.floor(timestamp / 100) % 3;
   const width = 20 + stage * 8;
   const left = Math.round(bobberPose.x - width / 2);
   const y = Math.round(bobberPose.y + 9 + stage * 2);
@@ -266,10 +310,22 @@ function getCatState(state, catchPose, timestamp) {
   return 'idle';
 }
 
-function getCatFrame(catFrames, state, timestamp) {
+function setCatAnimationState(state, nextState, timestamp) {
+  if (state.catAnimationState === nextState) {
+    return;
+  }
+
+  state.catAnimationState = nextState;
+  state.catAnimationStartedAt = timestamp;
+}
+
+function getCatFrame(catFrames, state, elapsed) {
   const frames = catFrames[state] || catFrames.idle;
-  const frameDuration = state === 'bite' ? 110 : 180;
-  const frameIndex = Math.floor(timestamp / frameDuration) % frames.length;
+  const settings = CAT_ANIMATION_SETTINGS[state];
+  const rawIndex = Math.floor(Math.max(0, elapsed) / settings.frameDuration);
+  const frameIndex = settings.loop
+    ? rawIndex % frames.length
+    : Math.min(rawIndex, frames.length - 1);
 
   return frames[frameIndex];
 }
@@ -296,12 +352,14 @@ function getBobberPose(timestamp, fishBiting) {
   ];
 
   if (fishBiting) {
-    const offset = biteOffsets[Math.floor(timestamp / 80) % biteOffsets.length];
+    const offset = biteOffsets[
+      Math.floor(timestamp / 100) % biteOffsets.length
+    ];
     return { x: 286 + offset.x, y: 137 + offset.y };
   }
 
   const offset = idleOffsets[
-    Math.floor(timestamp / 150) % idleOffsets.length
+    Math.floor(timestamp / 200) % idleOffsets.length
   ];
   return { x: 286, y: 137 + offset };
 }
@@ -378,10 +436,14 @@ function getCatchPose(state, timestamp) {
 
   return {
     fish: animation.fish,
-    x: Math.round(286 + (156 - 286) * eased),
-    y: Math.round(151 + (88 - 151) * eased - Math.sin(progress * Math.PI) * 25),
-    rotation: -0.18 + Math.sin(progress * Math.PI * 3) * 0.12
+    x: Math.round(lerp(286, 156, eased)),
+    y: Math.round(lerp(151, 88, eased) - Math.sin(progress * Math.PI) * 25),
+    rotation: lerp(-0.14, 0.08, eased)
   };
+}
+
+function lerp(start, end, progress) {
+  return start + (end - start) * progress;
 }
 
 function drawCatchFish(context, fishImages, pose) {
