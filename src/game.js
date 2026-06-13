@@ -114,6 +114,9 @@ function drawScene(scene, timestamp) {
   const bobberPose = getBobberPose(timestamp, scene.state.fishBiting);
 
   drawBackground(scene.context, scene.images.pondBackground);
+  if (scene.state.fishBiting) {
+    drawBiteRipple(scene.context, bobberPose, timestamp);
+  }
   drawCat(scene.context, getCatFrame(scene.images.cats, catState, timestamp));
   drawFishingRod(
     scene.context,
@@ -186,6 +189,19 @@ function drawBackground(context, backgroundImage) {
   context.fillRect(0, 68, SCENE_WIDTH, 8);
 }
 
+function drawBiteRipple(context, bobberPose, timestamp) {
+  const stage = Math.floor(timestamp / 90) % 3;
+  const width = 20 + stage * 8;
+  const left = Math.round(bobberPose.x - width / 2);
+  const y = Math.round(bobberPose.y + 9 + stage * 2);
+
+  context.globalAlpha = 0.7;
+  context.fillStyle = '#d7f4ef';
+  context.fillRect(left, y, width, 2);
+  context.fillRect(left + 5, y + 3, width - 10, 1);
+  context.globalAlpha = 1;
+}
+
 function getCatState(state, catchPose, timestamp) {
   if (catchPose) {
     return 'pull';
@@ -223,11 +239,24 @@ function drawCat(context, catImage) {
   context.fillRect(49, 48, 28, 28);
 }
 
-function getBobberPose(timestamp) {
-  return {
-    x: 286,
-    y: 137 + Math.sin(timestamp / 450) * 2
-  };
+function getBobberPose(timestamp, fishBiting) {
+  const idleOffsets = [0, -1, -2, -1, 0, 1, 2, 1];
+  const biteOffsets = [
+    { x: -3, y: 2 },
+    { x: 3, y: -3 },
+    { x: -2, y: -1 },
+    { x: 2, y: 3 }
+  ];
+
+  if (fishBiting) {
+    const offset = biteOffsets[Math.floor(timestamp / 80) % biteOffsets.length];
+    return { x: 286 + offset.x, y: 137 + offset.y };
+  }
+
+  const offset = idleOffsets[
+    Math.floor(timestamp / 150) % idleOffsets.length
+  ];
+  return { x: 286, y: 137 + offset };
 }
 
 function drawFishingRod(
