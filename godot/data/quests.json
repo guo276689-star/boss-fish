@@ -1,0 +1,27 @@
+[
+  {
+    "id": "catch_three",
+    "title": "鱼塘签到",
+    "description": "钓到 3 条任意鱼。",
+    "type": "catch_count",
+    "target": 3,
+    "reward_coins": 28
+  },
+  {
+    "id": "earn_sixty",
+    "title": "零碎战果",
+    "description": "通过钓鱼赚取 60 金币。",
+    "type": "earn_coins",
+    "target": 60,
+    "reward_coins": 36
+  },
+  {
+    "id": "find_rare",
+    "title": "闪闪发光的简历",
+    "description": "钓到 1 条 rare 或更高稀有度的鱼。",
+    "type": "catch_rarity",
+    "target": 1,
+    "target_rarity": "rare",
+    "reward_coins": 55
+  }
+]

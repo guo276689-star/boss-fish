@@ -1,57 +1,48 @@
-# Godot v0.1 验收标准
+# Godot v0.2 验收与验证记录
 
-## 完成门槛
+## 实际环境
 
-只有以下项目都有对应证据时，Godot v0.1 才能声明完成：
+- Godot：`4.7.stable.official.5b4e0cb0f`。
+- 分支：`godot-v0.2-core-gameplay-loop`。
+- 路线：Godot Mainline；Electron Legacy 未改动。
 
-1. Godot 4.x 可以导入 `godot/project.godot`，无脚本解析或资源导入错误。
-2. 主场景可以运行并保持 16:9 显示。
-3. 猫咪可以使用 WASD 和方向键移动，碰撞行为符合场景边界。
-4. 猫咪靠近鱼塘互动点后，HUD 显示可交互提示。
-5. 按 E 可以触发至少一次简化钓鱼，并获得明确鱼类结果。
-6. HUD 显示金币、当前提示和钓鱼结果，金币结算与数据一致。
-7. 停止并重新运行后的状态符合 v0.1“无持久化存档”边界。
-8. Electron Legacy 文件、启动入口、localStorage 结构和现有素材未被破坏。
+## 已执行证据
 
-## 必需证据
+| 检查 | 结果 | 证据 |
+| --- | --- | --- |
+| `godot --version`、`godot4 --version` | 通过 | 两个命令均输出 Godot 4.7 stable。 |
+| `godot --headless --path godot --editor --quit` | 通过 | 最终导入无 GDScript 解析错误。首次发现交互距离变量类型推断错误，已修复并复跑通过。 |
+| `godot --headless --path godot --quit-after 180` | 通过 | 主场景启动约 3 秒，无运行错误输出。 |
+| 临时隔离 v0.2 validation test | 通过 | 输出 `V0_2_VALIDATION_PASS`；覆盖 WASD/方向键移动、5 个最近互动点、任务/图鉴/商店/老板面板、钓鱼成功与超时、巡查中断、8 条鱼、任务推进/防重复领奖、升级效果与存档重载。测试脚本已清理，真实 `user://` 存档已恢复。 |
+| Godot 编辑器与 Debug 窗口 | 通过 | 已导入项目、可见办公室、鱼塘、任务板、图鉴柜、补给站、老板门、猫咪与 HUD；编辑器输出计数为 0 错误。 |
+| `git diff --check` | 见最终报告 | 需要在提交前以仓库最终差异复跑。 |
 
-- Godot 版本号与项目导入结果。
-- 实际运行日志或人工验收记录。
-- 猫咪移动、FishingSpot 互动、一次钓鱼和 HUD 更新的逐项结果。
-- `git diff --name-status` 与 `git diff --check` 输出。
-- 差异范围检查，证明没有无关 Electron Legacy 修改。
+## 功能验收矩阵
 
-没有运行证据时，不得写“测试通过”或“完成”；对应项目必须标记 **未验证**。没有截图或人工观察时，不得声称 UI 正常。
+| 项目 | 状态 | 证据 / 边界 |
+| --- | --- | --- |
+| 办公室、鱼塘、任务板、图鉴柜、补给站、老板门布局 | 通过 | Debug 可见。 |
+| 猫咪移动与朝向 | 通过（自动验证） | 临时验证脚本覆盖 WASD 和方向键回退；嵌入式 Debug 持续按键人工观察未验证。 |
+| 最近互动点与差异提示 | 通过（自动验证） | 5 个 `WorldInteractable`、最近选择和对应 action 均由验证脚本覆盖；逐点人工按键观察未验证。 |
+| 钓鱼状态、超时逃跑、收竿成功 | 通过（自动验证） | 验证脚本覆盖 `bite → result → idle` 及超时失败。 |
+| 8 条鱼、加权稀有度、鱼获金币 | 通过（自动验证） | fish 数据与加权选择由验证脚本覆盖。 |
+| 任务、领奖、防重复领取 | 通过（自动验证） | 三类委托、完成、重复领取拒绝均由验证脚本覆盖。 |
+| 图鉴锁定与数量显示 | 通过（代码/场景验证） | HUD 从鱼目录和计数渲染；实际面板点击未验证。 |
+| 商店与钓鱼参数效果 | 通过（自动验证） | 升级购买和 `wait_seconds_reduction` 在验证脚本中通过；实际面板点击未验证。 |
+| 老板压力与钓鱼中断 | 通过（自动验证） | 阈值进入巡查与钓鱼中断均由验证脚本覆盖；实际完整四次钓鱼人工演示未验证。 |
+| `user://` 存档与损坏回退 | 通过（自动验证） | 隔离重载验证金币、图鉴、升级、领奖状态；损坏文件人工演示未验证。 |
+| 音效 | 未验证 | v0.2 采用视觉提示占位，未接入音频资源。 |
+| Electron Legacy 回归运行 | 未验证 | 未启动 Legacy；Git 范围检查证明其路径未改。 |
 
-## 建议验收步骤
-
-1. 执行 `godot --version` 或 `godot4 --version`，记录实际命令和版本。
-2. 用 Godot 4.x 项目管理器导入 `godot/project.godot`。
-3. 确认主场景为 `res://scenes/main.tscn`，检查输出面板无解析错误。
-4. 运行项目，观察办公室、鱼塘、猫咪、金币和提示 HUD。
-5. 分别使用 WASD 与方向键移动，检查边界和鱼塘碰撞。
-6. 靠近 FishingSpot，确认提示出现；按 E，确认产生鱼类结果和金币变化。
-7. 离开互动范围，确认提示恢复；重新运行，确认金币按 v0.1 规则重置。
-8. 单独启动 Electron Legacy 并执行相关回归；若本里程碑未执行，则明确标记 **未验证**。
-
-## 静态检查
-
-在仓库根目录执行：
+## 提交前复验
 
 ```powershell
-Get-Content -Raw -Encoding UTF8 .\godot\data\fish.json | ConvertFrom-Json
+git status --short
+git branch --show-current
 git diff --name-status
 git diff --check
-git status --short --branch
+godot --headless --path godot --editor --quit
+godot --headless --path godot --quit-after 180
 ```
 
-同时检查：
-
-- 差异是否符合当前里程碑与目标路线。
-- 是否意外修改 Electron Legacy。
-- 是否包含调试输出、断点语句、临时补丁、失败素材或无用大图。
-- Scene/Node/GDScript 是否保持职责分离。
-
-## 当前验证状态
-
-本仓库现有记录显示当前环境未找到 `godot` 与 `godot4` 命令。Godot 项目导入、实际运行、猫咪移动、鱼塘互动、简化钓鱼与 HUD 视觉结果均为 **未验证**，需要在安装 Godot 4.x 的环境按上述步骤复验。
+在有可稳定捕获持续按键的桌面环境中，应再人工执行：移动至每个互动点、完成一条成功钓鱼和一次超时、领一次任务奖励、买一次升级、重启后核对存档、连续钓鱼触发一次巡查。

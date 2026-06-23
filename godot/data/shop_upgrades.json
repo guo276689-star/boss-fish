@@ -1,0 +1,35 @@
+[
+  {
+    "id": "better_rod",
+    "name": "加班鱼竿",
+    "description": "每级缩短一点等待上钩的时间。",
+    "level": 0,
+    "max_level": 3,
+    "cost": 42,
+    "effect": {
+      "wait_seconds_reduction": 0.22
+    }
+  },
+  {
+    "id": "lucky_charm",
+    "name": "摸鱼护符",
+    "description": "每级略微提高 rare 及以上鱼类的出现权重。",
+    "level": 0,
+    "max_level": 3,
+    "cost": 56,
+    "effect": {
+      "rare_weight_bonus": 0.3
+    }
+  },
+  {
+    "id": "focus_snack",
+    "name": "专注零食",
+    "description": "每级延长一点收竿反应时间。",
+    "level": 0,
+    "max_level": 3,
+    "cost": 64,
+    "effect": {
+      "hook_window_bonus": 0.3
+    }
+  }
+]
