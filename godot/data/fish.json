@@ -1,0 +1,14 @@
+[
+  {
+    "id": "moyu_goldfish",
+    "name": "摸鱼金鱼",
+    "description": "只在工位最忙时出现，擅长把进度条伪装成工作。",
+    "coin_reward": 12
+  },
+  {
+    "id": "badge_carp",
+    "name": "工牌鲤鱼",
+    "description": "胸前挂着工牌，游过闸机时从不忘记打卡。",
+    "coin_reward": 18
+  }
+]

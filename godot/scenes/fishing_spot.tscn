@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/fishing_spot.gd" id="1_spot"]
+
+[sub_resource type="RectangleShape2D" id="InteractionShape"]
+size = Vector2(92, 112)
+
+[node name="FishingSpot" type="Area2D"]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_spot")
+
+[node name="Marker" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-5, -34, 5, -34, 5, 14, -5, 14)
+color = Color(0.42, 0.25, 0.19, 1)
+
+[node name="Bobber" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-8, 14, 8, 14, 8, 27, -8, 27)
+color = Color(0.96, 0.34, 0.29, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("InteractionShape")

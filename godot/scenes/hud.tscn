@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="CoinPanel" type="PanelContainer" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 78.0
+
+[node name="CoinLabel" type="Label" parent="CoinPanel"]
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 24
+text = "金币：0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PromptPanel" type="PanelContainer" parent="."]
+offset_left = 276.0
+offset_top = 560.0
+offset_right = 876.0
+offset_bottom = 624.0
+
+[node name="PromptLabel" type="Label" parent="PromptPanel"]
+theme_override_colors/font_color = Color(0.94, 0.96, 0.91, 1)
+theme_override_font_sizes/font_size = 22
+text = "靠近鱼塘边的钓鱼点"
+horizontal_alignment = 1
+vertical_alignment = 1

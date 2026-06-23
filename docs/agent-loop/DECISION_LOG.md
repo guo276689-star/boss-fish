@@ -1,67 +1,52 @@
 # Decision Log
 
-> 本文件记录 ChatGPT 项目大脑审查意见和用户最终决策。按时间追加，不覆盖历史结论。Codex 可以根据明确审查结果代为写入记录，但不能替用户作出批准、提交、合并或 tag 决策。
+> 本文件按时间追加项目方向和人工审查决策。历史记录不得覆盖。Codex 可以记录用户已明确作出的决定，但不能自行批准提交、合并或 tag。
 
-## 决策权限
+## Initial Decisions — 2026-06-22
 
-### ChatGPT 项目大脑
+1. **Electron Legacy**：Electron 小窗口版本冻结为 Legacy，旧代码、localStorage 和已有素材继续保留，必要时维护。
+2. **Godot Mainline**：Godot 4.x 大屏 2D 像素版成为当前主线。
+3. **默认开发目录**：新功能默认进入 `godot/`，除非 Goal 明确要求维护 Electron Legacy。
+4. **Electron Canvas**：不再继续投入 Electron Canvas 贴图优化，明确的 Legacy 修复除外。
+5. **GodotMaker 边界**：GodotMaker 只作为工作流参考，不作为项目依赖，不接入仓库。
+6. **Agent Loop**：`docs/agent-loop/` 作为后续 Codex 工作协议，固定使用 Read → Plan → Implement → Run → Review → Fix → Report → Decision。
+7. **Git 权限**：Codex 不自动合并 `main`，不自动打 tag；commit、push、merge 和 tag 均由用户决定。
+8. **产品禁区**：不做后端、账号、数据库、联网或排行榜。
 
-- 审查 Goal 是否守边界。
-- 审查 `ACCEPTANCE.md` 和 `CODEX_REPORT.md` 的证据是否充分。
-- 提出批准、补测、修订或停止建议。
-- 定义获批后的下一轮 Goal。
+## Reference Principles
 
-### 用户
+- Scene/Node 按 Godot 官方最佳实践保持职责清晰；Autoload 必须有明确全局生命周期和稳定边界。
+- 使用真实 `project.godot` 和小型可运行 demo 学习结构，不复制无关系统。
+- 参考 GodotMaker 的 GDD → Task → Implement → Test → Screenshot → Evaluate → Fix 循环，但由 BossFish Agent Loop 文档和人工决策落地。
+- GUT / GdUnit4 作为后期测试候选，Godot reboot v0.1 不强制接入。
+- Godot Export Action 作为后期导出候选，Godot reboot v0.1 不接入。
 
-- 作出批准或退回的最终决定。
-- 决定是否 commit、push、合并 `main` 或打 tag。
-- 提供截图和人工体验结论。
+## Decision States
 
-### Codex
-
-- 不自我批准。
-- 不自动 commit、push、合并 `main` 或打 tag。
-- 只执行用户明确授权且仍在 Goal 范围内的 Git 操作。
-
-## 决策状态
-
-- `APPROVED`：本轮结果获得用户批准；不代表已经提交或合并。
+- `APPROVED`：用户批准本轮结果；不等于已经提交或合并。
 - `REVISION_REQUIRED`：需要修复失败项或补充证据。
 - `REJECTED`：本轮方案或结果不接受。
-- `STOPPED`：本轮终止，不再继续修复。
-- `PENDING`：等待报告、人工体验或用户决定。
+- `STOPPED`：本轮终止。
+- `PENDING`：等待报告、截图、人工体验或用户决定。
 
-## 决策记录
-
-当前无已批准决策。
-
-## 追加模板
+## Append Template
 
 ```text
 ### Decision YYYY-MM-DD-序号
 
-- 时间：YYYY-MM-DD HH:mm，Asia/Shanghai
-- Goal ID：...
-- 当前分支：...
-- 审查者：ChatGPT 项目大脑 / 用户
-- CODEX_REPORT 状态：...
-- 人工体验证据：... / 未验证
-- 决策：APPROVED / REVISION_REQUIRED / REJECTED / STOPPED / PENDING
-- 决策理由：...
-- 失败项处理：...
-- 未验证项处理：...
-- 是否批准 commit：是 / 否 / 未决定
-- 是否批准 push：是 / 否 / 未决定
-- 是否批准合并 main：是 / 否 / 未决定
-- 是否批准打 tag：是 / 否 / 未决定
-- 下一步：...
-- 下一轮 Goal：... / 未定义
+- Goal：...
+- Current Branch：...
+- Reviewer：ChatGPT 项目大脑 / 用户
+- Codex Report：...
+- Screenshot / Manual Feedback：... / 未验证
+- Decision：APPROVED / REVISION_REQUIRED / REJECTED / STOPPED / PENDING
+- Reason：...
+- Failed Items：...
+- Unverified Items：...
+- Approve Commit：是 / 否 / 未决定
+- Approve Push：是 / 否 / 未决定
+- Approve Merge Main：是 / 否 / 未决定
+- Approve Tag：是 / 否 / 未决定
+- Next Step：...
+- Next Goal：... / 未定义
 ```
-
-## 进入下一轮的条件
-
-1. 当前 `CODEX_REPORT.md` 已完成并包含 Git 证据。
-2. 必须验收项已经通过，或未验证项已由用户明确接受。
-3. 用户已经记录批准、退回或终止决定。
-4. 下一轮 Goal 不隐式继承本轮未批准的扩大范围。
-5. 新一轮开始前重新填写 `CURRENT_GOAL.md` 和 `ACCEPTANCE.md`。
