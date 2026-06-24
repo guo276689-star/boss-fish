@@ -1,0 +1,315 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/cat.tscn" id="2_cat"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/world_interactable.tscn" id="3_interactable"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/systems/game_state.gd" id="5_state"]
+[ext_resource type="Script" path="res://scripts/systems/fishing_system.gd" id="6_fishing"]
+[ext_resource type="Script" path="res://scripts/systems/boss_pressure.gd" id="7_boss"]
+[ext_resource type="Script" path="res://scripts/systems/interaction_director.gd" id="8_interaction"]
+
+[sub_resource type="RectangleShape2D" id="HorizontalBoundary"]
+size = Vector2(1280, 32)
+
+[sub_resource type="RectangleShape2D" id="VerticalBoundary"]
+size = Vector2(32, 720)
+
+[sub_resource type="RectangleShape2D" id="PondCollision"]
+size = Vector2(360, 248)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="OfficeFloor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.075, 0.105, 0.12, 1)
+
+[node name="WallBand" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 205, 0, 205)
+color = Color(0.14, 0.18, 0.2, 1)
+
+[node name="WallTrim" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 194, 1280, 194, 1280, 205, 0, 205)
+color = Color(0.3, 0.39, 0.38, 1)
+
+[node name="FloorLineA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(42, 304, 663, 304, 663, 312, 42, 312)
+color = Color(0.12, 0.17, 0.19, 1)
+
+[node name="FloorLineB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(42, 660, 1234, 660, 1234, 668, 42, 668)
+color = Color(0.12, 0.17, 0.19, 1)
+
+[node name="WindowA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(92, 45, 315, 45, 315, 154, 92, 154)
+color = Color(0.19, 0.42, 0.5, 1)
+
+[node name="WindowB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(341, 45, 564, 45, 564, 154, 341, 154)
+color = Color(0.19, 0.42, 0.5, 1)
+
+[node name="WindowReflectionA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(112, 63, 195, 63, 145, 136, 112, 136)
+color = Color(0.42, 0.7, 0.71, 0.55)
+
+[node name="WindowReflectionB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(365, 63, 448, 63, 398, 136, 365, 136)
+color = Color(0.42, 0.7, 0.71, 0.55)
+
+[node name="DeskRow" type="Node2D" parent="."]
+
+[node name="DeskA" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(86, 210, 316, 210, 316, 290, 86, 290)
+color = Color(0.34, 0.25, 0.18, 1)
+
+[node name="DeskB" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(355, 210, 585, 210, 585, 290, 355, 290)
+color = Color(0.34, 0.25, 0.18, 1)
+
+[node name="DeskAEdge" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(86, 210, 316, 210, 316, 220, 86, 220)
+color = Color(0.62, 0.45, 0.29, 1)
+
+[node name="DeskBEdge" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(355, 210, 585, 210, 585, 220, 355, 220)
+color = Color(0.62, 0.45, 0.29, 1)
+
+[node name="ScreenA" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(152, 220, 245, 220, 245, 266, 152, 266)
+color = Color(0.23, 0.67, 0.65, 1)
+
+[node name="ScreenB" type="Polygon2D" parent="DeskRow"]
+polygon = PackedVector2Array(421, 220, 514, 220, 514, 266, 421, 266)
+color = Color(0.23, 0.67, 0.65, 1)
+
+[node name="Carpet" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(290, 310, 650, 310, 650, 655, 290, 655)
+color = Color(0.2, 0.25, 0.26, 1)
+
+[node name="CarpetStripe" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(308, 330, 632, 330, 632, 346, 308, 346)
+color = Color(0.31, 0.36, 0.35, 1)
+
+[node name="PondDeck" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(720, 262, 1235, 262, 1235, 620, 720, 620)
+color = Color(0.21, 0.29, 0.28, 1)
+
+[node name="PondFrame" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(772, 300, 1185, 300, 1185, 575, 772, 575)
+color = Color(0.47, 0.33, 0.2, 1)
+
+[node name="PondWater" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(792, 320, 1165, 320, 1165, 555, 792, 555)
+color = Color(0.1, 0.42, 0.52, 1)
+
+[node name="WaterStripeA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(825, 372, 972, 372, 972, 384, 825, 384)
+color = Color(0.38, 0.72, 0.72, 1)
+
+[node name="WaterStripeB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1004, 460, 1130, 460, 1130, 472, 1004, 472)
+color = Color(0.38, 0.72, 0.72, 1)
+
+[node name="WaterLily" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1054, 352, 1080, 340, 1102, 358, 1090, 382, 1062, 380)
+color = Color(0.36, 0.69, 0.35, 1)
+
+[node name="BossDoor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1000, 52, 1164, 52, 1164, 222, 1000, 222)
+color = Color(0.25, 0.16, 0.17, 1)
+
+[node name="BossDoorWindow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1023, 76, 1141, 76, 1141, 137, 1023, 137)
+color = Color(0.78, 0.39, 0.32, 1)
+
+[node name="TaskBoardBlockout" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(50, 328, 260, 328, 260, 456, 50, 456)
+color = Color(0.29, 0.23, 0.17, 1)
+
+[node name="TaskBoardTrim" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(50, 328, 260, 328, 260, 340, 50, 340)
+color = Color(0.95, 0.65, 0.27, 1)
+
+[node name="TaskPaperA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(72, 355, 124, 355, 124, 405, 72, 405)
+color = Color(0.87, 0.79, 0.55, 1)
+
+[node name="TaskPaperB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(186, 355, 238, 355, 238, 405, 186, 405)
+color = Color(0.73, 0.82, 0.7, 1)
+
+[node name="BestiaryShelfBlockout" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(50, 506, 260, 506, 260, 645, 50, 645)
+color = Color(0.16, 0.19, 0.29, 1)
+
+[node name="BestiaryShelfTrim" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(50, 506, 260, 506, 260, 518, 50, 518)
+color = Color(0.48, 0.56, 0.92, 1)
+
+[node name="BestiaryShelfLineA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(70, 548, 240, 548, 240, 558, 70, 558)
+color = Color(0.34, 0.4, 0.62, 1)
+
+[node name="BestiaryShelfLineB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(70, 598, 240, 598, 240, 608, 70, 608)
+color = Color(0.34, 0.4, 0.62, 1)
+
+[node name="ShopBlockout" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(335, 512, 615, 512, 615, 645, 335, 645)
+color = Color(0.16, 0.28, 0.22, 1)
+
+[node name="ShopTrim" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(335, 512, 615, 512, 615, 524, 335, 524)
+color = Color(0.31, 0.73, 0.42, 1)
+
+[node name="ShopShelfA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(360, 548, 590, 548, 590, 558, 360, 558)
+color = Color(0.25, 0.46, 0.32, 1)
+
+[node name="ShopShelfB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(360, 600, 590, 600, 590, 610, 360, 610)
+color = Color(0.25, 0.46, 0.32, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 166.0
+offset_right = 620.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0.82, 0.89, 0.81, 1)
+theme_override_font_sizes/font_size = 25
+text = "老板鱼来了 · 办公室摸鱼基地"
+
+[node name="PondTitle" type="Label" parent="."]
+offset_left = 830.0
+offset_top = 580.0
+offset_right = 1130.0
+offset_bottom = 615.0
+theme_override_colors/font_color = Color(0.63, 0.88, 0.75, 1)
+theme_override_font_sizes/font_size = 22
+text = "办公室鱼塘"
+horizontal_alignment = 1
+
+[node name="TaskBoardTitle" type="Label" parent="."]
+offset_left = 58.0
+offset_top = 422.0
+offset_right = 252.0
+offset_bottom = 449.0
+theme_override_colors/font_color = Color(0.95, 0.79, 0.44, 1)
+theme_override_font_sizes/font_size = 17
+text = "今日小委托"
+horizontal_alignment = 1
+
+[node name="BestiaryTitle" type="Label" parent="."]
+offset_left = 58.0
+offset_top = 616.0
+offset_right = 252.0
+offset_bottom = 643.0
+theme_override_colors/font_color = Color(0.65, 0.72, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "办公室图鉴柜"
+horizontal_alignment = 1
+
+[node name="ShopTitle" type="Label" parent="."]
+offset_left = 348.0
+offset_top = 615.0
+offset_right = 602.0
+offset_bottom = 642.0
+theme_override_colors/font_color = Color(0.54, 0.9, 0.58, 1)
+theme_override_font_sizes/font_size = 17
+text = "摸鱼补给站"
+horizontal_alignment = 1
+
+[node name="BossDoorTitle" type="Label" parent="."]
+offset_left = 1008.0
+offset_top = 144.0
+offset_right = 1156.0
+offset_bottom = 170.0
+theme_override_colors/font_color = Color(1, 0.58, 0.44, 1)
+theme_override_font_sizes/font_size = 16
+text = "巡查办公室"
+horizontal_alignment = 1
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(640, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Top"]
+shape = SubResource("HorizontalBoundary")
+
+[node name="Bottom" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(640, 736)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom"]
+shape = SubResource("HorizontalBoundary")
+
+[node name="Left" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(-16, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
+shape = SubResource("VerticalBoundary")
+
+[node name="Right" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1296, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+shape = SubResource("VerticalBoundary")
+
+[node name="Pond" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(978, 438)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Pond"]
+shape = SubResource("PondCollision")
+
+[node name="Cat" parent="." instance=ExtResource("2_cat")]
+position = Vector2(475, 420)
+
+[node name="FishingSpot" parent="." instance=ExtResource("3_interactable")]
+position = Vector2(705, 440)
+action_id = "fishing"
+display_name = "鱼塘钓点"
+prompt_text = "按 E 在办公室鱼塘摸鱼"
+accent_color = Color(0.33, 0.78, 0.78, 1)
+
+[node name="TaskBoard" parent="." instance=ExtResource("3_interactable")]
+position = Vector2(145, 375)
+action_id = "tasks"
+display_name = "今日小委托"
+prompt_text = "按 E 查看今日小委托"
+accent_color = Color(0.96, 0.68, 0.3, 1)
+
+[node name="BestiaryShelf" parent="." instance=ExtResource("3_interactable")]
+position = Vector2(145, 565)
+action_id = "bestiary"
+display_name = "图鉴柜"
+prompt_text = "按 E 查看办公室图鉴"
+accent_color = Color(0.57, 0.62, 0.94, 1)
+
+[node name="ShopDesk" parent="." instance=ExtResource("3_interactable")]
+position = Vector2(475, 570)
+action_id = "shop"
+display_name = "摸鱼补给站"
+prompt_text = "按 E 打开摸鱼补给站"
+accent_color = Color(0.42, 0.83, 0.48, 1)
+
+[node name="BossZone" parent="." instance=ExtResource("3_interactable")]
+position = Vector2(1082, 214)
+action_id = "boss"
+display_name = "老板门"
+prompt_text = "按 E 查看老板压力"
+accent_color = Color(0.94, 0.4, 0.34, 1)
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("5_state")
+
+[node name="FishingSystem" type="Node" parent="."]
+script = ExtResource("6_fishing")
+
+[node name="BossPressure" type="Node" parent="."]
+script = ExtResource("7_boss")
+
+[node name="InteractionDirector" type="Node" parent="."]
+script = ExtResource("8_interaction")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]

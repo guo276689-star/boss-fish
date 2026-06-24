@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/world_interactable.gd" id="1_interactable"]
+
+[node name="WorldInteractable" type="Node2D" groups=["interactable"]]
+script = ExtResource("1_interactable")
+
+[node name="Shadow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-42, 23, 42, 23, 32, 34, -32, 34)
+color = Color(0.05, 0.07, 0.09, 0.55)
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-40, -28, 40, -28, 40, 24, -40, 24)
+color = Color(0.16, 0.2, 0.23, 1)
+
+[node name="Accent" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-40, -28, 40, -28, 40, -18, -40, -18)
+color = Color(0.6, 0.8, 0.7, 1)
+
+[node name="Icon" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.92, 0.95, 0.89, 1)
+theme_override_font_sizes/font_size = 22
+text = "◆"
+horizontal_alignment = 1
+
+[node name="FocusMarker" type="Label" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -55.0
+offset_right = 24.0
+offset_bottom = -29.0
+theme_override_font_sizes/font_size = 20
+text = "▼"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -72.0
+offset_top = 38.0
+offset_right = 72.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.85, 0.9, 0.84, 1)
+theme_override_font_sizes/font_size = 17
+horizontal_alignment = 1

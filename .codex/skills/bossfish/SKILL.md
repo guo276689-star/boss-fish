@@ -2,11 +2,22 @@
 
 适用项目：《老板鱼来了》 / Boss Fish Is Coming
 
-项目类型：
-Windows 小窗口 Electron 单机放置钓鱼游戏。
+项目路线：
+
+1. Godot Mainline：当前主线，Godot 4.x 大屏 2D 像素游戏，目录为 `godot/`。
+2. Electron Legacy：冻结的 Windows 小窗口单机放置钓鱼原型，保留在仓库根目录及原有 Electron 目录。
+
+默认路由规则：
+
+* 新功能默认进入 Godot Mainline。
+* 只有用户明确要求维护 Electron、Legacy 或旧小窗口版本时，才修改 Electron Legacy。
+* 每次修改前必须先写明目标路线。
+* 不迁移旧 JavaScript 代码；Godot 版重新实现场景、系统和数据边界。
 
 技术栈：
-Electron、HTML、CSS、JavaScript、Canvas、JSON、localStorage。
+
+* Godot Mainline：Godot 4.x、GDScript、Scene/Node、JSON 或 Godot Resource。
+* Electron Legacy：Electron、HTML、CSS、JavaScript、Canvas、JSON、localStorage。
 
 当前没有：
 后端、服务器、数据库、账号、联网、排行榜、Steam 成就。
@@ -72,6 +83,35 @@ Electron、HTML、CSS、JavaScript、Canvas、JSON、localStorage。
 
 ## 3. 文件责任归属
 
+### 3.1 Godot Mainline
+
+`godot/project.godot`：
+项目、窗口、输入、渲染和像素过滤设置。
+禁止放游戏业务规则。
+
+`godot/scenes/`：
+场景组合、Node 层级、碰撞区域和可复用实体。
+Scene/Node 职责必须清楚，禁止把任务、图鉴、商店、存档等系统全部塞进主场景。
+
+`godot/scripts/`：
+GDScript 行为与系统协调。
+角色、互动、UI、经济、任务、数据加载和存档应按职责拆分；主场景脚本只做必要编排。
+
+`godot/data/`：
+鱼类、任务、商店等静态数据。
+禁止把大量静态数据硬编码在多个 Node 脚本里，禁止放运行时存档。
+
+`godot/assets/`：
+统一像素规范后的正式资源。
+Gemini / FrameRonin 素材只能作为参考或候选，接入前必须统一尺寸、调色板、轮廓、动画帧、透明边缘和导入过滤；禁止提交失败稿、原始素材堆或未使用大图。
+
+`godot/docs/`：
+Godot 设计、概念迁移、路线和验收文档。
+
+### 3.2 Electron Legacy
+
+以下分层规范继续保留，但只适用于明确的 Electron Legacy 维护任务。
+
 main.js：
 Electron 主进程，窗口创建、窗口尺寸、IPC 主进程处理。
 禁止放游戏规则、金币、任务、图鉴、Canvas 绘制。
@@ -132,7 +172,7 @@ assets/：
 
 ## 4. 存档和数据规则
 
-当前存档使用 localStorage。
+Electron Legacy 存档使用 localStorage。Godot Mainline 未来使用独立、版本化的 Godot 存档，不直接读取或复用 Legacy localStorage。
 
 如果修改存档结构，必须说明：
 
@@ -166,6 +206,12 @@ assets/：
 12. 不把 UI、业务、存档混在一个大函数里。
 13. 不把 main.js / preload.js 当万能入口。
 14. 不做“大重构式小需求”。
+15. Godot Scene/Node 职责必须清楚，主场景不得成为万能系统容器。
+16. GDScript 使用小函数、明确命名和早返回；沿用 50/80 行限制。
+17. 不把大量鱼类、任务或商店数据硬编码进节点脚本。
+18. 不混合角色控制、交互、HUD、经济、任务和存档职责。
+19. 不引入 GodotMaker。
+20. Godot 与 Electron 均不得引入后端、账号、数据库、联网或排行榜。
 
 允许：
 
@@ -201,7 +247,7 @@ assets/：
 6. 检查是否有 console.log / debugger
 7. 检查函数是否过长
 8. 检查是否破坏已有模块边界
-9. npm start
+9. 按目标路线执行验证：Godot 使用 Godot 4.x 导入/运行；Electron Legacy 使用 npm 和对应手动回归
 10. 手动验收本次需求
 
 PowerShell 检查命令：
@@ -224,16 +270,18 @@ Select-String -Path .\src\*.js -Pattern "console.log|debugger|TODO|FIXME"
 
 每次改代码前必须回答：
 
-1. 是否影响金币：是 / 否
-2. 是否影响今日委托：是 / 否
-3. 是否影响图鉴：是 / 否
-4. 是否影响商店：是 / 否
-5. 是否影响音效：是 / 否
-6. 是否影响迷你模式：是 / 否
-7. 是否影响 localStorage：是 / 否
-8. 是否影响 Electron 主进程：是 / 否
-9. 是否需要存档迁移：是 / 否
-10. 是否有未验证项：有 / 无
+1. 目标路线：Godot Mainline / Electron Legacy / 跨线文档
+2. 是否影响金币：是 / 否
+3. 是否影响今日委托：是 / 否
+4. 是否影响图鉴：是 / 否
+5. 是否影响商店：是 / 否
+6. 是否影响音效：是 / 否
+7. 是否影响迷你模式：是 / 否
+8. 是否影响 localStorage 或 Godot 存档：是 / 否
+9. 是否影响 Electron 主进程：是 / 否
+10. 是否影响 Godot 场景、数据或项目设置：是 / 否
+11. 是否需要存档迁移：是 / 否
+12. 是否有未验证项：有 / 无
 
 ---
 
@@ -246,6 +294,9 @@ Select-String -Path .\src\*.js -Pattern "console.log|debugger|TODO|FIXME"
 
 目标：
 - ...
+
+目标路线：
+- Godot Mainline / Electron Legacy / 跨线文档
 
 会修改文件：
 1. 文件：
@@ -349,6 +400,9 @@ Git 存档：
 * 复杂动画系统
 * 大型重构
 * 无证据完成声明
+* GodotMaker
+* 把 Electron JavaScript 平移到 Godot
+* 默认继续投入 Electron Canvas 贴图优化
 
 如果用户要求提速：
 可以做小里程碑需求包。

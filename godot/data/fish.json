@@ -1,0 +1,74 @@
+[
+  {
+    "id": "moyu_goldfish",
+    "name": "摸鱼金鱼",
+    "rarity": "common",
+    "base_price": 12,
+    "description": "只在工位最忙时出现，擅长把进度条伪装成工作。",
+    "flavor_text": "它正在认真地假装认真。",
+    "weight": 36
+  },
+  {
+    "id": "badge_carp",
+    "name": "工牌鲤鱼",
+    "rarity": "common",
+    "base_price": 16,
+    "description": "胸前挂着工牌，游过闸机时从不忘记打卡。",
+    "flavor_text": "鱼鳍刷卡，准点下班。",
+    "weight": 30
+  },
+  {
+    "id": "coffee_loach",
+    "name": "咖啡泥鳅",
+    "rarity": "common",
+    "base_price": 20,
+    "description": "闻起来像凌晨两点的双份浓缩。",
+    "flavor_text": "它比你更需要休息。",
+    "weight": 24
+  },
+  {
+    "id": "ppt_catfish",
+    "name": "PPT 鲶鱼",
+    "rarity": "rare",
+    "base_price": 38,
+    "description": "每根胡须都挂着一页过渡动画。",
+    "flavor_text": "请翻到第 87 页。",
+    "weight": 12
+  },
+  {
+    "id": "meeting_jellyfish",
+    "name": "会议水母",
+    "rarity": "rare",
+    "base_price": 46,
+    "description": "漂浮时会把所有人拉进下一场会议。",
+    "flavor_text": "这会本可以发消息。",
+    "weight": 9
+  },
+  {
+    "id": "client_octopus",
+    "name": "甲方章鱼",
+    "rarity": "epic",
+    "base_price": 85,
+    "description": "八只触手同时改第九版需求。",
+    "flavor_text": "再加一个小功能就好。",
+    "weight": 5
+  },
+  {
+    "id": "kpi_shark",
+    "name": "KPI 鲨鱼",
+    "rarity": "epic",
+    "base_price": 110,
+    "description": "一出现，整片鱼塘的季度目标都会游快。",
+    "flavor_text": "它闻到了可量化成果。",
+    "weight": 3
+  },
+  {
+    "id": "boss_fish",
+    "name": "老板鱼",
+    "rarity": "legendary",
+    "base_price": 240,
+    "description": "它从门缝观察你多久了？没有人知道。",
+    "flavor_text": "老板来了，快把鱼竿藏好！",
+    "weight": 1
+  }
+]
