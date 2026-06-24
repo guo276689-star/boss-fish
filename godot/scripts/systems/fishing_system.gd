@@ -34,7 +34,7 @@ func begin_fishing(boss_inspecting: bool) -> String:
 	if state != IDLE:
 		return "现在不能重新抛竿。"
 	state = CASTING
-	status_changed.emit("正在摸鱼中……")
+	status_changed.emit("准备抛竿……")
 	fishing_started.emit()
 	_begin_waiting_after_cast()
 	return ""
@@ -70,7 +70,7 @@ func _begin_waiting_after_cast() -> void:
 	if state != CASTING or _game_state == null:
 		return
 	state = WAITING
-	status_changed.emit("鱼线轻轻晃动，耐心等一等……")
+	status_changed.emit("等待上钩……鱼线轻轻晃动。")
 	_wait_timer.start(_game_state.get_wait_seconds())
 
 
@@ -78,7 +78,7 @@ func _on_wait_finished() -> void:
 	if state != WAITING or _game_state == null:
 		return
 	state = BITE
-	status_changed.emit("上钩了！快按 E 或 Space 收竿！")
+	status_changed.emit("上钩！快按 E 或 Space 收竿！")
 	_bite_timer.start(_game_state.get_hook_window_seconds())
 
 
@@ -86,7 +86,7 @@ func _on_bite_expired() -> void:
 	if state != BITE:
 		return
 	state = RESULT
-	status_changed.emit("鱼跑掉了，下次手快一点！")
+	status_changed.emit("收竿失败：鱼跑掉了，下次手快一点！")
 	result_ready.emit({}, 0)
 
 
@@ -111,7 +111,7 @@ func _result_message(fish: Dictionary, reward: int) -> String:
 	var prefix := ""
 	if rarity != "common":
 		prefix = "稀有警报！"
-	return "%s摸到%s，获得 %d 金币。" % [prefix, fish.get("name", "未知鱼"), reward]
+	return "%s收竿成功：摸到%s，获得 %d 金币。" % [prefix, fish.get("name", "未知鱼"), reward]
 
 
 func _make_timer(callback: Callable) -> Timer:

@@ -50,6 +50,17 @@ SaveAndUI spans GameState, BossPressure, FishingLoop results, all panels, and he
 4. **Review and fix**: compare results with every area checklist; make minimal corrections only.
 5. **Report and stop**: update the linked reports with actual evidence, unresolved items, and Git state. Do not commit, push, merge, or tag.
 
+## v0.3 Implementation Update
+
+The original v0.3 commit contained this Markdown control system but no runtime polish files. The missing scoped implementation is now present in the v0.4 working tree and is validated by the temporary `V0_3_V0_4_VALIDATION_PASS` run:
+
+- nearest-target focus marker and action-specific interaction labels;
+- explicit cast, wait, bite, success, and failure wording;
+- consistent quest/shop/modal feedback and a boss panel that opens during inspection;
+- v0.2 Godot save fallback migration to `user://boss_fish_v0_3_save.json`.
+
+The visual portions of the v0.3 acceptance still require a runnable-screen observation and remain **未验证** until the user reviews them.
+
 ## Scope Guardrails
 
 - No Electron Legacy changes, including `src/`, `main.js`, `preload.js`, root `data/`, or root `assets/`.

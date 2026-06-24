@@ -45,3 +45,9 @@ Make the existing office a readable low-noise pixel blockout in which each gamep
 
 - Godot visual inspection or screenshot of the office.
 - Functional traversal/interaction evidence recorded in `VALIDATION.md`.
+
+## v0.3 Evidence Update
+
+- Implemented: office floor, landmark trims, task-board, bestiary-shelf, shop, pond, and boss-door blockouts now use the shared v0.4 low-noise palette.
+- Automated: the temporary validation instantiated the scene's interaction components and verified current-target switching.
+- Visual readability, spawn-to-zone walking observation, and screenshot evidence: **未验证**.

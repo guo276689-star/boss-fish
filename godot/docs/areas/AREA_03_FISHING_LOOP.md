@@ -48,3 +48,9 @@ Make the existing cast, wait, bite, reel, success, and failure flow clear withou
 
 - Headless deterministic fishing validation.
 - Runtime/manual visual result evidence; otherwise mark 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: explicit prepare, wait, bite, success, and escape status copy; result modal now renders the fish rarity in Chinese and can show an imported test preview.
+- Automated: waiting, bite/reel success, result acknowledgement, and timeout failure passed in `V0_3_V0_4_VALIDATION_PASS`.
+- Live result rhythm and rarity visual feedback: **未验证**.

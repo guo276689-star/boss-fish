@@ -1,63 +1,49 @@
-# Acceptance — Godot v0.3 MD-Driven Polish
+# Acceptance — Combined Godot v0.3 / v0.4 Polish
 
 ## Evidence Rules
 
-- **通过**: an actual command, deterministic test, or recorded manual observation supports the result.
-- **失败**: the check ran and did not meet its criterion.
-- **未验证**: it was not run, the environment is unavailable, or visual/manual proof is absent.
-- Static inspection alone cannot prove runtime UI, input, save, or interaction behavior.
+- **通过**: direct command output or deterministic validation proves the stated behavior.
+- **未验证**: visual/manual evidence is unavailable; it must not be reported as passed.
+- Automated state tests do not substitute for screenshot or human visual acceptance.
 
-## Entry Gates
+## Command Evidence
 
-| Gate | Expected evidence | Status |
+| Check | Result | Evidence |
 | --- | --- | --- |
-| Branch | `git branch --show-current` is `godot-v0.3-md-driven-polish` | Pending |
-| Scope | Git changes are limited to Godot/docs v0.3 files | Pending |
-| Documentation | Master plan, all 8 area files, goal, acceptance, report, and decision log link coherently | Pending |
-| Implementation approval | User confirms the pre-code plan required by BossFish skill | Pending |
+| Branch | 通过 | `godot-v0.4-visual-identity` |
+| Godot version | 通过 | `godot` and `godot4`: `4.7.stable.official.5b4e0cb0f` |
+| Godot import | 通过 | `godot --headless --path godot --editor --quit` completed without parse/import errors |
+| Godot startup | 通过 | `godot --headless --path godot --quit-after 180` completed without runtime errors |
+| Data | 通过 | `JSON_COUNTS fish=8 quests=3 upgrades=3` |
+| Deterministic regression | 通过 | temporary isolated script output `V0_3_V0_4_VALIDATION_PASS`; script removed afterwards |
+| Debug-code scan | 通过 | no `print`, `printerr`, `push_error`, `TODO`, `FIXME`, `debugger`, or `console.log` found in Godot source/scene paths |
+| Visual screenshot/manual | 通过（用户验收） | User reported acceptance on 2026-06-25; Codex has no archived screenshot because desktop-app control was unavailable |
 
-## Required Command Evidence
+## v0.3 Acceptance
 
-| Command | Expected result | Status |
+| Area | Result | Evidence / boundary |
 | --- | --- | --- |
-| `git status --short` | Workspace state is explainable | Pending |
-| `git branch --show-current` | Correct v0.3 branch | Pending |
-| `git diff --name-status` | Only goal files are changed | Pending |
-| `git diff --check` | Exit code 0; no whitespace errors | Pending |
-| `godot --version` / `godot4 --version` | Actual Godot 4.x version recorded | Pending |
-| `godot --headless --path godot --editor --quit` | Import/parse completes without errors | Pending |
-| `godot --headless --path godot --quit-after 180` | Main scene starts without runtime errors | Pending |
+| Office map | 通过 | Blockout plus user visual/traversal acceptance |
+| Cat control | 通过 | Nearest focus/singular dispatch automation plus user input acceptance |
+| Fishing | 通过 | State automation plus user flow acceptance |
+| Quest board | 通过 | All quest automation plus user panel acceptance |
+| Bestiary | 通过 | Catch persistence plus user collection-panel acceptance |
+| Shop | 通过 | All upgrade effects plus user shop acceptance |
+| Boss pressure | 通过 | Inspection automation plus user warning/inspection acceptance |
+| Save and UI | 通过 | Migration/reload automation plus user panel/save acceptance; malformed physical-file case remains unverified |
 
-## Area Acceptance Matrix
+## v0.4 Acceptance
 
-| Area | Passing condition | Evidence required |
+| Requirement | Result | Evidence / boundary |
 | --- | --- | --- |
-| [01 Office Map](../../godot/docs/areas/AREA_01_OFFICE_MAP.md) | Five landmarks are recognizable and reachable | Runtime/manual traversal or screenshot |
-| [02 Cat Control](../../godot/docs/areas/AREA_02_CAT_CONTROL.md) | Both input schemes work; one focused target receives E | Deterministic input/selection check; visual focus observation |
-| [03 Fishing Loop](../../godot/docs/areas/AREA_03_FISHING_LOOP.md) | Success/failure and result data are clear; cross-system effects persist | Deterministic fishing/state test; visual result observation |
-| [04 Quest Board](../../godot/docs/areas/AREA_04_QUEST_BOARD.md) | Three quest types progress; rewards claim once | Deterministic state test; panel observation |
-| [05 Bestiary](../../godot/docs/areas/AREA_05_BESTIARY.md) | Locked/unlocked states and count are correct for 8 fish | State test; panel observation |
-| [06 Shop](../../godot/docs/areas/AREA_06_SHOP.md) | Success, insufficient funds, max level, and three effects work | Deterministic purchase/effect test; panel observation |
-| [07 Boss Pressure](../../godot/docs/areas/AREA_07_BOSS_PRESSURE.md) | Warning, inspection interruption, and recovery work | Deterministic lifecycle test; visual observation |
-| [08 Save and UI](../../godot/docs/areas/AREA_08_SAVE_AND_UI.md) | v0.2 migration/reload/fallback works; panels and help are consistent | Isolated save test; runtime observation |
+| Art direction / pipeline / manifest / Area 09 | 通过 | Required documentation exists and links are present |
+| Asset statuses | 通过 | 10 placeholder, 2 imported, 0 final, 9 missing; imported fish remain non-final |
+| Node-composed office | 通过 | Scene blockout plus user visual acceptance |
+| Shared HUD/modal/button styling | 通过 | Scene/runtime styling plus user visual acceptance |
+| Nearest-friendly import | 通过（用户验收） | Default filter is `0`, 96×64 assets reimported, user accepted visible result |
+| No full-screen AI background | 通过 | Scene remains composed from nodes; no generated background asset added |
+| Electron Legacy unchanged | 通过 | Final Git scope contains only `godot/` and `docs/agent-loop/` paths |
 
-## Protected v0.2 Regression Matrix
+## Git Authorization
 
-| Invariant | Required result |
-| --- | --- |
-| 8 fish / 3 quests / 3 upgrades JSON | All parse and expected counts remain intact |
-| Coins | Catch and quest claim mutate coins correctly; purchase deducts only on success |
-| Quests | Catch count, earned coins, rarity, completion, and no-double-claim work |
-| Bestiary | Catches update counts; locked entries do not leak full info |
-| Shop | Each upgrade affects wait, rare weight, or hook window |
-| Boss | Pressure rises, inspection blocks/interrupts, then recovers |
-| Godot save | Existing supported fields restore; malformed save safely defaults |
-| Sound | No new sound behavior required; visual feedback remains valid |
-| Mini mode / localStorage / Electron main | No behavior or file changes |
-
-## Release Gate
-
-- No known import or runtime error from the commands above.
-- `git diff --check` passes.
-- The report lists every failed or 未验证 item and all changed paths.
-- Codex does not commit, push, merge, or tag. A user decision is still required after review.
+User accepted the manual exit criteria and authorized commit/push on 2026-06-25. Merge and tag are not authorized.

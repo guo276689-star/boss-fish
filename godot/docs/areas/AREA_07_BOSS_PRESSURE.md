@@ -46,3 +46,9 @@ Fishing starts and successful catches add pressure; `BossPressure` warns at 60, 
 
 - Headless inspection lifecycle validation.
 - Godot visual inspection of warning/inspection feedback, or 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: boss modal now opens in both normal and inspection states and uses the shared warning treatment.
+- Automated: threshold inspection start and recovery to pressure 25 passed in `V0_3_V0_4_VALIDATION_PASS`.
+- HUD/door urgency and live interruption observation: **未验证**.

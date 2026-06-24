@@ -27,6 +27,16 @@ theme_override_font_sizes/font_size = 22
 text = "◆"
 horizontal_alignment = 1
 
+[node name="FocusMarker" type="Label" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -55.0
+offset_right = 24.0
+offset_bottom = -29.0
+theme_override_font_sizes/font_size = 20
+text = "▼"
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="."]
 offset_left = -72.0
 offset_top = 38.0

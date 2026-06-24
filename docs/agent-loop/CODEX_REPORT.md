@@ -1,69 +1,68 @@
-# Codex Report — Godot v0.3 MD-Driven Polish
+# Codex Report — Combined Godot v0.3 / v0.4 Polish
 
-> Status: in progress. This report records only evidence already obtained; pending work is not represented as passed.
+> Result: **accepted**. Runtime import/start and deterministic core regression passed; user reported manual visual acceptance on 2026-06-25.
 
-## Current Branch
+## Current Branch and Goal
 
-- Branch: `godot-v0.3-md-driven-polish`.
-- Commit: none created by Codex.
-- Push / merge `main` / tag: not performed.
+- Branch: `godot-v0.4-visual-identity`.
+- Goal: implement the missed v0.3 polish together with the v0.4 visual identity/art pipeline.
+- Existing history note: `b69f999` is documentation-only v0.3 planning; this worktree contains the missing runtime implementation and has not been committed.
+- Commit / push / merge main / tag: not performed for this combined implementation.
 
-## Goal
+## Modified Files and Responsibilities
 
-Establish the linked v0.3 Markdown control system, then polish the existing Godot loop while preserving all v0.2 systems. See [CURRENT_GOAL](CURRENT_GOAL.md) and [GAME_MASTER_PLAN](../../godot/docs/GAME_MASTER_PLAN.md).
+| File | Responsibility |
+| --- | --- |
+| `godot/scenes/main.tscn` | Low-noise office blockout, visual landmark hierarchy; collisions and interaction positions preserved. |
+| `godot/scenes/interactables/world_interactable.tscn` | Reusable action marker and focus indicator. |
+| `godot/scripts/interactables/world_interactable.gd` | Action glyph and visual focused/unfocused state. |
+| `godot/scripts/systems/interaction_director.gd` | Clears prior focus and activates exactly one nearest target. |
+| `godot/scripts/systems/fishing_system.gd` | Explicit fishing state/result wording only. |
+| `godot/scenes/hud.tscn` | Shared HUD/modal surfaces, help panel, fish-preview node. |
+| `godot/scripts/hud.gd` | Unified runtime buttons, rarity presentation, fish preview mapping, boss modal repair, max-level wording. |
+| `godot/scripts/systems/save_service.gd` | v0.3 save path plus safe v0.2 Godot fallback migration. |
+| `godot/assets/fish/fish_badge_carp.png` | Imported 96×64 test preview; not final art. |
+| `godot/assets/fish/fish_ppt_catfish.png` | Imported 96×64 test preview; not final art. |
+| `godot/docs/*`, `docs/agent-loop/*` | Art direction, asset rules, Area 09, acceptance, evidence, and decision records. |
 
-## Current Modification Scope
+## Documentation and Asset Manifest
 
-| Path group | Responsibility | Status |
+- Complete: `ART_DIRECTION.md`, `ASSET_PIPELINE.md`, `ASSET_MANIFEST.md`, and `AREA_09_VISUAL_IDENTITY.md`.
+- Manifest summary: `placeholder` 10, `imported` 2, `final` 0, `missing` 9.
+- Imported fish: `badge_carp` from root `carp.png`, `ppt_catfish` from root `catfish.png`; both are 96×64 and were reimported by Godot.
+- No full-screen AI background, failed generation, or raw source dump was added to `godot/assets/`.
+
+## Actual Commands and Results
+
+| Command / action | Result | Output summary |
 | --- | --- | --- |
-| `godot/docs/GAME_MASTER_PLAN.md` | Master ownership, dependencies, scope gates, push gate | Drafted in this documentation pass |
-| `godot/docs/areas/AREA_*.md` | Per-area scope, dependencies, acceptance, evidence | Drafted in this documentation pass |
-| `docs/agent-loop/*.md` | Goal, acceptance, decision, and evidence control | Updated in this documentation pass |
-| `godot/docs/VALIDATION.md` | v0.3 validation matrix and evidence log | Pending update in this documentation pass |
-| Godot runtime files | Future scoped implementation only after confirmation | Not modified yet |
-| Electron Legacy | Frozen | Not modified |
+| `git status --short`, `git branch --show-current`, `git diff --name-status`, `git diff --check` | 通过 | Branch is `godot-v0.4-visual-identity`; modified/untracked paths are v0.3/v0.4 Godot/docs only; `git diff --check` exits 0. |
+| `godot --version`, `godot4 --version` | 通过 | Both output `4.7.stable.official.5b4e0cb0f`. |
+| `godot --headless --path godot --editor --quit` | 通过 | Project scan, scripts, fish imports, and editor layout completed without errors. |
+| `godot --headless --path godot --quit-after 180` | 通过 | Main scene start completed without runtime errors. |
+| Temporary `v0_3_v0_4_validation.gd` | 通过 | Output `V0_3_V0_4_VALIDATION_PASS`; test removed afterwards. |
+| JSON parse | 通过 | `fish=8`, `quests=3`, `upgrades=3`. |
+| Godot-source debug scan | 通过 | No debug/TODO markers found. |
+| Desktop visual capture | Tool unavailable | Windows app-control native pipe unavailable; user supplied manual acceptance instead. |
 
-## Executed Commands and Output Summary
+## v0.3 Core Regression
 
-| Command | Result | Summary |
-| --- | --- | --- |
-| `git status --short` | Observed | No output before the documentation changes; starting workspace was clean. |
-| `git branch --show-current` | Observed | `godot-v0.3-md-driven-polish`. |
-| `git diff --name-status` | Observed | No output before the documentation changes. |
-| `git diff --check` | Observed | Exit code 0 before the documentation changes. |
-| `rg --files godot docs .codex` | Observed | Confirmed v0.2 Godot scenes, systems, data, and existing agent-loop documents. |
-| `godot --version` and `godot4 --version` | Passed | Both output `4.7.stable.official.5b4e0cb0f`. |
-| `godot --headless --path godot --editor --quit` | Passed | Initial scan and editor layout completed; no parse/import error was emitted. |
-| `godot --headless --path godot --quit-after 180` | Passed | Main project start command completed with no runtime error output. |
+- Passed automatically: interaction focus/singular dispatch; fishing success/failure/result reset; coins; all three quest types and duplicate-claim rejection; caught counts; all three upgrade effects; boss inspection/recovery; state reload; v0.2→v0.3 migration and v0.3 precedence.
+- 未验证: physical malformed-file recovery and sound. User accepted live traversal, panel clicks, visual readability, and save flow; no Codex screenshot was archived.
 
-## Area Status
+## Boundaries
 
-| Area | Scope documented | Implementation | Acceptance |
-| --- | --- | --- | --- |
-| Office Map | Yes | Not started | 未验证 |
-| Cat Control | Yes | Not started | 未验证 |
-| Fishing Loop | Yes | Not started | 未验证 |
-| Quest Board | Yes | Not started | 未验证 |
-| Bestiary | Yes | Not started | 未验证 |
-| Shop | Yes | Not started | 未验证 |
-| Boss Pressure | Yes | Not started | 未验证 |
-| Save and UI | Yes | Not started | 未验证 |
-
-## Impact Check
-
-- Coins / quests / bestiary / shop / sound: no runtime change yet.
-- Mini mode / localStorage / Electron main process: no change.
-- Godot scenes, scripts, data, project settings, and save: no runtime change yet.
 - Electron Legacy modified: no.
-- Backend / networking / database / account introduced: no.
+- localStorage / mini mode / Electron main process modified: no.
+- Backend / account / database / networking introduced: no.
+- Godot save migration: yes. New path `user://boss_fish_v0_3_save.json`; fallback reads the former v0.2 Godot path, writes supported state to v0.3, and starts defaults for missing/unparseable data.
 
-## Unverified
+## Final Git Evidence
 
-- Deterministic v0.3 validation, visual QA, and all v0.3 area checks are 未验证.
-- Final Git diff scope and `git diff --check` after the documentation pass are pending.
+`git diff --name-status` lists modifications only under `docs/agent-loop/`, `godot/docs/`, `godot/scenes/`, and `godot/scripts/`. `git status --short` additionally lists the new `godot/assets/fish/` directory, which contains two PNGs and their Godot-generated `.import` metadata. No `main.js`, `preload.js`, `src/`, root `assets/`, root `data/`, HTML, or `styles/` path appears. `git diff --check` produced no whitespace error.
 
-## Recommendation and Git Gate
+## Recommendation and Push Gate
 
-- Recommend commit: not yet; implementation and validation are pending.
-- Proposed future message: `feat(godot): add v0.3 md-driven polish`.
-- Wait for user acceptance before commit/push. The exact approval phrase is `验收通过，允许提交并 push`.
+- Recommendation: commit/push the current scoped worktree; user manual acceptance and Git authorization were supplied on 2026-06-25.
+- Suggested commit message: `feat: add godot v0.4 visual identity pipeline`.
+- Wait for `验收通过，允许提交并 push`; do not commit, push, merge, or tag beforehand.

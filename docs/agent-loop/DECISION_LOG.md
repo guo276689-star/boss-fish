@@ -68,3 +68,57 @@
 - Approve Tag：否
 - Next Step：完成文档交叉链接，输出精确实现方案并等待确认。
 - Next Goal：未定义
+
+### Decision 2026-06-24-02
+
+- Goal：Godot v0.4 visual identity and art pipeline.
+- Current Branch：`godot-v0.4-visual-identity`
+- Reviewer：用户
+- Codex Report：[v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：未验证
+- Decision：PENDING
+- Reason：用户要求以低噪点 blockout、资产清单、import 规则和 UI 统一推进视觉方向；最终手绘美术不在本轮范围。
+- Failed Items：无；实现和运行验证尚未开始。
+- Unverified Items：Godot 运行、视觉观察、v0.3 回归、候选鱼素材导入与 filter 检查。
+- Approve Commit：否
+- Approve Push：否
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：完成 Art MD 交叉检查，输出精确场景/UI实现方案并等待确认。
+- Next Goal：未定义
+
+### Decision 2026-06-24-03
+
+- Goal：在 v0.4 分支补齐未实施的 v0.3 runtime polish，并同时完成 v0.4 视觉统一。
+- Current Branch：`godot-v0.4-visual-identity`
+- Reviewer：用户
+- Codex Report：[combined v0.3/v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：未验证；Windows app-control native pipe unavailable。
+- Decision：PENDING
+- Reason：自动导入、启动和核心回归已通过；需要用户在真实窗口验收视觉层级、输入、面板和存档体验。
+- Failed Items：headless viewport capture 不可用（dummy renderer 无可读纹理）；非游戏运行失败。
+- Unverified Items：人工视觉、实时键盘、所有面板点击、物理损坏存档、音效。
+- Approve Commit：否
+- Approve Push：否
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：用户执行手动验收；通过后使用 Push Gate 口令。
+- Next Goal：未定义
+
+### Decision 2026-06-25-01
+
+- Goal：Combined Godot v0.3 runtime recovery and v0.4 visual identity pipeline.
+- Current Branch：`godot-v0.4-visual-identity`
+- Reviewer：用户
+- Codex Report：[combined v0.3/v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：用户验收通过；Codex 截图未归档。
+- Decision：APPROVED
+- Reason：用户已确认场景、UI、互动、钓鱼、任务、商店、巡查和存档体验通过，并授权提交推送。
+- Failed Items：无已知阻塞项。
+- Unverified Items：物理损坏存档演示、音效；不阻塞本轮用户验收。
+- Approve Commit：是
+- Approve Push：是
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：执行 Git 缓存检查、提交并推送当前分支。
+- Next Goal：未定义

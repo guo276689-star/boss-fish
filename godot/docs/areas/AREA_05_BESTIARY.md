@@ -43,3 +43,9 @@ HUD renders caught fish with name, rarity, description, and count; uncaught fish
 ## Evidence Needed
 
 - State validation and Godot panel inspection; visual details are 未验证 without a screenshot/manual observation.
+
+## v0.3 Evidence Update
+
+- Implemented: no catalog data or unlock rule changed; the fish-result preview only uses explicitly imported candidate IDs.
+- Automated: catches update saved bestiary counts in `V0_3_V0_4_VALIDATION_PASS`.
+- Eight-entry panel scanability and locked-state observation: **未验证**.

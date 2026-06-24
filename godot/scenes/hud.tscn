@@ -1,6 +1,66 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="HudPanelStyle"]
+bg_color = Color(0.055, 0.09, 0.12, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.24, 0.39, 0.42, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="HudAccentStyle"]
+bg_color = Color(0.065, 0.13, 0.15, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.68, 0.68, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+content_margin_left = 12.0
+content_margin_top = 7.0
+content_margin_right = 12.0
+content_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxFlat" id="HudStatusStyle"]
+bg_color = Color(0.12, 0.1, 0.08, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.64, 0.26, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="ModalStyle"]
+bg_color = Color(0.045, 0.075, 0.1, 0.985)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.67, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -10,6 +70,7 @@ offset_left = 24.0
 offset_top = 24.0
 offset_right = 260.0
 offset_bottom = 78.0
+theme_override_styles/panel = SubResource("HudPanelStyle")
 
 [node name="CoinLabel" type="Label" parent="CoinPanel"]
 theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
@@ -23,6 +84,7 @@ offset_left = 280.0
 offset_top = 24.0
 offset_right = 840.0
 offset_bottom = 78.0
+theme_override_styles/panel = SubResource("HudPanelStyle")
 
 [node name="PressureLabel" type="Label" parent="PressurePanel"]
 theme_override_colors/font_color = Color(0.8, 0.86, 0.75, 1)
@@ -31,21 +93,26 @@ text = "老板压力：0% · 老板暂时没注意到你。"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Help" type="Label" parent="."]
+[node name="HelpPanel" type="PanelContainer" parent="."]
 offset_left = 920.0
-offset_top = 28.0
-offset_right = 1250.0
-offset_bottom = 78.0
+offset_top = 24.0
+offset_right = 1256.0
+offset_bottom = 82.0
+theme_override_styles/panel = SubResource("HudPanelStyle")
+
+[node name="Help" type="Label" parent="HelpPanel"]
 theme_override_colors/font_color = Color(0.72, 0.77, 0.72, 1)
 theme_override_font_sizes/font_size = 16
 text = "移动：WASD / 方向键\n互动 / 收竿：E 或 Space"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="PromptPanel" type="PanelContainer" parent="."]
 offset_left = 276.0
 offset_top = 560.0
 offset_right = 876.0
 offset_bottom = 624.0
+theme_override_styles/panel = SubResource("HudAccentStyle")
 
 [node name="PromptLabel" type="Label" parent="PromptPanel"]
 theme_override_colors/font_color = Color(0.94, 0.96, 0.91, 1)
@@ -59,6 +126,7 @@ offset_left = 256.0
 offset_top = 484.0
 offset_right = 896.0
 offset_bottom = 540.0
+theme_override_styles/panel = SubResource("HudStatusStyle")
 
 [node name="StatusLabel" type="Label" parent="StatusPanel"]
 theme_override_colors/font_color = Color(1, 0.86, 0.4, 1)
@@ -68,10 +136,11 @@ vertical_alignment = 1
 
 [node name="Modal" type="PanelContainer" parent="."]
 visible = false
-offset_left = 320.0
-offset_top = 126.0
-offset_right = 960.0
-offset_bottom = 515.0
+offset_left = 310.0
+offset_top = 116.0
+offset_right = 970.0
+offset_bottom = 532.0
+theme_override_styles/panel = SubResource("ModalStyle")
 
 [node name="Margin" type="MarginContainer" parent="Modal"]
 theme_override_constants/margin_left = 24
@@ -88,11 +157,18 @@ theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 
 [node name="Body" type="RichTextLabel" parent="Modal/Margin/VBox"]
-custom_minimum_size = Vector2(0, 210)
+custom_minimum_size = Vector2(0, 165)
 fit_content = false
 theme_override_colors/default_color = Color(0.9, 0.94, 0.87, 1)
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = false
+
+[node name="FishPreviewCenter" type="CenterContainer" parent="Modal/Margin/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 64)
+
+[node name="FishPreview" type="TextureRect" parent="Modal/Margin/VBox/FishPreviewCenter"]
+texture_filter = 1
 
 [node name="Actions" type="VBoxContainer" parent="Modal/Margin/VBox"]
 theme_override_constants/separation = 6

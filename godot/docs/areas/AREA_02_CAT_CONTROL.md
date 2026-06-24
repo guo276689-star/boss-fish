@@ -46,3 +46,9 @@ Provide reliable WASD/arrow movement and exactly one obvious nearby interaction 
 
 - Godot runtime validation of movement and nearest selection.
 - Manual/screenshot evidence for focus feedback; otherwise mark 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: action-specific label glyphs and a single visible focus marker; `InteractionDirector` clears the previous focus before setting the next.
+- Automated: nearest fishing/task focus and one-target action dispatch passed in `V0_3_V0_4_VALIDATION_PASS`.
+- WASD/arrow-key and visible focus observation in a live window: **未验证**.

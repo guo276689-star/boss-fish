@@ -44,3 +44,9 @@ Make the fixed three daily-style requests legible: title, progress, reward, clai
 
 - Deterministic state validation for all three quest types and duplicate claim rejection.
 - Panel visual inspection, or 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: panel status now leads each quest row; existing claim intent/rule boundary is preserved.
+- Automated: catch-count, earned-coins, rarity, one-time claim, and duplicate-claim rejection passed in `V0_3_V0_4_VALIDATION_PASS`.
+- Panel readability and button click observation: **未验证**.

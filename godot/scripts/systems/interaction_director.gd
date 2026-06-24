@@ -40,5 +40,10 @@ func _find_nearest_interactable() -> WorldInteractable:
 func _set_current(next: WorldInteractable) -> void:
 	if next == _current:
 		return
+	var previous := _current
 	_current = next
+	if previous != null:
+		previous.set_focused(false)
+	if _current != null:
+		_current.set_focused(true)
 	prompt_changed.emit(_current.prompt_text if _current != null else "探索办公室，寻找可互动的区域。")

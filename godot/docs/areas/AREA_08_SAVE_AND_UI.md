@@ -47,3 +47,9 @@ Keep the Godot-only save safe and make HUD/panel controls consistent and self-ex
 
 - Isolated save/reload/malformed-file validation.
 - Runtime panel close and help-text inspection; otherwise mark 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: `SaveService` reads `user://boss_fish_v0_3_save.json`, falls back to the v0.2 Godot path, and persists supported legacy state to the v0.3 path. It never reads Electron `localStorage`.
+- Automated: migration, v0.3 precedence, state reload, and modal close paths passed in `V0_3_V0_4_VALIDATION_PASS`.
+- Malformed physical-file demonstration, live help readability, and all panel click paths: **未验证**.

@@ -46,3 +46,9 @@ The shop renders name, level, price, description, and purchase buttons. `GameSta
 
 - Deterministic purchase/effect validation.
 - Panel state inspection, or 未验证.
+
+## v0.3 Evidence Update
+
+- Implemented: max-level rows now state `已满级`; the shared button style is applied to runtime shop actions.
+- Automated: `better_rod`, `lucky_charm`, and `focus_snack` purchases and effect totals passed in `V0_3_V0_4_VALIDATION_PASS`.
+- Insufficient-funds/max-level visual observation: **未验证**.
