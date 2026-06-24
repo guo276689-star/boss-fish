@@ -1,61 +1,63 @@
-# Acceptance
+# Acceptance — Godot v0.3 MD-Driven Polish
 
-## 判定标准
+## Evidence Rules
 
-- `通过`：实际执行对应命令或人工步骤，结果符合预期且有证据。
-- `失败`：已执行，但结果不符合预期或出现错误。
-- `未验证`：命令未执行、环境不可用、缺少截图或只能静态推断。
-- 没有证据不得写“完成”或“测试通过”。
-- 所有未验证项必须显式写“未验证”。
+- **通过**: an actual command, deterministic test, or recorded manual observation supports the result.
+- **失败**: the check ran and did not meet its criterion.
+- **未验证**: it was not run, the environment is unavailable, or visual/manual proof is absent.
+- Static inspection alone cannot prove runtime UI, input, save, or interaction behavior.
 
-## 基础 Git 验收
+## Entry Gates
 
-| 命令 | 期望结果 | 状态 |
+| Gate | Expected evidence | Status |
 | --- | --- | --- |
-| `git status` | 分支和工作区状态可解释，无隐藏差异 | 未验证 |
-| `git branch --show-current` | 位于 Goal 指定分支 | 未验证 |
-| `git diff --name-status` | 只有 Goal 范围内文件 | 未验证 |
-| `git diff --check` | 退出码为 0，无空白错误 | 未验证 |
+| Branch | `git branch --show-current` is `godot-v0.3-md-driven-polish` | Pending |
+| Scope | Git changes are limited to Godot/docs v0.3 files | Pending |
+| Documentation | Master plan, all 8 area files, goal, acceptance, report, and decision log link coherently | Pending |
+| Implementation approval | User confirms the pre-code plan required by BossFish skill | Pending |
 
-## Godot 环境验收
+## Required Command Evidence
 
-| 命令 | 期望结果 | 状态 |
+| Command | Expected result | Status |
 | --- | --- | --- |
-| `godot --version` | 输出实际 Godot 4.x 版本 | 未验证 |
-| `godot4 --version` | 若提供该命令，输出实际版本 | 未验证 |
+| `git status --short` | Workspace state is explainable | Pending |
+| `git branch --show-current` | Correct v0.3 branch | Pending |
+| `git diff --name-status` | Only goal files are changed | Pending |
+| `git diff --check` | Exit code 0; no whitespace errors | Pending |
+| `godot --version` / `godot4 --version` | Actual Godot 4.x version recorded | Pending |
+| `godot --headless --path godot --editor --quit` | Import/parse completes without errors | Pending |
+| `godot --headless --path godot --quit-after 180` | Main scene starts without runtime errors | Pending |
 
-如果两个命令都不存在，必须在报告中写：**Godot 运行未验证**。不得伪造版本或运行结果。
+## Area Acceptance Matrix
 
-## Godot v0.1 功能验收
-
-| 验收项 | 验收方法 | 状态 |
+| Area | Passing condition | Evidence required |
 | --- | --- | --- |
-| Godot 项目是否能打开 | 导入 `godot/project.godot`，检查解析和资源导入错误 | 未验证 |
-| 主场景是否能运行 | 运行 Main，记录退出码、日志和人工观察 | 未验证 |
-| 猫咪是否可移动 | 使用 WASD 和方向键实际操作 | 未验证 |
-| FishingSpot 是否可交互 | 靠近鱼塘，确认提示和 E 输入 | 未验证 |
-| 是否能触发一次简化钓鱼 | 按 E，确认鱼类结果和金币变化 | 未验证 |
-| HUD 是否显示金币和提示 | 人工观察 HUD 内容和更新 | 未验证 |
-| 最小鱼类数据是否存在 | 解析数据并检查 `moyu_goldfish`、`badge_carp` | 未验证 |
-| 是否未修改 Electron Legacy `src` | 检查 Git 差异 | 未验证 |
-| 是否无后端/数据库/账号/联网 | 检查依赖、配置和可执行代码 | 未验证 |
+| [01 Office Map](../../godot/docs/areas/AREA_01_OFFICE_MAP.md) | Five landmarks are recognizable and reachable | Runtime/manual traversal or screenshot |
+| [02 Cat Control](../../godot/docs/areas/AREA_02_CAT_CONTROL.md) | Both input schemes work; one focused target receives E | Deterministic input/selection check; visual focus observation |
+| [03 Fishing Loop](../../godot/docs/areas/AREA_03_FISHING_LOOP.md) | Success/failure and result data are clear; cross-system effects persist | Deterministic fishing/state test; visual result observation |
+| [04 Quest Board](../../godot/docs/areas/AREA_04_QUEST_BOARD.md) | Three quest types progress; rewards claim once | Deterministic state test; panel observation |
+| [05 Bestiary](../../godot/docs/areas/AREA_05_BESTIARY.md) | Locked/unlocked states and count are correct for 8 fish | State test; panel observation |
+| [06 Shop](../../godot/docs/areas/AREA_06_SHOP.md) | Success, insufficient funds, max level, and three effects work | Deterministic purchase/effect test; panel observation |
+| [07 Boss Pressure](../../godot/docs/areas/AREA_07_BOSS_PRESSURE.md) | Warning, inspection interruption, and recovery work | Deterministic lifecycle test; visual observation |
+| [08 Save and UI](../../godot/docs/areas/AREA_08_SAVE_AND_UI.md) | v0.2 migration/reload/fallback works; panels and help are consistent | Isolated save test; runtime observation |
 
-## 报告标准
+## Protected v0.2 Regression Matrix
 
-`CODEX_REPORT.md` 必须包含：
+| Invariant | Required result |
+| --- | --- |
+| 8 fish / 3 quests / 3 upgrades JSON | All parse and expected counts remain intact |
+| Coins | Catch and quest claim mutate coins correctly; purchase deducts only on success |
+| Quests | Catch count, earned coins, rarity, completion, and no-double-claim work |
+| Bestiary | Catches update counts; locked entries do not leak full info |
+| Shop | Each upgrade affects wait, rare weight, or hook window |
+| Boss | Pressure rises, inspection blocks/interrupts, then recovers |
+| Godot save | Existing supported fields restore; malformed save safely defaults |
+| Sound | No new sound behavior required; visual feedback remains valid |
+| Mini mode / localStorage / Electron main | No behavior or file changes |
 
-- 实际运行命令和命令输出摘要。
-- 通过项。
-- 失败项。
-- 未验证项。
-- Electron Legacy 与 Godot Mainline 影响。
-- `git diff --name-status` 和 `git diff --check` 原始输出或准确摘要。
-- 截图说明；不能截图或没有人工观察时，明确写“截图未验证”。
-- 是否建议提交、建议 commit message 和是否建议进入下一轮。
+## Release Gate
 
-## 参考测试边界
-
-- v0.1 优先完成真实项目导入、运行和人工交互验收。
-- GUT / GdUnit4 只作为后期自动测试参考，v0.1 不强制接入。
-- Godot Export Action 只作为后期自动导出参考，v0.1 不接入。
-- GodotMaker 只作为 Loop 思路参考，不作为依赖或验收工具。
+- No known import or runtime error from the commands above.
+- `git diff --check` passes.
+- The report lists every failed or 未验证 item and all changed paths.
+- Codex does not commit, push, merge, or tag. A user decision is still required after review.

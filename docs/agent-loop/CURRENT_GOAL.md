@@ -1,77 +1,56 @@
-# Current Goal
+# Current Goal — Godot v0.3 MD-Driven Polish
 
-## 当前阶段
+## Current Phase
 
-Godot reboot v0.1
+Read → Plan → Write MD. Implementation has not started.
 
-## 当前目标
+## Goal
 
-验收并小修当前 Godot v0.1 原型，确认是否达到最小可玩骨架。
+Build a strongly linked Markdown control system, then use it to polish the Godot v0.2 playable loop into a clearer and more stable v0.3 demonstration build.
 
-## 当前最小可玩骨架
+## Target Track
 
-- `godot/` 子项目存在。
-- `project.godot` 存在。
-- Main 场景存在。
-- Cat 角色存在。
-- 猫咪可以移动，或移动脚本和输入设置完整。
-- FishingSpot 互动点存在。
-- 可触发一次简化钓鱼。
-- HUD 显示金币和提示文本。
-- 有最小鱼类数据：`moyu_goldfish` / `badge_carp`。
-- 不破坏 Electron Legacy。
+Godot Mainline only. Electron Legacy remains frozen and untouched.
 
-## 允许范围
+## Required Deliverables
 
-- 验收 Godot v0.1 文件、场景、脚本、输入、数据和资源引用。
-- 修复阻塞最小闭环的明显小错误。
-- 补充最小输入说明、验收文档和 Codex 报告。
-- 运行 Godot 项目、Git 检查和必要的静态检查。
+- [GAME_MASTER_PLAN](../../godot/docs/GAME_MASTER_PLAN.md) and eight linked area contracts.
+- Scoped Godot scene, control, fishing, UI, boss-feedback, and save-compatibility polish.
+- Updated [ACCEPTANCE](ACCEPTANCE.md), [CODEX_REPORT](CODEX_REPORT.md), [DECISION_LOG](DECISION_LOG.md), and [Godot validation record](../../godot/docs/VALIDATION.md).
 
-## 禁止范围
+## In Scope
 
-- 不做 v0.2。
-- 不做完整图鉴。
-- 不做完整商店。
-- 不做完整今日小委托。
-- 不做老板巡查系统。
-- 不接入全部鱼类。
-- 不做复杂动画系统。
-- 不改 Electron Legacy `src/`。
-- 不删除旧项目文件或素材。
-- 不引入后端、账号、数据库、联网、排行榜或 GodotMaker。
-- 不自动提交。
-- 不自动合并 `main`。
-- 不自动打 tag。
+- Improve existing office landmarks and navigation readability.
+- Improve existing cat control, nearest-target focus, and prompt clarity.
+- Improve fishing state/result feedback, panels, shop/quest/bestiary readability, and boss-pressure feedback.
+- Add minimal v0.2-to-v0.3 Godot save migration and malformed-save coverage.
+- Run Git checks, Godot 4.x import/start validation, deterministic validation where feasible, and documented manual observations.
 
-## Goal 模板
+## Must Remain True
 
-后续新一轮开始时，ChatGPT 项目大脑按以下结构替换当前内容：
+- Godot starts; cat movement and five interactions work.
+- Fishing can succeed or time out; catches change coins, quests, bestiary, pressure, and save.
+- Three quests, three upgrades, and eight fish still load from JSON.
+- Shop effects still influence fishing.
+- Inspection interrupts fishing and later recovers.
+- Electron Legacy is unchanged.
 
-```text
-当前阶段：
-- ...
+## Forbidden Scope
 
-当前目标：
-- ...
+- No Electron Legacy modifications or JavaScript migration.
+- No backend, server, database, account, networking, leaderboard, Steam achievement, GodotMaker, cloud save, new map, expanded fish catalog, complex TileMap, AI, combat, pet, dungeon, crafting, or complex animation system.
+- No commit, push, merge, or tag without the exact user approval phrase: `验收通过，允许提交并 push`.
 
-范围内：
-- ...
+## Implementation Gate
 
-禁止范围：
-- ...
+The documentation pass is authorized by this goal. Before changing GDScript, scenes, data, or project settings, Codex must present the exact file plan, impact check, quality check, and validation method, then receive user confirmation as required by the BossFish skill.
 
-计划修改文件：
-- 文件 / 职责 / 原因 / 风险
+## Stop Conditions
 
-交付物：
-- ...
+- Every acceptance item has actual evidence, or remaining unavailable checks are marked 未验证.
+- A blocker requires scope expansion or user authority.
+- The working tree includes unrelated changes.
 
-必须执行的验收：
-- ...
+## Linked Acceptance
 
-停止条件：
-- ...
-```
-
-Codex 只能执行已经下发的 Goal。修复若需要超出范围，必须停止并在报告中写明原因。
+See [ACCEPTANCE](ACCEPTANCE.md) for test criteria, [GAME_MASTER_PLAN](../../godot/docs/GAME_MASTER_PLAN.md) for dependency ownership, and [CODEX_REPORT](CODEX_REPORT.md) for executed-command evidence.

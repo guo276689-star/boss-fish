@@ -50,3 +50,21 @@
 - Next Step：...
 - Next Goal：... / 未定义
 ```
+
+### Decision 2026-06-24-01
+
+- Goal：Godot v0.3 MD-driven polish — linked planning system followed by scoped playable polish.
+- Current Branch：`godot-v0.3-md-driven-polish`
+- Reviewer：用户
+- Codex Report：[v0.3 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：未验证
+- Decision：PENDING
+- Reason：用户已下发 Goal；文档控制体系正在建立，代码实现必须先经过 BossFish 预修改方案确认。
+- Failed Items：无；运行时验证尚未开始。
+- Unverified Items：Godot 导入、运行、视觉交互、存档迁移与全量回归。
+- Approve Commit：否
+- Approve Push：否
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：完成文档交叉链接，输出精确实现方案并等待确认。
+- Next Goal：未定义
