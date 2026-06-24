@@ -25,6 +25,7 @@
 | Data catalog | 通过 | PowerShell JSON parse: 8 fish, 3 quests, 3 upgrades. |
 | Source hygiene | 通过 | No `print`, `printerr`, `push_error`, `TODO`, `FIXME`, `debugger`, or `console.log` in Godot scripts/scenes. |
 | Fish import | 通过 | `fish_badge_carp.png` and `fish_ppt_catfish.png` were reimported from 96×64 source candidates. |
+| PNG Git attributes | 通过 | `godot/.gitattributes` now marks image formats `-text`; restored fish hashes match their root sources. |
 | Pixel filter | 部分通过 | Project default is `textures/canvas_textures/default_texture_filter=0`; new preview node uses nearest. Import-dock and visual blur inspection are 未验证. |
 
 ## Isolated Validation Coverage
@@ -88,3 +89,7 @@ No Electron Legacy path is present. Commit/push is recorded below after user acc
 - Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
 - Push: `origin/godot-v0.4-visual-identity`.
 - Merge main / tag: not performed.
+
+## Mainline Correction Before Tagging
+
+The first local mainline validation found ASCII conversion of both imported PNG files under the inherited `* text eol=lf` attribute. Before pushing `main`, the files were restored byte-for-byte from root candidates, PNG/WebP/JPEG/GIF were marked `-text`, invalid `.import` records were regenerated, and Godot editor import/main start completed without the earlier preload errors. The final v0.3/v0.4 tags must point at this correction, not the earlier feature commit.

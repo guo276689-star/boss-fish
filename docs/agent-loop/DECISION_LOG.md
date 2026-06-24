@@ -140,3 +140,21 @@
 - Approve Tag：否
 - Next Step：等待后续 Goal。
 - Next Goal：未定义
+
+### Decision 2026-06-25-03
+
+- Goal：Correct mainline PNG Git attributes before the approved merge/tag push.
+- Current Branch：`main`
+- Reviewer：Codex validation evidence
+- Codex Report：[combined v0.3/v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：不适用。
+- Decision：REVISION_REQUIRED
+- Reason：mainline verification exposed ASCII conversion of PNG files under `godot/.gitattributes`; Godot could not preload fish assets.
+- Failed Items：PNG import and HUD script compilation before correction。
+- Unverified Items：无新增功能验收项。
+- Approve Commit：用户已授权
+- Approve Push：用户已授权
+- Approve Merge Main：已执行本地合并
+- Approve Tag：等待修复验证后执行
+- Next Step：提交二进制属性和重新导入元数据修复，复跑 Godot，再推送 main 和标签。
+- Next Goal：未定义

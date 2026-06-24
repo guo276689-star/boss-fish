@@ -6,9 +6,9 @@
 | --- | --- | --- | --- | --- |
 | `character.cat_player` | `godot/assets/cat_placeholder.svg` | placeholder | `scenes/cat.tscn` | Existing SVG placeholder; replace with reviewed pixel sheet later. |
 | `fish.moyu_goldfish` | `godot/assets/fish/fish_moyu_goldfish.png` | missing | fishing result, bestiary | No mapped Godot candidate. |
-| `fish.badge_carp` | `godot/assets/fish/fish_badge_carp.png` | imported | fishing result preview | Copied from root `assets/images/fish/carp.png`; 96×64, Godot import completed, not art-approved. |
+| `fish.badge_carp` | `godot/assets/fish/fish_badge_carp.png` | imported | fishing result preview | Copied from root `assets/images/fish/carp.png`; 96×64, binary Git attribute and Godot reimport verified, not art-approved. |
 | `fish.coffee_loach` | `godot/assets/fish/fish_coffee_loach.png` | missing | fishing result, bestiary | Uniform placeholder required until import. |
-| `fish.ppt_catfish` | `godot/assets/fish/fish_ppt_catfish.png` | imported | fishing result preview | Copied from root `assets/images/fish/catfish.png`; 96×64, Godot import completed, not art-approved. |
+| `fish.ppt_catfish` | `godot/assets/fish/fish_ppt_catfish.png` | imported | fishing result preview | Copied from root `assets/images/fish/catfish.png`; 96×64, binary Git attribute and Godot reimport verified, not art-approved. |
 | `fish.meeting_jellyfish` | `godot/assets/fish/fish_meeting_jellyfish.png` | missing | fishing result, bestiary | Root `assets/images/fish/jellyfish.png` is a candidate; not imported. |
 | `fish.client_octopus` | `godot/assets/fish/fish_client_octopus.png` | missing | fishing result, bestiary | Root `assets/images/fish/octopus.png` is a candidate; not imported. |
 | `fish.kpi_shark` | `godot/assets/fish/fish_kpi_shark.png` | missing | fishing result, bestiary | Root `assets/images/fish/shark.png` is a candidate; not imported. |

@@ -32,6 +32,7 @@ godot/assets/
 ## Godot Import Requirements
 
 - Project default: `textures/canvas_textures/default_texture_filter=0` (nearest) in `project.godot`.
+- `godot/.gitattributes` must mark PNG/WebP/JPEG/GIF as `-text`; binary textures must never pass through Git newline conversion.
 - Texture importer: use nearest filtering; disable mipmaps for sprite/UI pixel assets unless a reviewed exception needs them.
 - Keep compression/lossless settings appropriate to the accepted source; do not introduce blur to reduce file size.
 - Display only at integer scale. Do not use fractional `Sprite2D.scale` or `TextureRect` stretch that blurs pixels.

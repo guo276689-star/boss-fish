@@ -11,6 +11,10 @@
 - Push: confirmed to `origin/godot-v0.4-visual-identity`.
 - Merge main / tag: not performed.
 
+## Mainline Import Correction
+
+When the unpushed `main` merge was validated, its inherited `godot/.gitattributes` rule treated PNG files as text and corrupted the two imported fish during checkout. The source hashes were restored from the untouched root candidates, image extensions were set to `-text`, invalid `.import` metadata was regenerated, and Godot import/start then completed without error. This correction must be committed before `main` is pushed or tagged.
+
 ## Modified Files and Responsibilities
 
 | File | Responsibility |
