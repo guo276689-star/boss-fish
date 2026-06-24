@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Delivery recorded. Runtime implementation, user visual acceptance, commit, and branch push are present.
+Delivery recorded. Runtime implementation, user visual acceptance, mainline merge, branch push, and release tags are present.
 
 ## Goal
 
@@ -22,7 +22,7 @@ Recover the unimplemented v0.3 runtime polish and complete the v0.4 visual ident
 
 - Automated Godot import/start and deterministic core regression validation passed.
 - The user reported visual acceptance on 2026-06-25 and authorized commit/push. No screenshot was archived by Codex because desktop-app control was unavailable.
-- Commit `958f76a` was pushed to `origin/godot-v0.4-visual-identity`. Merge and tag remain prohibited.
+- Feature commit `958f76a` was pushed to `origin/godot-v0.4-visual-identity`, then merged to `main` as `3de3019`; corrected mainline commit `afd612d` was pushed with the v0.3/v0.4 tags.
 
 ## Manual Review Evidence
 

@@ -158,3 +158,22 @@
 - Approve Tag：等待修复验证后执行
 - Next Step：提交二进制属性和重新导入元数据修复，复跑 Godot，再推送 main 和标签。
 - Next Goal：未定义
+
+### Decision 2026-06-25-04
+
+- Goal：Merge accepted Godot v0.3/v0.4 delivery to main and create release tags.
+- Current Branch：`main`
+- Reviewer：用户
+- Codex Report：[combined v0.3/v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：沿用已通过的用户验收。
+- Decision：APPROVED
+- Reason：`main` merged at `3de3019`; binary correction `afd612d` passed Godot reimport/start and was pushed.
+- Failed Items：初始 mainline PNG ASCII conversion；已由 `.gitattributes` 修复。
+- Unverified Items：物理损坏存档演示、音效；不阻塞发布。
+- Approve Commit：已执行
+- Approve Push：已执行
+- Approve Merge Main：已执行
+- Approve Tag：已执行
+- Tags：`godot-v0.3-runtime-complete`、`godot-v0.4-stable`
+- Next Step：等待后续 Goal。
+- Next Goal：未定义

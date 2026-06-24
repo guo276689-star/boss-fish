@@ -9,7 +9,9 @@
 - Existing history note: `b69f999` is documentation-only v0.3 planning; this worktree contains the missing runtime implementation and has not been committed.
 - Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
 - Push: confirmed to `origin/godot-v0.4-visual-identity`.
-- Merge main / tag: not performed.
+- Main merge: `3de3019 merge: integrate BossFish Godot v0.3 and v0.4`.
+- Binary correction: `afd612d fix(godot): preserve imported fish binaries`.
+- Tags: `godot-v0.3-runtime-complete`, `godot-v0.4-stable`, both pointing to corrected mainline commit `afd612d`.
 
 ## Mainline Import Correction
 
@@ -71,4 +73,4 @@ When the unpushed `main` merge was validated, its inherited `godot/.gitattribute
 
 - Commit/push completed after the user supplied authorization on 2026-06-25.
 - Feature commit message: `feat(godot): complete v0.3 polish and v0.4 visual identity`.
-- Merge main and tag remain intentionally unperformed.
+- Main merge and both release tags were pushed after final Godot import/start verification.

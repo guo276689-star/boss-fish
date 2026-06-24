@@ -88,8 +88,15 @@ No Electron Legacy path is present. Commit/push is recorded below after user acc
 - User acceptance: 2026-06-25.
 - Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
 - Push: `origin/godot-v0.4-visual-identity`.
-- Merge main / tag: not performed.
+- Main merge and release tags: recorded below after final mainline verification.
 
 ## Mainline Correction Before Tagging
 
 The first local mainline validation found ASCII conversion of both imported PNG files under the inherited `* text eol=lf` attribute. Before pushing `main`, the files were restored byte-for-byte from root candidates, PNG/WebP/JPEG/GIF were marked `-text`, invalid `.import` records were regenerated, and Godot editor import/main start completed without the earlier preload errors. The final v0.3/v0.4 tags must point at this correction, not the earlier feature commit.
+
+## Mainline Release Record
+
+- Merge commit: `3de3019 merge: integrate BossFish Godot v0.3 and v0.4`.
+- Corrected release commit: `afd612d fix(godot): preserve imported fish binaries`.
+- Pushed branch: `origin/main`.
+- Tags pushed: `godot-v0.3-runtime-complete` and `godot-v0.4-stable`, both at `afd612d`.
