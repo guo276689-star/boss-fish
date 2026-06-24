@@ -122,3 +122,21 @@
 - Approve Tag：否
 - Next Step：执行 Git 缓存检查、提交并推送当前分支。
 - Next Goal：未定义
+
+### Decision 2026-06-25-02
+
+- Goal：Combined Godot v0.3 runtime recovery and v0.4 visual identity pipeline.
+- Current Branch：`godot-v0.4-visual-identity`
+- Reviewer：用户
+- Codex Report：[combined v0.3/v0.4 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：用户验收通过；Codex 截图未归档。
+- Decision：APPROVED
+- Reason：功能提交 `958f76a` 已推送至目标分支。
+- Failed Items：无。
+- Unverified Items：物理损坏存档演示、音效；不阻塞用户验收。
+- Approve Commit：已执行
+- Approve Push：已执行
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：等待后续 Goal。
+- Next Goal：未定义

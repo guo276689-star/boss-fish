@@ -46,4 +46,4 @@
 
 ## Git Authorization
 
-User accepted the manual exit criteria and authorized commit/push on 2026-06-25. Merge and tag are not authorized.
+User accepted the manual exit criteria and authorized commit/push on 2026-06-25. Commit `958f76a` was pushed to `origin/godot-v0.4-visual-identity`; merge and tag are not authorized.

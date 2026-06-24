@@ -7,7 +7,9 @@
 - Branch: `godot-v0.4-visual-identity`.
 - Goal: implement the missed v0.3 polish together with the v0.4 visual identity/art pipeline.
 - Existing history note: `b69f999` is documentation-only v0.3 planning; this worktree contains the missing runtime implementation and has not been committed.
-- Commit / push / merge main / tag: not performed for this combined implementation.
+- Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
+- Push: confirmed to `origin/godot-v0.4-visual-identity`.
+- Merge main / tag: not performed.
 
 ## Modified Files and Responsibilities
 
@@ -63,6 +65,6 @@
 
 ## Recommendation and Push Gate
 
-- Recommendation: commit/push the current scoped worktree; user manual acceptance and Git authorization were supplied on 2026-06-25.
-- Suggested commit message: `feat: add godot v0.4 visual identity pipeline`.
-- Wait for `验收通过，允许提交并 push`; do not commit, push, merge, or tag beforehand.
+- Commit/push completed after the user supplied authorization on 2026-06-25.
+- Feature commit message: `feat(godot): complete v0.3 polish and v0.4 visual identity`.
+- Merge main and tag remain intentionally unperformed.

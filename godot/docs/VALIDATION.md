@@ -80,4 +80,11 @@ Executed after the report update:
 | `git diff --name-status` | Modified paths limited to `docs/agent-loop/`, `godot/docs/`, `godot/scenes/`, and `godot/scripts/` |
 | `git diff --check` | Exit code 0; no whitespace error |
 
-No Electron Legacy path is present. Commit/push still waits for user acceptance.
+No Electron Legacy path is present. Commit/push is recorded below after user acceptance.
+
+## Delivery Record
+
+- User acceptance: 2026-06-25.
+- Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
+- Push: `origin/godot-v0.4-visual-identity`.
+- Merge main / tag: not performed.
