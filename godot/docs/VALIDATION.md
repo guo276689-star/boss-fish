@@ -1,6 +1,6 @@
 # Godot v0.5 Playable Art Pack Validation
 
-**Status:** implemented and automatically validated. Human 1280×720 visual acceptance remains **未验证** until the user observes or provides a screenshot.
+**Status:** implemented, automatically validated, accepted by the user, merged to `main`, and tagged as `godot-v0.5-stable`. Screenshot archive remains **未验证**.
 
 ## Linked Contracts
 
@@ -26,6 +26,14 @@
 | Regression | v0.4 behavior/data/save checks | 部分通过：main start and data counts pass; keyboard/manual save regression 未验证 |
 | Git scope | No Electron Legacy path; `git diff --check` passes | 通过：final diff/check scope is Godot/docs only |
 
+## Release Records
+
+- User acceptance and Git authorization: 2026-06-25.
+- Feature commit on `godot-v0.5-playable-art-pack`: `1f28e2b`.
+- Main merge commit: `04412b2`.
+- Tag: `godot-v0.5-stable` points to `04412b2`.
+- Remote push: `origin/godot-v0.5-playable-art-pack`, `origin/main`, and `origin/godot-v0.5-stable`.
+
 ## Commands Run
 
 - `godot --version` → `4.7.stable.official.5b4e0cb0f`
@@ -44,7 +52,7 @@ All v0.5 non-final assets are `placeholder_plus`, `imported`, or future-only `mi
 
 ## Remaining Manual Checks
 
-- Observe 1280×720 visual readability in a visible Godot window.
+- Screenshot archive for 1280×720 visual readability.
 - Move the cat through the office and confirm no prop decoration obscures interactions.
 - Trigger fishing start/wait/bite/success/fail/rare states and boss warning in a visible run.
 - Open bestiary/shop/tasks and confirm modal hierarchy visually matches the art direction.

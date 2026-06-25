@@ -1,13 +1,15 @@
 # Codex Report — Godot v0.5 Playable Art Pack
 
-> Status: implemented in the working tree, validated by Godot/import/static checks, and waiting for user visual acceptance. No commit, push, merge, or tag has been made.
+> Status: accepted by the user, committed, pushed, merged to `main`, and tagged as `godot-v0.5-stable`.
 
 ## Current Branch and Goal
 
 - Branch: `godot-v0.5-playable-art-pack`.
 - Target track: Godot Mainline.
 - Goal: improve playable pixel-art presentation while preserving the accepted v0.4 loop.
-- Git: no v0.5 commit/push/merge/tag has been made.
+- Feature commit: `1f28e2b` (`feat: add godot v0.5 playable art pack`) on `godot-v0.5-playable-art-pack`.
+- Main merge commit: `04412b2` (`merge: godot v0.5 playable art pack`).
+- Tag: `godot-v0.5-stable` points to `04412b2`.
 
 ## Implemented
 
@@ -36,7 +38,8 @@
 
 ## Unverified
 
-- Human visual acceptance at 1280×720 is **未验证** because no screenshot/manual observation has been provided in this run.
+- User acceptance: 通过, recorded on 2026-06-25.
+- Screenshot archive is **未验证** because no screenshot artifact was provided in this run.
 - Physical movement/reachability with keyboard is **未验证** in a visible window; main scene startup and programmatic scene loading passed.
 - Sound is unchanged and **未验证**.
 
@@ -49,5 +52,6 @@
 
 ## Push Gate
 
-- Suggested future commit message: `feat: add godot v0.5 playable art pack`.
-- Wait for user acceptance and the exact approval phrase before any Git submission.
+- User authorized commit, push, main merge, and tagging.
+- Branch, `main`, and `godot-v0.5-stable` were pushed to `origin`.
+- This release-record documentation commit is intentionally after the tag; the tag remains on the validated delivery merge commit.

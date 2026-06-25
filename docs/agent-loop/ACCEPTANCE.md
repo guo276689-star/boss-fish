@@ -11,9 +11,10 @@
 | Gate | Required evidence | Status |
 | --- | --- | --- |
 | Branch | `godot-v0.5-playable-art-pack` | 通过：observed |
-| Scope | Godot/docs paths only | 通过：pending final Git diff check already shows no Electron Legacy paths |
+| Scope | Godot/docs paths only | 通过：final Git diff/status checks showed no Electron Legacy paths |
 | Art documentation | v0.5 direction, pipeline, manifest, master/Area 09, and agent-loop docs agree | 通过：updated for implemented v0.5 |
 | Code approval | User confirms exact v0.5 implementation plan | 通过：user said `确认实施v0.5` |
+| Release approval | User approves commit, push, main merge, and tag | 通过：user said `验收通过,允许提交push,并且合并main,打上对应标签,之后更新文档` |
 
 ## Visual Acceptance Matrix
 
@@ -43,4 +44,9 @@
 
 ## Push Gate
 
-No `git commit`, `git push`, `git merge`, or `git tag` before the user enters `验收通过，允许提交并 push`.
+Gate satisfied on 2026-06-25. Release actions completed:
+
+- Feature commit: `1f28e2b`
+- Main merge commit: `04412b2`
+- Tag: `godot-v0.5-stable`
+- Remote: branch, `main`, and tag pushed to `origin`

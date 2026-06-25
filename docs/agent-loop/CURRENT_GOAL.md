@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Implemented → Validate → Report → Wait for user acceptance. Runtime art changes are in the working tree but not committed.
+Released → Record. Runtime art changes were accepted, committed, pushed, merged to `main`, and tagged.
 
 ## Goal
 
@@ -24,4 +24,11 @@ Godot Mainline only on `godot-v0.5-playable-art-pack`. Electron Legacy and root 
 
 ## Implementation Gate
 
-User confirmed the v0.5 implementation plan with `确认实施v0.5`. Codex must now finish validation/reporting and stop before any commit, push, merge, or tag until the user explicitly approves Git submission.
+User confirmed implementation with `确认实施v0.5`, then approved release with `验收通过,允许提交push,并且合并main,打上对应标签,之后更新文档`.
+
+Release records:
+
+- Feature commit: `1f28e2b`
+- Main merge commit: `04412b2`
+- Tag: `godot-v0.5-stable`
+- Post-tag documentation update: this file and linked agent-loop records on `main`

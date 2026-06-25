@@ -181,17 +181,17 @@
 ### Decision 2026-06-25-05
 
 - Goal：Godot v0.5 playable art pack.
-- Current Branch：`godot-v0.5-playable-art-pack`
+- Current Branch：`main`
 - Reviewer：用户
 - Codex Report：[v0.5 report](CODEX_REPORT.md)
-- Screenshot / Manual Feedback：未验证
-- Decision：IMPLEMENTED_PENDING_ACCEPTANCE
-- Reason：用户确认实施 v0.5；Codex 已通过 imported 与 placeholder_plus 素材提升可玩视觉，不增加玩法或伪造 final art。
-- Failed Items：无已知阻塞；最终 Git whitespace/scope 检查待文档收尾后复跑。
-- Unverified Items：1280×720 人工视觉观察、键盘移动/可达性、可见窗口内钓鱼状态时序、音效。
-- Approve Commit：否
-- Approve Push：否
-- Approve Merge Main：否
-- Approve Tag：否
-- Next Step：完成最终验证，等待用户验收；未经 `验收通过，允许提交并 push` 不提交。
+- Screenshot / Manual Feedback：用户验收通过；截图未归档。
+- Decision：APPROVED_RELEASED
+- Reason：用户确认实施 v0.5，并授权提交、push、合并 main、打对应标签和更新文档。
+- Failed Items：无。
+- Unverified Items：截图归档、物理键盘移动/可达性演示、可见窗口内钓鱼状态时序、音效。
+- Approve Commit：已执行，feature commit `1f28e2b`
+- Approve Push：已执行，`origin/godot-v0.5-playable-art-pack`
+- Approve Merge Main：已执行，main merge commit `04412b2`
+- Approve Tag：已执行，`godot-v0.5-stable`
+- Next Step：提交并推送本次 post-tag 发布记录文档。
 - Next Goal：未定义
