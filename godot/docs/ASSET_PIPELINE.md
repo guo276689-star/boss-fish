@@ -1,4 +1,4 @@
-# Boss Fish v0.4 Asset Pipeline
+# Boss Fish v0.5 Asset Pipeline
 
 ## Purpose and Boundary
 
@@ -50,12 +50,16 @@ godot/assets/
 Every asset needs an entry in [ASSET_MANIFEST](ASSET_MANIFEST.md):
 
 - `asset_id`, Godot destination path, `current_status`, `used_by`, and review/source notes.
-- `placeholder`, `imported`, `final`, and `missing` are the only status values.
+- `placeholder`, `placeholder_plus`, `imported`, `final`, and `missing` are the allowed status values.
 - A root candidate is still `missing` for Godot until it is copied, imported, and recorded as `imported`.
 
 ## Existing Candidate Review
 
-The repository currently has 16 root candidates under `assets/images/fish/`, each measured at 96×64. For v0.4, only `carp.png` and `catfish.png` were copied as isolated test imports for `badge_carp` and `ppt_catfish`. Their Godot paths and source notes are recorded as `imported` in the manifest; they are not final art. The remaining root candidates are still not Godot assets.
+The repository currently has root candidates under `assets/images/cats/` and `assets/images/fish/`. For v0.5, one 96×96 cat candidate and eight 96×64 fish candidates were copied into `godot/assets/`, imported by Godot, and recorded as `imported` in the manifest. They are not final art.
+
+## v0.5 Candidate Map
+
+The v0.5 playable pack copied only these normalized, source-matched candidates into `godot/assets/`: `idle-1.png` for the cat, and `round`, `carp`, `eel`, `catfish`, `jellyfish`, `octopus`, `shark`, and `whale` for the eight fish preview IDs. Each copy preserved original dimensions, is marked `imported`, and remains non-final. Root source assets were not edited.
 
 ## Tooling Reference Workflow
 
@@ -63,8 +67,8 @@ The repository currently has 16 root candidates under `assets/images/fish/`, eac
 - **Godot best practices**: preserve Scene/Node responsibility, small scripts, and project organization boundaries.
 - **Pixelorama**: recommended for pixel production and transparent-canvas export.
 - **GodotMaker**: reference only its GDD → Task → Implement → Test → Screenshot → Evaluate → Fix loop; it is not a dependency.
-- **GUT / GdUnit4**: future test options; v0.4 does not add either framework.
-- **Godot Export Action**: future packaging option; v0.4 does not add it.
+- **GUT / GdUnit4**: future test options; v0.5 does not add either framework.
+- **Godot Export Action**: future packaging option; v0.5 does not add it.
 
 ## Rejection Rules
 

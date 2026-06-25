@@ -61,6 +61,12 @@ The original v0.3 commit contained this Markdown control system but no runtime p
 
 The visual portions of the v0.3 acceptance still require a runnable-screen observation and remain **未验证** until the user reviews them.
 
+## v0.5 Playable Art Pack Extension
+
+v0.5 does not add gameplay. It upgrades the cat, core office props, fish presentation, HUD/panels, fishing feedback, and boss warning through imported source candidates and `placeholder_plus` node compositions. Area 09 owns visual consistency; Areas 01–08 retain gameplay responsibilities and must pass regression validation.
+
+Implementation status: the v0.5 art pack is implemented on `godot-v0.5-playable-art-pack` with one imported cat candidate, eight imported fish previews, node-composed office prop upgrades, and presentation-only HUD feedback. No fish data, economy rules, quests, shop rules, save structure, Electron Legacy path, backend, networking, export, merge, tag, or Git submission is part of this milestone before user acceptance.
+
 ## Scope Guardrails
 
 - No Electron Legacy changes, including `src/`, `main.js`, `preload.js`, root `data/`, or root `assets/`.

@@ -6,14 +6,22 @@ signal shop_purchase_requested(upgrade_id: String)
 signal modal_closed
 
 const FISH_PREVIEW_TEXTURES := {
+	"moyu_goldfish": preload("res://assets/fish/fish_moyu_goldfish.png"),
 	"badge_carp": preload("res://assets/fish/fish_badge_carp.png"),
+	"coffee_loach": preload("res://assets/fish/fish_coffee_loach.png"),
 	"ppt_catfish": preload("res://assets/fish/fish_ppt_catfish.png"),
+	"meeting_jellyfish": preload("res://assets/fish/fish_meeting_jellyfish.png"),
+	"client_octopus": preload("res://assets/fish/fish_client_octopus.png"),
+	"kpi_shark": preload("res://assets/fish/fish_kpi_shark.png"),
+	"boss_fish": preload("res://assets/fish/fish_boss_fish.png"),
 }
 
 @onready var coin_label: Label = $CoinPanel/CoinLabel
 @onready var prompt_label: Label = $PromptPanel/PromptLabel
-@onready var pressure_label: Label = $PressurePanel/PressureLabel
-@onready var status_label: Label = $StatusPanel/StatusLabel
+@onready var boss_alert_icon: Label = $PressurePanel/PressureContent/BossAlertIcon
+@onready var pressure_label: Label = $PressurePanel/PressureContent/PressureLabel
+@onready var status_icon: Label = $StatusPanel/StatusContent/StatusIcon
+@onready var status_label: Label = $StatusPanel/StatusContent/StatusLabel
 @onready var modal: PanelContainer = $Modal
 @onready var modal_title: Label = $Modal/Margin/VBox/Title
 @onready var modal_body: RichTextLabel = $Modal/Margin/VBox/Body
@@ -46,6 +54,10 @@ func set_world_prompt(message: String) -> void:
 func set_status(message: String) -> void:
 	_status = message
 	status_label.text = message
+	status_icon.text = _get_status_icon(message)
+	status_icon.modulate = _get_status_color(message)
+	status_label.modulate = _get_status_color(message)
+	status_icon.visible = not message.is_empty()
 	status_label.visible = not message.is_empty()
 	_refresh_prompt()
 
@@ -53,6 +65,8 @@ func set_status(message: String) -> void:
 func set_pressure(value: int, message: String) -> void:
 	pressure_label.text = "老板压力：%d%% · %s" % [value, message]
 	pressure_label.modulate = Color(1.0, 0.56, 0.42) if value >= 60 else Color(0.8, 0.86, 0.75)
+	boss_alert_icon.text = "!" if value >= 60 else "◆"
+	boss_alert_icon.modulate = Color(1.0, 0.28, 0.2) if value >= 60 else Color(0.36, 0.76, 0.7)
 
 
 func show_fishing_result(fish: Dictionary, reward: int) -> void:
@@ -80,15 +94,15 @@ func show_quests(quests: Array[Dictionary]) -> void:
 
 
 func show_bestiary(catalog: Array[Dictionary], caught_counts: Dictionary) -> void:
-	var lines: Array[String] = []
+	var discovered := 0
 	for fish in catalog:
 		var fish_id := str(fish.get("id", ""))
 		var count := int(caught_counts.get(fish_id, 0))
 		if count > 0:
-			lines.append("%s · %s · %d 条\n%s" % [fish.get("name", fish_id), fish.get("rarity", "common"), count, fish.get("description", "")])
-		else:
-			lines.append("??? · 锁定\n还没有摸到这条办公室鱼。")
-	_open_modal("办公室图鉴（8 条）", "\n\n".join(lines))
+			discovered += 1
+	_open_modal("办公室图鉴（8 条）", "已发现：%d / %d。锁定卡片会在首次摸到后显示真实图标。" % [discovered, catalog.size()])
+	modal_body.custom_minimum_size = Vector2(0, 58)
+	_add_bestiary_grid(catalog, caught_counts)
 	_add_close_action()
 
 
@@ -141,6 +155,7 @@ func _open_modal(title: String, body: String) -> void:
 	modal_title.text = title
 	modal_title.modulate = Color.WHITE
 	modal_body.text = body
+	modal_body.custom_minimum_size = Vector2(0, 165)
 	_clear_fish_preview()
 	for child in modal_actions.get_children():
 		child.queue_free()
@@ -206,6 +221,104 @@ func _set_fish_preview(fish_id: String) -> void:
 func _clear_fish_preview() -> void:
 	fish_preview.texture = null
 	fish_preview_center.visible = false
+
+
+func _add_bestiary_grid(catalog: Array[Dictionary], caught_counts: Dictionary) -> void:
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 8)
+	for fish in catalog:
+		var fish_id := str(fish.get("id", ""))
+		var count := int(caught_counts.get(fish_id, 0))
+		grid.add_child(_make_bestiary_card(fish, count))
+	modal_actions.add_child(grid)
+
+
+func _make_bestiary_card(fish: Dictionary, count: int) -> PanelContainer:
+	var fish_id := str(fish.get("id", ""))
+	var rarity := str(fish.get("rarity", "common"))
+	var unlocked := count > 0
+	var card := PanelContainer.new()
+	card.custom_minimum_size = Vector2(138, 88)
+	card.add_theme_stylebox_override("panel", _make_card_style(rarity, unlocked))
+
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 3)
+	card.add_child(box)
+	var title := str(fish.get("name", fish_id)) if unlocked else "???"
+	var footer := "%s · %d 条" % [_format_rarity(rarity), count] if unlocked else "未发现"
+	_add_card_label(box, title, _get_rarity_color(rarity), 15)
+	_add_card_image(box, fish_id, unlocked)
+	_add_card_label(box, footer, Color(0.72, 0.78, 0.78, 1.0), 13)
+	return card
+
+
+func _add_card_image(parent: VBoxContainer, fish_id: String, unlocked: bool) -> void:
+	if unlocked and FISH_PREVIEW_TEXTURES.has(fish_id):
+		var preview := TextureRect.new()
+		preview.custom_minimum_size = Vector2(96, 36)
+		preview.texture_filter = 1
+		preview.texture = FISH_PREVIEW_TEXTURES[fish_id]
+		preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		parent.add_child(preview)
+		return
+	_add_card_label(parent, "???", Color(0.28, 0.34, 0.36, 1.0), 22)
+
+
+func _add_card_label(parent: VBoxContainer, text: String, color: Color, font_size: int) -> void:
+	var label := Label.new()
+	label.text = text
+	label.horizontal_alignment = 1
+	label.add_theme_color_override("font_color", color)
+	label.add_theme_font_size_override("font_size", font_size)
+	parent.add_child(label)
+
+
+func _make_card_style(rarity: String, unlocked: bool) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.08, 0.1, 0.13, 0.96) if unlocked else Color(0.045, 0.055, 0.065, 0.96)
+	style.border_color = _get_rarity_color(rarity) if unlocked else Color(0.18, 0.22, 0.24, 1.0)
+	style.border_width_left = 2
+	style.border_width_top = 2
+	style.border_width_right = 2
+	style.border_width_bottom = 2
+	style.content_margin_left = 6.0
+	style.content_margin_top = 5.0
+	style.content_margin_right = 6.0
+	style.content_margin_bottom = 5.0
+	return style
+
+
+func _get_status_icon(message: String) -> String:
+	if message.is_empty():
+		return ""
+	if message.contains("稀有"):
+		return "★"
+	if message.contains("上钩"):
+		return "!"
+	if message.contains("准备"):
+		return "▶"
+	if message.contains("等待"):
+		return "≈"
+	if message.contains("成功"):
+		return "✓"
+	if message.contains("失败") or message.contains("跑掉") or message.contains("打断"):
+		return "×"
+	return "•"
+
+
+func _get_status_color(message: String) -> Color:
+	if message.contains("稀有"):
+		return Color(1.0, 0.74, 0.28, 1.0)
+	if message.contains("上钩"):
+		return Color(1.0, 0.34, 0.24, 1.0)
+	if message.contains("成功"):
+		return Color(0.44, 0.9, 0.58, 1.0)
+	if message.contains("失败") or message.contains("跑掉") or message.contains("打断"):
+		return Color(1.0, 0.58, 0.44, 1.0)
+	return Color(1.0, 0.86, 0.4, 1.0)
 
 
 func _format_rarity(rarity: String) -> String:

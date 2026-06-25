@@ -177,3 +177,21 @@
 - Tags：`godot-v0.3-runtime-complete`、`godot-v0.4-stable`
 - Next Step：等待后续 Goal。
 - Next Goal：未定义
+
+### Decision 2026-06-25-05
+
+- Goal：Godot v0.5 playable art pack.
+- Current Branch：`godot-v0.5-playable-art-pack`
+- Reviewer：用户
+- Codex Report：[v0.5 report](CODEX_REPORT.md)
+- Screenshot / Manual Feedback：未验证
+- Decision：IMPLEMENTED_PENDING_ACCEPTANCE
+- Reason：用户确认实施 v0.5；Codex 已通过 imported 与 placeholder_plus 素材提升可玩视觉，不增加玩法或伪造 final art。
+- Failed Items：无已知阻塞；最终 Git whitespace/scope 检查待文档收尾后复跑。
+- Unverified Items：1280×720 人工视觉观察、键盘移动/可达性、可见窗口内钓鱼状态时序、音效。
+- Approve Commit：否
+- Approve Push：否
+- Approve Merge Main：否
+- Approve Tag：否
+- Next Step：完成最终验证，等待用户验收；未经 `验收通过，允许提交并 push` 不提交。
+- Next Goal：未定义

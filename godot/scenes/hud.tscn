@@ -86,7 +86,18 @@ offset_right = 840.0
 offset_bottom = 78.0
 theme_override_styles/panel = SubResource("HudPanelStyle")
 
-[node name="PressureLabel" type="Label" parent="PressurePanel"]
+[node name="PressureContent" type="HBoxContainer" parent="PressurePanel"]
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="BossAlertIcon" type="Label" parent="PressurePanel/PressureContent"]
+theme_override_colors/font_color = Color(0.36, 0.76, 0.7, 1)
+theme_override_font_sizes/font_size = 23
+text = "◆"
+vertical_alignment = 1
+
+[node name="PressureLabel" type="Label" parent="PressurePanel/PressureContent"]
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8, 0.86, 0.75, 1)
 theme_override_font_sizes/font_size = 20
 text = "老板压力：0% · 老板暂时没注意到你。"
@@ -128,7 +139,18 @@ offset_right = 896.0
 offset_bottom = 540.0
 theme_override_styles/panel = SubResource("HudStatusStyle")
 
-[node name="StatusLabel" type="Label" parent="StatusPanel"]
+[node name="StatusContent" type="HBoxContainer" parent="StatusPanel"]
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="StatusIcon" type="Label" parent="StatusPanel/StatusContent"]
+theme_override_colors/font_color = Color(1, 0.86, 0.4, 1)
+theme_override_font_sizes/font_size = 23
+text = "•"
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="StatusPanel/StatusContent"]
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.86, 0.4, 1)
 theme_override_font_sizes/font_size = 21
 horizontal_alignment = 1
