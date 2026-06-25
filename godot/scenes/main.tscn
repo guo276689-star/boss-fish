@@ -91,6 +91,22 @@ color = Color(0.2, 0.25, 0.26, 1)
 polygon = PackedVector2Array(308, 330, 632, 330, 632, 346, 308, 346)
 color = Color(0.31, 0.36, 0.35, 1)
 
+[node name="CatSpawnMat" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(402, 382, 548, 382, 548, 470, 402, 470)
+color = Color(0.14, 0.23, 0.24, 1)
+
+[node name="CatSpawnMatEdge" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(414, 394, 536, 394, 536, 458, 414, 458)
+color = Color(0.23, 0.4, 0.38, 1)
+
+[node name="CatSpawnPawA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(448, 414, 464, 414, 464, 430, 448, 430)
+color = Color(0.83, 0.67, 0.42, 1)
+
+[node name="CatSpawnPawB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(486, 414, 502, 414, 502, 430, 486, 430)
+color = Color(0.83, 0.67, 0.42, 1)
+
 [node name="PondDeck" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(720, 262, 1235, 262, 1235, 620, 720, 620)
 color = Color(0.21, 0.29, 0.28, 1)
@@ -115,6 +131,22 @@ color = Color(0.38, 0.72, 0.72, 1)
 polygon = PackedVector2Array(1054, 352, 1080, 340, 1102, 358, 1090, 382, 1062, 380)
 color = Color(0.36, 0.69, 0.35, 1)
 
+[node name="WaterRippleA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(850, 420, 926, 420, 926, 430, 850, 430)
+color = Color(0.58, 0.86, 0.83, 0.72)
+
+[node name="WaterRippleB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(978, 392, 1046, 392, 1046, 402, 978, 402)
+color = Color(0.58, 0.86, 0.83, 0.55)
+
+[node name="PondBobber" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(744, 424, 764, 424, 764, 444, 744, 444)
+color = Color(1, 0.72, 0.36, 1)
+
+[node name="PondBobberTip" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(750, 416, 758, 416, 758, 424, 750, 424)
+color = Color(1, 0.96, 0.72, 1)
+
 [node name="BossDoor" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(1000, 52, 1164, 52, 1164, 222, 1000, 222)
 color = Color(0.25, 0.16, 0.17, 1)
@@ -122,6 +154,38 @@ color = Color(0.25, 0.16, 0.17, 1)
 [node name="BossDoorWindow" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(1023, 76, 1141, 76, 1141, 137, 1023, 137)
 color = Color(0.78, 0.39, 0.32, 1)
+
+[node name="BossDoorFrame" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(990, 44, 1174, 44, 1174, 54, 990, 54)
+color = Color(0.48, 0.22, 0.2, 1)
+
+[node name="BossDoorFrameLeft" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(990, 44, 1000, 44, 1000, 222, 990, 222)
+color = Color(0.48, 0.22, 0.2, 1)
+
+[node name="BossDoorFrameRight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1164, 44, 1174, 44, 1174, 222, 1164, 222)
+color = Color(0.48, 0.22, 0.2, 1)
+
+[node name="BossDoorFrameBottom" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(990, 222, 1174, 222, 1174, 232, 990, 232)
+color = Color(0.48, 0.22, 0.2, 1)
+
+[node name="BossDoorHandle" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1130, 166, 1146, 166, 1146, 182, 1130, 182)
+color = Color(1, 0.75, 0.28, 1)
+
+[node name="BossWarningLight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(970, 62, 988, 62, 988, 80, 970, 80)
+color = Color(1, 0.2, 0.15, 1)
+
+[node name="BossWarningStripeA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1008, 206, 1048, 206, 1040, 222, 1000, 222)
+color = Color(1, 0.68, 0.22, 1)
+
+[node name="BossWarningStripeB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(1068, 206, 1108, 206, 1100, 222, 1060, 222)
+color = Color(1, 0.68, 0.22, 1)
 
 [node name="TaskBoardBlockout" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(50, 328, 260, 328, 260, 456, 50, 456)
@@ -139,6 +203,22 @@ color = Color(0.87, 0.79, 0.55, 1)
 polygon = PackedVector2Array(186, 355, 238, 355, 238, 405, 186, 405)
 color = Color(0.73, 0.82, 0.7, 1)
 
+[node name="TaskPinA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(96, 350, 108, 350, 108, 362, 96, 362)
+color = Color(0.95, 0.28, 0.23, 1)
+
+[node name="TaskPinB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(210, 350, 222, 350, 222, 362, 210, 362)
+color = Color(0.95, 0.28, 0.23, 1)
+
+[node name="TaskLineA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(80, 378, 116, 378, 116, 384, 80, 384)
+color = Color(0.43, 0.34, 0.26, 1)
+
+[node name="TaskLineB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(194, 378, 230, 378, 230, 384, 194, 384)
+color = Color(0.36, 0.45, 0.32, 1)
+
 [node name="BestiaryShelfBlockout" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(50, 506, 260, 506, 260, 645, 50, 645)
 color = Color(0.16, 0.19, 0.29, 1)
@@ -155,6 +235,22 @@ color = Color(0.34, 0.4, 0.62, 1)
 polygon = PackedVector2Array(70, 598, 240, 598, 240, 608, 70, 608)
 color = Color(0.34, 0.4, 0.62, 1)
 
+[node name="BestiaryBookA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(84, 525, 104, 525, 104, 548, 84, 548)
+color = Color(0.56, 0.7, 1, 1)
+
+[node name="BestiaryBookB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(112, 524, 132, 524, 132, 548, 112, 548)
+color = Color(0.82, 0.58, 1, 1)
+
+[node name="BestiaryBookC" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(152, 574, 174, 574, 174, 598, 152, 598)
+color = Color(0.54, 0.86, 0.7, 1)
+
+[node name="BestiaryFishBadge" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(194, 528, 226, 520, 244, 536, 226, 552, 194, 544)
+color = Color(0.78, 0.82, 0.92, 1)
+
 [node name="ShopBlockout" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(335, 512, 615, 512, 615, 645, 335, 645)
 color = Color(0.16, 0.28, 0.22, 1)
@@ -170,6 +266,22 @@ color = Color(0.25, 0.46, 0.32, 1)
 [node name="ShopShelfB" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(360, 600, 590, 600, 590, 610, 360, 610)
 color = Color(0.25, 0.46, 0.32, 1)
+
+[node name="ShopGoodsA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(382, 526, 430, 526, 430, 548, 382, 548)
+color = Color(0.86, 0.74, 0.36, 1)
+
+[node name="ShopGoodsB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(458, 526, 506, 526, 506, 548, 458, 548)
+color = Color(0.46, 0.84, 0.72, 1)
+
+[node name="ShopDrawer" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(398, 574, 552, 574, 552, 600, 398, 600)
+color = Color(0.19, 0.36, 0.27, 1)
+
+[node name="ShopCoinIcon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(552, 526, 576, 526, 576, 550, 552, 550)
+color = Color(1, 0.83, 0.28, 1)
 
 [node name="Title" type="Label" parent="."]
 offset_left = 64.0

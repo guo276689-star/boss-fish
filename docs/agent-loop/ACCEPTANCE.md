@@ -1,49 +1,46 @@
-# Acceptance — Combined Godot v0.3 / v0.4 Polish
+# Acceptance — Godot v0.5 Playable Art Pack
 
 ## Evidence Rules
 
-- **通过**: direct command output or deterministic validation proves the stated behavior.
-- **未验证**: visual/manual evidence is unavailable; it must not be reported as passed.
-- Automated state tests do not substitute for screenshot or human visual acceptance.
+- **通过** requires actual command, deterministic check, screenshot, or recorded manual observation.
+- **未验证** is mandatory when visual/manual evidence is unavailable.
+- Imported assets are never final art without explicit human approval.
 
-## Command Evidence
+## Entry Gates
 
-| Check | Result | Evidence |
+| Gate | Required evidence | Status |
 | --- | --- | --- |
-| Branch | 通过 | `godot-v0.4-visual-identity` |
-| Godot version | 通过 | `godot` and `godot4`: `4.7.stable.official.5b4e0cb0f` |
-| Godot import | 通过 | `godot --headless --path godot --editor --quit` completed without parse/import errors |
-| Godot startup | 通过 | `godot --headless --path godot --quit-after 180` completed without runtime errors |
-| Data | 通过 | `JSON_COUNTS fish=8 quests=3 upgrades=3` |
-| Deterministic regression | 通过 | temporary isolated script output `V0_3_V0_4_VALIDATION_PASS`; script removed afterwards |
-| Debug-code scan | 通过 | no `print`, `printerr`, `push_error`, `TODO`, `FIXME`, `debugger`, or `console.log` found in Godot source/scene paths |
-| Visual screenshot/manual | 通过（用户验收） | User reported acceptance on 2026-06-25; Codex has no archived screenshot because desktop-app control was unavailable |
+| Branch | `godot-v0.5-playable-art-pack` | 通过：observed |
+| Scope | Godot/docs paths only | 通过：pending final Git diff check already shows no Electron Legacy paths |
+| Art documentation | v0.5 direction, pipeline, manifest, master/Area 09, and agent-loop docs agree | 通过：updated for implemented v0.5 |
+| Code approval | User confirms exact v0.5 implementation plan | 通过：user said `确认实施v0.5` |
 
-## v0.3 Acceptance
+## Visual Acceptance Matrix
 
-| Area | Result | Evidence / boundary |
+| Requirement | Passing evidence | Status |
 | --- | --- | --- |
-| Office map | 通过 | Blockout plus user visual/traversal acceptance |
-| Cat control | 通过 | Nearest focus/singular dispatch automation plus user input acceptance |
-| Fishing | 通过 | State automation plus user flow acceptance |
-| Quest board | 通过 | All quest automation plus user panel acceptance |
-| Bestiary | 通过 | Catch persistence plus user collection-panel acceptance |
-| Shop | 通过 | All upgrade effects plus user shop acceptance |
-| Boss pressure | 通过 | Inspection automation plus user warning/inspection acceptance |
-| Save and UI | 通过 | Migration/reload automation plus user panel/save acceptance; malformed physical-file case remains unverified |
+| Cat | Clear cat silhouette, facing/movement feedback, intact collision | 部分通过：imported cat texture and cat scene load passed; visible movement observation 未验证 |
+| Office props | Pond, board, shelf, desk, door, spawn recognizable and reachable | 部分通过：static props implemented and main scene starts; visible reachability observation 未验证 |
+| Fish | Eight bestiary/result visual states, lock/unlock and rarity distinction | 通过：temporary Godot validation verified 8 result previews and 8 bestiary cards |
+| UI | HUD/modal/button hierarchy reads as game UI at 1280×720 | 部分通过：HUD loads and dynamic UI methods pass; screenshot/manual hierarchy 未验证 |
+| Fishing | Start/wait/bite/success/failure/rare feedback visibly differs | 部分通过：status icon/color paths executed; manual timing observation 未验证 |
+| Boss | Pressure and inspection warning visibly differs | 部分通过：warning icon/color path executed; manual inspection observation 未验证 |
+| Asset status | Manifest paths/statuses are accurate; no false final claim | 通过：manifest records imported/placeholder_plus/missing only; final count 0 |
+| Regression | v0.4 loop/data/save work and Electron Legacy is unchanged | 部分通过：main start, data counts, and scoped diff checks pass; keyboard/manual save regression 未验证 |
 
-## v0.4 Acceptance
+## Required Commands
 
-| Requirement | Result | Evidence / boundary |
+| Command | Expected result | Status |
 | --- | --- | --- |
-| Art direction / pipeline / manifest / Area 09 | 通过 | Required documentation exists and links are present |
-| Asset statuses | 通过 | 10 placeholder, 2 imported, 0 final, 9 missing; imported fish remain non-final |
-| Node-composed office | 通过 | Scene blockout plus user visual acceptance |
-| Shared HUD/modal/button styling | 通过 | Scene/runtime styling plus user visual acceptance |
-| Nearest-friendly import | 通过（用户验收） | Default filter is `0`, 96×64 assets reimported, user accepted visible result |
-| No full-screen AI background | 通过 | Scene remains composed from nodes; no generated background asset added |
-| Electron Legacy unchanged | 通过 | Final Git scope contains only `godot/` and `docs/agent-loop/` paths |
+| `godot --version` | Godot 4.x recorded | 通过：`4.7.stable.official.5b4e0cb0f` |
+| `godot4 --version` | Godot 4.x recorded | 通过：`4.7.stable.official.5b4e0cb0f` |
+| `godot --headless --path godot --editor --quit` | Imports/scripts parse | 通过 |
+| `godot --headless --path godot --quit-after 180` | Main scene starts | 通过 |
+| Temporary Godot validation script | 8 fish resources/result previews/bestiary cards load | 通过；script deleted after run |
+| JSON parse | 8 fish / 3 quests / 3 shop upgrades | 通过 |
+| Debug marker search | No debug/TODO markers in Godot scripts/scenes | 通过 |
+| Git status/diff checks | Scoped, clean whitespace diff | 通过：`git diff --check` passed; `git status --short` shows Godot/docs scope only |
 
-## Git Authorization
+## Push Gate
 
-User accepted the manual exit criteria and authorized commit/push on 2026-06-25. Commit `958f76a` was pushed to `origin/godot-v0.4-visual-identity`; merge and tag are not authorized.
+No `git commit`, `git push`, `git merge`, or `git tag` before the user enters `验收通过，允许提交并 push`.

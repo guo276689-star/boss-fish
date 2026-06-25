@@ -1,29 +1,27 @@
-# Current Goal — Combined Godot v0.3 / v0.4 Polish
+# Current Goal — Godot v0.5 Playable Art Pack
 
 ## Current Phase
 
-Delivery recorded. Runtime implementation, user visual acceptance, mainline merge, branch push, and release tags are present.
+Implemented → Validate → Report → Wait for user acceptance. Runtime art changes are in the working tree but not committed.
 
 ## Goal
 
-Recover the unimplemented v0.3 runtime polish and complete the v0.4 visual identity pipeline in one Godot Mainline change set, without rewriting Electron Legacy or overstating placeholder art.
+Turn the v0.4 visual contract into a playable first pixel-art pack: a clearer cat, recognizable office props, eight fish visual states, cohesive game UI, fishing feedback, and boss warning without adding gameplay systems or claiming final art.
 
-## Delivered Scope
+## Target Track
 
-- v0.3: single nearest-interaction focus, explicit fishing feedback, quest/shop status polish, inspection-safe boss panel, and v0.2→v0.3 Godot save fallback migration.
-- v0.4: art direction, asset pipeline, manifest, visual Area 09, low-noise office blockout, shared HUD/modal/button surfaces, explicit placeholder rules, and two imported 96×64 fish test previews.
+Godot Mainline only on `godot-v0.5-playable-art-pack`. Electron Legacy and root source assets remain untouched.
 
-## Protected Scope
+## Required Deliverables
 
-- Movement, five interaction types, fishing success/failure, coins, quests, bestiary, shop effects, boss pressure, save/reload, and 8 fish / 3 quests / 3 upgrades data remain protected by validation.
-- Electron Legacy, root `assets/` source files, localStorage, mini mode, sound, Electron main process, backend, account, database, and networking are not modified.
+- Updated art direction, pipeline, manifest, master plan, Area 09, acceptance, report, decision, and validation records.
+- Imported or `placeholder_plus` cat, props, eight fish visual states, HUD/panel/button treatment, fishing feedback, and boss warning.
+- Godot import/run plus v0.4 gameplay regression evidence.
 
-## Acceptance Gate
+## Non-Goals
 
-- Automated Godot import/start and deterministic core regression validation passed.
-- The user reported visual acceptance on 2026-06-25 and authorized commit/push. No screenshot was archived by Codex because desktop-app control was unavailable.
-- Feature commit `958f76a` was pushed to `origin/godot-v0.4-visual-identity`, then merged to `main` as `3de3019`; corrected mainline commit `afd612d` was pushed with the v0.3/v0.4 tags.
+- No final hand-drawn claim, full-screen AI background, new gameplay, fish data, complex animation/TileMap, backend, database, account, network, export, Electron Legacy change, commit, push, merge, or tag.
 
-## Manual Review Evidence
+## Implementation Gate
 
-The user has reported the following visual/manual flow as accepted: office landmarks, interaction focus, HUD/modal readability, fish previews, five interactions, fishing, quest, shop, inspection, and save reload.
+User confirmed the v0.5 implementation plan with `确认实施v0.5`. Codex must now finish validation/reporting and stop before any commit, push, merge, or tag until the user explicitly approves Git submission.

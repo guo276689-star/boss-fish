@@ -1,102 +1,50 @@
-# Combined Godot v0.3 / v0.4 Validation Record
+# Godot v0.5 Playable Art Pack Validation
 
-**Conclusion:** automated runtime/data validation passed; the user reported manual visual acceptance on 2026-06-25. Codex did not archive a screenshot because desktop-app control was unavailable.
+**Status:** implemented and automatically validated. Human 1280×720 visual acceptance remains **未验证** until the user observes or provides a screenshot.
 
-## Linked Evidence
+## Linked Contracts
 
-- [Combined report](../../docs/agent-loop/CODEX_REPORT.md)
-- [Acceptance matrix](../../docs/agent-loop/ACCEPTANCE.md)
-- [Art direction](ART_DIRECTION.md), [asset pipeline](ASSET_PIPELINE.md), [asset manifest](ASSET_MANIFEST.md), and [Area 09](areas/AREA_09_VISUAL_IDENTITY.md)
-- v0.3 implementation evidence: [master-plan update](GAME_MASTER_PLAN.md#v03-implementation-update) and Areas [01](areas/AREA_01_OFFICE_MAP.md) through [08](areas/AREA_08_SAVE_AND_UI.md)
+- [ART_DIRECTION](ART_DIRECTION.md), [ASSET_PIPELINE](ASSET_PIPELINE.md), [ASSET_MANIFEST](ASSET_MANIFEST.md), [GAME_MASTER_PLAN](GAME_MASTER_PLAN.md), and [Area 09](areas/AREA_09_VISUAL_IDENTITY.md)
+- [Current goal](../../docs/agent-loop/CURRENT_GOAL.md), [acceptance](../../docs/agent-loop/ACCEPTANCE.md), and [report](../../docs/agent-loop/CODEX_REPORT.md)
 
-## Actual Environment
+## Baseline Preserved
 
-- Branch: `godot-v0.4-visual-identity`.
-- Godot: `4.7.stable.official.5b4e0cb0f` from both `godot --version` and `godot4 --version`.
-- Electron Legacy: no changed file path in the current implementation scope.
+- Existing Godot v0.4 mainline behavior remains the baseline: 8 fish, 3 quests, 3 upgrades, movement, five interactions, fishing, quests, bestiary, shop, boss pressure, and save behavior.
+- v0.5 changed presentation only: assets, scene decoration, HUD/result/bestiary visual treatment, and docs.
+- No `godot/data/*.json`, save schema, Electron Legacy, backend, networking, export, merge, tag, commit, or push is part of the implementation.
 
-## Executed Validation
+## v0.5 Validation Results
 
-| Check | Result | Evidence |
+| Area | Required proof | Status |
 | --- | --- | --- |
-| Godot editor import | 通过 | `godot --headless --path godot --editor --quit` scanned scripts and imported both fish textures without errors. |
-| Godot main start | 通过 | `godot --headless --path godot --quit-after 180` completed without runtime error output. |
-| Isolated combined validation | 通过 | Temporary `res://tests/v0_3_v0_4_validation.gd` output `V0_3_V0_4_VALIDATION_PASS`; deleted after execution. |
-| Data catalog | 通过 | PowerShell JSON parse: 8 fish, 3 quests, 3 upgrades. |
-| Source hygiene | 通过 | No `print`, `printerr`, `push_error`, `TODO`, `FIXME`, `debugger`, or `console.log` in Godot scripts/scenes. |
-| Fish import | 通过 | `fish_badge_carp.png` and `fish_ppt_catfish.png` were reimported from 96×64 source candidates. |
-| PNG Git attributes | 通过 | `godot/.gitattributes` now marks image formats `-text`; restored fish hashes match their root sources. |
-| Pixel filter | 部分通过 | Project default is `textures/canvas_textures/default_texture_filter=0`; new preview node uses nearest. Import-dock and visual blur inspection are 未验证. |
+| Cat | Scene/runtime cat visual plus movement/collision check | 部分通过：cat scene load and texture import pass; visible movement/collision observation 未验证 |
+| Office props | Screenshot/manual observation and five-area reachability | 部分通过：main scene starts and static prop nodes exist; manual reachability 未验证 |
+| Fish | Eight visual mappings; locked/unlocked bestiary and result preview | 通过：temporary Godot validation script verified 8 IDs, resources, result previews, and bestiary cards |
+| HUD / panel | Screenshot/manual observation of hierarchy and close buttons | 部分通过：HUD scene loads and dynamic modal methods pass; screenshot/manual hierarchy 未验证 |
+| Fishing / boss | State-specific visual feedback and unchanged logic | 部分通过：status and pressure UI paths executed; manual state timing 未验证 |
+| Import | Nearest-friendly project/import settings and no blurred scaling | 部分通过：Godot import passes and PNGs have binary attributes; manual blur check 未验证 |
+| Regression | v0.4 behavior/data/save checks | 部分通过：main start and data counts pass; keyboard/manual save regression 未验证 |
+| Git scope | No Electron Legacy path; `git diff --check` passes | 通过：final diff/check scope is Godot/docs only |
 
-## Isolated Validation Coverage
+## Commands Run
 
-The removed temporary script used in-memory save services so it did not persist user progression. It verified:
+- `godot --version` → `4.7.stable.official.5b4e0cb0f`
+- `godot4 --version` → `4.7.stable.official.5b4e0cb0f`
+- `godot --headless --path godot --editor --quit` → passed
+- `godot --headless --path godot --quit-after 180` → passed
+- `godot --headless --path godot --script res://tests/tmp_v0_5_validation.gd` → `[v0.5-validation] PASS`; temporary script deleted after run
+- JSON parse check → 8 fish, 3 quests, 3 shop upgrades
+- Debug marker search in `godot/scripts` and `godot/scenes` → no matches
+- `git diff --check` → passed, with expected CRLF warnings for `docs/agent-loop/*.md`
+- `git status --short` → Godot/docs scope only; no Electron Legacy paths
 
-- 8 fish / 3 quests / 3 upgrades data load.
-- Catches award coins and update caught counts.
-- Count, earned-coins, and rarity quests complete; claims succeed once and duplicate claims fail.
-- `better_rod`, `lucky_charm`, and `focus_snack` purchase successfully and affect their respective fishing parameters.
-- Saved coins and caught counts restore through `GameState`.
-- Only the nearest interactable receives focus and dispatches the interaction action.
-- Fishing enters waiting, accepts bite reeling, reaches result/idle, and reaches failure result after timeout.
-- Boss pressure begins inspection and recovers to 25.
-- Boss modal opens during inspection; the imported carp preview becomes visible; modal close works.
-- v0.2 Godot save fallback migrates to `user://boss_fish_v0_3_save.json`, and an existing v0.3 state takes precedence.
+## Asset Status Rule
 
-## Save Compatibility
+All v0.5 non-final assets are `placeholder_plus`, `imported`, or future-only `missing` in the manifest. `final` is prohibited without human art approval; current final count is 0.
 
-| Item | Result |
-| --- | --- |
-| New path | `user://boss_fish_v0_3_save.json` |
-| Legacy input | `user://boss_fish_v0_2_save.json` only; no Electron `localStorage` access |
-| Supported fields | coins, caught counts, quests, upgrade levels, boss pressure |
-| Migration | Valid v0.2 state is loaded and written to v0.3 path |
-| Missing / malformed | Code returns default state; physical malformed-file demonstration is **未验证** |
-| Reset behavior | No reset UI was added; missing/rejected data starts from defaults |
+## Remaining Manual Checks
 
-## Visual Acceptance
-
-| Criterion | Status | Evidence / boundary |
-| --- | --- | --- |
-| Office landmark hierarchy | 通过（用户验收） | Node-composed palette/blockout plus user visual acceptance. |
-| HUD/modal visual consistency | 通过（用户验收） | Shared StyleBox/button implementation plus user acceptance. |
-| Placeholder clarity | 通过（用户验收） | Manifest/node fallbacks and user acceptance. |
-| Fish preview sharpness | 通过（用户验收） | Native 96×64 import, nearest node setting, and user acceptance. |
-| No AI full background | 通过 | `main.tscn` remains node-composed; no full-screen generated image asset was added. |
-
-## Unavailable Evidence Source
-
-- Windows application-control connection: unavailable (`native pipe` missing).
-- Headless screenshot capture: unavailable because the dummy renderer returns no readable viewport texture. The temporary capture script was deleted and no game source was changed because of this limitation.
-- User manual acceptance supplies visual evidence; no screenshot is archived by Codex.
-
-## Final Git Checks
-
-Executed after the report update:
-
-| Command | Result |
-| --- | --- |
-| `git status --short` | v0.3/v0.4 Godot/docs changes plus the new `godot/assets/fish/` directory only |
-| `git branch --show-current` | `godot-v0.4-visual-identity` |
-| `git diff --name-status` | Modified paths limited to `docs/agent-loop/`, `godot/docs/`, `godot/scenes/`, and `godot/scripts/` |
-| `git diff --check` | Exit code 0; no whitespace error |
-
-No Electron Legacy path is present. Commit/push is recorded below after user acceptance.
-
-## Delivery Record
-
-- User acceptance: 2026-06-25.
-- Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
-- Push: `origin/godot-v0.4-visual-identity`.
-- Main merge and release tags: recorded below after final mainline verification.
-
-## Mainline Correction Before Tagging
-
-The first local mainline validation found ASCII conversion of both imported PNG files under the inherited `* text eol=lf` attribute. Before pushing `main`, the files were restored byte-for-byte from root candidates, PNG/WebP/JPEG/GIF were marked `-text`, invalid `.import` records were regenerated, and Godot editor import/main start completed without the earlier preload errors. The final v0.3/v0.4 tags must point at this correction, not the earlier feature commit.
-
-## Mainline Release Record
-
-- Merge commit: `3de3019 merge: integrate BossFish Godot v0.3 and v0.4`.
-- Corrected release commit: `afd612d fix(godot): preserve imported fish binaries`.
-- Pushed branch: `origin/main`.
-- Tags pushed: `godot-v0.3-runtime-complete` and `godot-v0.4-stable`, both at `afd612d`.
+- Observe 1280×720 visual readability in a visible Godot window.
+- Move the cat through the office and confirm no prop decoration obscures interactions.
+- Trigger fishing start/wait/bite/success/fail/rare states and boss warning in a visible run.
+- Open bestiary/shop/tasks and confirm modal hierarchy visually matches the art direction.

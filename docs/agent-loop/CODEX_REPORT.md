@@ -1,76 +1,53 @@
-# Codex Report — Combined Godot v0.3 / v0.4 Polish
+# Codex Report — Godot v0.5 Playable Art Pack
 
-> Result: **accepted**. Runtime import/start and deterministic core regression passed; user reported manual visual acceptance on 2026-06-25.
+> Status: implemented in the working tree, validated by Godot/import/static checks, and waiting for user visual acceptance. No commit, push, merge, or tag has been made.
 
 ## Current Branch and Goal
 
-- Branch: `godot-v0.4-visual-identity`.
-- Goal: implement the missed v0.3 polish together with the v0.4 visual identity/art pipeline.
-- Existing history note: `b69f999` is documentation-only v0.3 planning; this worktree contains the missing runtime implementation and has not been committed.
-- Commit: `958f76a feat(godot): complete v0.3 polish and v0.4 visual identity`.
-- Push: confirmed to `origin/godot-v0.4-visual-identity`.
-- Main merge: `3de3019 merge: integrate BossFish Godot v0.3 and v0.4`.
-- Binary correction: `afd612d fix(godot): preserve imported fish binaries`.
-- Tags: `godot-v0.3-runtime-complete`, `godot-v0.4-stable`, both pointing to corrected mainline commit `afd612d`.
+- Branch: `godot-v0.5-playable-art-pack`.
+- Target track: Godot Mainline.
+- Goal: improve playable pixel-art presentation while preserving the accepted v0.4 loop.
+- Git: no v0.5 commit/push/merge/tag has been made.
 
-## Mainline Import Correction
+## Implemented
 
-When the unpushed `main` merge was validated, its inherited `godot/.gitattributes` rule treated PNG files as text and corrupted the two imported fish during checkout. The source hashes were restored from the untouched root candidates, image extensions were set to `-text`, invalid `.import` metadata was regenerated, and Godot import/start then completed without error. This correction must be committed before `main` is pushed or tagged.
+- Cat: `scenes/cat.tscn` now uses `godot/assets/characters/cat_player_placeholder_plus.png`; collision and movement script are unchanged.
+- Fish: all eight fish IDs map to imported 96×64 previews in `scripts/hud.gd`, result modal, and bestiary grid.
+- Office: `scenes/main.tscn` adds static `placeholder_plus` prop details for pond, task board, bestiary shelf, shop desk, boss door, and cat spawn mat.
+- HUD: `scenes/hud.tscn` adds pressure/status icon slots; `scripts/hud.gd` adds fishing-state colors/icons, boss warning icon state, result previews, and 8-card bestiary lock/unlock UI.
+- Docs: art direction, pipeline, manifest, master plan, Area 09, acceptance, validation, current goal, decision log, and this report were updated for v0.5.
 
-## Modified Files and Responsibilities
+## Assets Copied Into Godot
 
-| File | Responsibility |
-| --- | --- |
-| `godot/scenes/main.tscn` | Low-noise office blockout, visual landmark hierarchy; collisions and interaction positions preserved. |
-| `godot/scenes/interactables/world_interactable.tscn` | Reusable action marker and focus indicator. |
-| `godot/scripts/interactables/world_interactable.gd` | Action glyph and visual focused/unfocused state. |
-| `godot/scripts/systems/interaction_director.gd` | Clears prior focus and activates exactly one nearest target. |
-| `godot/scripts/systems/fishing_system.gd` | Explicit fishing state/result wording only. |
-| `godot/scenes/hud.tscn` | Shared HUD/modal surfaces, help panel, fish-preview node. |
-| `godot/scripts/hud.gd` | Unified runtime buttons, rarity presentation, fish preview mapping, boss modal repair, max-level wording. |
-| `godot/scripts/systems/save_service.gd` | v0.3 save path plus safe v0.2 Godot fallback migration. |
-| `godot/assets/fish/fish_badge_carp.png` | Imported 96×64 test preview; not final art. |
-| `godot/assets/fish/fish_ppt_catfish.png` | Imported 96×64 test preview; not final art. |
-| `godot/docs/*`, `docs/agent-loop/*` | Art direction, asset rules, Area 09, acceptance, evidence, and decision records. |
+- Cat: root `assets/images/cats/idle-1.png` → `godot/assets/characters/cat_player_placeholder_plus.png`.
+- Fish: `round`, `carp`, `eel`, `catfish`, `jellyfish`, `octopus`, `shark`, and `whale` candidates copied into `godot/assets/fish/` with v0.5 fish IDs.
+- Dimensions verified: cat 96×96; all fish 96×64.
+- `godot/.gitattributes` already marks `*.png -text`.
 
-## Documentation and Asset Manifest
+## Validation Evidence
 
-- Complete: `ART_DIRECTION.md`, `ASSET_PIPELINE.md`, `ASSET_MANIFEST.md`, and `AREA_09_VISUAL_IDENTITY.md`.
-- Manifest summary: `placeholder` 10, `imported` 2, `final` 0, `missing` 9.
-- Imported fish: `badge_carp` from root `carp.png`, `ppt_catfish` from root `catfish.png`; both are 96×64 and were reimported by Godot.
-- No full-screen AI background, failed generation, or raw source dump was added to `godot/assets/`.
+- `godot --version` → `4.7.stable.official.5b4e0cb0f`.
+- `godot4 --version` → `4.7.stable.official.5b4e0cb0f`.
+- `godot --headless --path godot --editor --quit` → passed; imported new PNGs and parsed scripts/scenes.
+- `godot --headless --path godot --quit-after 180` → passed; main scene starts.
+- Temporary Godot validation script → `PASS`; verified 8 fish data IDs, 8 texture resources, result previews, bestiary grid cards, and cat/main scene resources. Script was deleted after the run.
+- Data parse check → 8 fish, 3 quests, 3 shop upgrades.
+- Debug marker search in `godot/scripts` and `godot/scenes` → no `print(`, `push_error(`, `console.log`, `debugger`, `TODO`, or `FIXME` matches.
 
-## Actual Commands and Results
+## Unverified
 
-| Command / action | Result | Output summary |
-| --- | --- | --- |
-| `git status --short`, `git branch --show-current`, `git diff --name-status`, `git diff --check` | 通过 | Branch is `godot-v0.4-visual-identity`; modified/untracked paths are v0.3/v0.4 Godot/docs only; `git diff --check` exits 0. |
-| `godot --version`, `godot4 --version` | 通过 | Both output `4.7.stable.official.5b4e0cb0f`. |
-| `godot --headless --path godot --editor --quit` | 通过 | Project scan, scripts, fish imports, and editor layout completed without errors. |
-| `godot --headless --path godot --quit-after 180` | 通过 | Main scene start completed without runtime errors. |
-| Temporary `v0_3_v0_4_validation.gd` | 通过 | Output `V0_3_V0_4_VALIDATION_PASS`; test removed afterwards. |
-| JSON parse | 通过 | `fish=8`, `quests=3`, `upgrades=3`. |
-| Godot-source debug scan | 通过 | No debug/TODO markers found. |
-| Desktop visual capture | Tool unavailable | Windows app-control native pipe unavailable; user supplied manual acceptance instead. |
+- Human visual acceptance at 1280×720 is **未验证** because no screenshot/manual observation has been provided in this run.
+- Physical movement/reachability with keyboard is **未验证** in a visible window; main scene startup and programmatic scene loading passed.
+- Sound is unchanged and **未验证**.
 
-## v0.3 Core Regression
+## Scope Guard
 
-- Passed automatically: interaction focus/singular dispatch; fishing success/failure/result reset; coins; all three quest types and duplicate-claim rejection; caught counts; all three upgrade effects; boss inspection/recovery; state reload; v0.2→v0.3 migration and v0.3 precedence.
-- 未验证: physical malformed-file recovery and sound. User accepted live traversal, panel clicks, visual readability, and save flow; no Codex screenshot was archived.
+- No `godot/data/*.json` gameplay rule changes.
+- No save schema/localStorage changes.
+- No Electron Legacy changes.
+- No backend, account, database, networking, leaderboard, export, merge, tag, commit, or push.
 
-## Boundaries
+## Push Gate
 
-- Electron Legacy modified: no.
-- localStorage / mini mode / Electron main process modified: no.
-- Backend / account / database / networking introduced: no.
-- Godot save migration: yes. New path `user://boss_fish_v0_3_save.json`; fallback reads the former v0.2 Godot path, writes supported state to v0.3, and starts defaults for missing/unparseable data.
-
-## Final Git Evidence
-
-`git diff --name-status` lists modifications only under `docs/agent-loop/`, `godot/docs/`, `godot/scenes/`, and `godot/scripts/`. `git status --short` additionally lists the new `godot/assets/fish/` directory, which contains two PNGs and their Godot-generated `.import` metadata. No `main.js`, `preload.js`, `src/`, root `assets/`, root `data/`, HTML, or `styles/` path appears. `git diff --check` produced no whitespace error.
-
-## Recommendation and Push Gate
-
-- Commit/push completed after the user supplied authorization on 2026-06-25.
-- Feature commit message: `feat(godot): complete v0.3 polish and v0.4 visual identity`.
-- Main merge and both release tags were pushed after final Godot import/start verification.
+- Suggested future commit message: `feat: add godot v0.5 playable art pack`.
+- Wait for user acceptance and the exact approval phrase before any Git submission.
